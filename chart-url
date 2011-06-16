@@ -1,1 +1,1 @@
-https://chart.googleapis.com/chart?cht=lxy&chs=600x400&chds=a&chtt=Iteration%20Burndown&chxt=x,y&chma=50,0,0,50&chdl=Ideal%20Line|Burndown&chco=00FF00,FF0000&chd=t:0,1,2,3,4,5,6|6,5,4,3,2,1,0|0,1,2,3,4,5,6|6,6,4,2,2,2,1
+https://chart.googleapis.com/chart?cht=lxy&chs=600x400&chds=a&chtt=Iteration%20Burndown&chxt=x,y&chxr=1,0,7,1&chma=50,0,0,50&chdl=Ideal%20Line|Burndown&chco=00FF00,FF0000&chd=t:0,1,2,3,4,5,6|6,5,4,3,2,1,0|0,1,2,3,4,5,6|6,6,4,2,2,2,1
