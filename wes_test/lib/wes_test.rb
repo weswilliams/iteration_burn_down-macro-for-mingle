@@ -16,7 +16,6 @@ class WesTest
   end
 
   def execute
-#    @parameters.each {|key, value| html << "param: '#{key} = #{value}'<br>"}
     begin
       chart_url = 'https://chart.googleapis.com/chart?'
       chart_title = 'chtt=Iteration%20Burndown'
@@ -24,8 +23,7 @@ class WesTest
       weekdays_x_axis = weekdays_for(date_range).collect { |day| "#{day.month}-#{day.day}" }.join('|')
       stories = story_info
       total_story_points = calculate_total_story_points stories
-#      points_y_axis = generate_y_axis(total_story_points)
-      chart_range = "chxr=1,0,#{total_story_points},1"
+      chart_range = "chxr=1,0,#{total_story_points},#{y_axis_step(total_story_points)}"
       ideal_line_data = generate_idea_line_data(total_story_points, date_range)
       x_data = generate_x_data(date_range)
       burn_down_line = generate_cumulative_accepted_points_by_weekday(total_story_points, story_info, date_range)
@@ -48,6 +46,10 @@ class WesTest
     end
   end
 
+  def y_axis_step(total_story_points)
+    (total_story_points/10.0).ceil
+  end
+
   def generate_cumulative_accepted_points_by_weekday(total_story_points, story_info, date_range)
     weekdays = weekdays_for(date_range)
     points_by_past_weekdays = {}
@@ -62,11 +64,6 @@ class WesTest
 
   def generate_x_data(date_range)
     (0...(weekdays_for(date_range).count)).to_a.join(',')
-  end
-
-  def generate_y_axis(total_story_points)
-    
-    '|' + ((1..total_story_points).to_a.join('|'))
   end
 
   def generate_idea_line_data(total_story_points, date_range)
