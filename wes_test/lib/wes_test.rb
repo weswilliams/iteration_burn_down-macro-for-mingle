@@ -20,15 +20,21 @@ class WesTest
 
     date_range = iteration_date_range
     weekdays = weekdays_for(date_range)
-
+    stories = story_info
+    total_story_points = calculate_total_story_points stories
     <<-HTML
     h2. Iteration ##{@parameters['current_iteration']} Burndown:
 
-    weekdays = #{weekdays}
+    weekdays = #{weekdays} <br>
+    total story points #{total_story_points} <br>
     story info #{story_info.to_s}
 
     <img src='https://chart.googleapis.com/chart?cht=lxy&chs=600x400&chds=a&chtt=Iteration%20Burndown&chls=1,6,6&chxt=x,y&chxr=1,0,11,1&chma=50,0,0,50&chdl=Ideal%20Line|Burndown&chco=00FF00,FF0000&chd=t:0,1,2,3,4|11,8.25,5.5,2.75,0|0,1,2,3,4|11,11,6,3,0&chxl=0:|#{weekdays}|1:||1|2|3|4|'></img>
     HTML
+  end
+
+  def calculate_total_story_points(stories)
+    stories.inject(0) {|total, hash| hash['planning_estimate'] ? total + hash['planning_estimate'].to_i : total}
   end
 
   def story_info
