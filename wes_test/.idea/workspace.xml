@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f96edcd0-badd-41e6-970b-31a679c7e29e" name="Default" comment="" />
+    <list default="true" id="f96edcd0-badd-41e6-970b-31a679c7e29e" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/wes_test.rb" afterPath="$PROJECT_DIR$/lib/wes_test.rb" />
+    </list>
     <ignored path="wes_test.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,7 +31,7 @@
       <file leaf-file-name="wes_test.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/wes_test.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="101" selection-start="974" selection-end="974" vertical-scroll-proportion="0.65688485">
+            <state line="28" column="30" selection-start="764" selection-end="764" vertical-scroll-proportion="0.41986457">
               <folding />
             </state>
           </provider>
@@ -67,7 +71,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -459,7 +463,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/wes_test.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="101" selection-start="974" selection-end="974" vertical-scroll-proportion="0.65688485">
+        <state line="28" column="30" selection-start="764" selection-end="764" vertical-scroll-proportion="0.41986457">
           <folding />
         </state>
       </provider>

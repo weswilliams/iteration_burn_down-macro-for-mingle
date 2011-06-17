@@ -24,7 +24,9 @@ class WesTest
     weekdays = weekdays_for(date_range)
     stories = story_info
     total_story_points = calculate_total_story_points stories
-    chart_range = "chxr=1,0,#{total_story_points}{,1"
+    chart_range = "chxr=1,0,#{total_story_points},1"
+    ideal_line_data = "#{total_story_points},4.5,3,1.5,0"
+    burn_down_line = "6,5,4,3,0"
 
     <<-HTML
     h2. Iteration ##{@parameters['current_iteration']} Burndown:
@@ -33,7 +35,7 @@ class WesTest
     total story points #{total_story_points} <br>
     story info #{story_info.to_s}
 
-    <img src='#{chart_url}cht=lxy&chs=600x400&chds=a&#{chart_title}&chls=1,6,6&chxt=x,y&#{chart_range}&chma=50,0,0,50&chdl=Ideal%20Line|Burndown&chco=00FF00,FF0000&chd=t:0,1,2,3,4|11,8.25,5.5,2.75,0|0,1,2,3,4|11,11,6,3,0&chxl=0:|#{weekdays}|1:||1|2|3|4|'></img>
+    <img src='#{chart_url}cht=lxy&chs=600x400&chds=a&#{chart_title}&chls=1,6,6&chxt=x,y&#{chart_range}&chma=50,0,0,50&chdl=Ideal%20Line|Burndown&chco=00FF00,FF0000&chd=t:0,1,2,3,4|#{ideal_line_data}|0,1,2,3,4|#{burn_down_line}&chxl=0:|#{weekdays}|1:||1|2|3|4|'></img>
     HTML
   end
 
