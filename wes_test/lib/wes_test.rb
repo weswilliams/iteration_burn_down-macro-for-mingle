@@ -24,7 +24,7 @@ class WesTest
       weekdays_x_axis = weekdays_for(date_range).collect { |day| "#{day.month}-#{day.day}" }.join('|')
       stories = story_info
       total_story_points = calculate_total_story_points stories
-      points_y_axis = generate_y_axis(total_story_points)
+#      points_y_axis = generate_y_axis(total_story_points)
       chart_range = "chxr=1,0,#{total_story_points},1"
       ideal_line_data = generate_idea_line_data(total_story_points, date_range)
       x_data = generate_x_data(date_range)
@@ -35,14 +35,13 @@ class WesTest
 
     points by past days = #{generate_cumulative_accepted_points_by_weekday(total_story_points, story_info, date_range)} <br>
     x axis weekdays = #{weekdays_x_axis} <br>
-    y axis points = #{points_y_axis} <br>
     total story points #{total_story_points} <br>
     date range #{date_range} <br>
     idea line data = #{ideal_line_data} <br>
     x data = #{x_data} <br>
     story info #{story_info.to_s}
 
-    <img src='#{chart_url}cht=lxy&chs=600x400&chds=a&#{chart_title}&chls=1,6,6&chxt=x,y&#{chart_range}&chma=50,0,0,50&chdl=Ideal%20Line|Burndown&chco=00FF00,FF0000&chd=t:#{x_data}|#{ideal_line_data}|#{x_data}|#{burn_down_line}&chxl=0:|#{weekdays_x_axis}|1:|#{points_y_axis}|'></img>
+    <img src='#{chart_url}cht=lxy&chs=600x400&chds=a&#{chart_title}&chls=1,6,6&chxt=x,y&#{chart_range}&chma=50,0,0,50&chdl=Ideal%20Line|Burndown&chco=00FF00,FF0000&chd=t:#{x_data}|#{ideal_line_data}|#{x_data}|#{burn_down_line}&chxl=0:|#{weekdays_x_axis}|1:|'></img>
       HTML
     rescue Exception
       "Something went way wrong: #{$!}"
@@ -66,6 +65,7 @@ class WesTest
   end
 
   def generate_y_axis(total_story_points)
+    
     '|' + ((1..total_story_points).to_a.join('|'))
   end
 
