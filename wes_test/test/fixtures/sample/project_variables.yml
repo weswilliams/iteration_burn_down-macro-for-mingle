@@ -2,6 +2,6 @@
 - name: Current Release
   display_value: 'Release 3'
   project_id: 78
-- name: Current Sprint
+- name: Current Iteration
   display_value: 'Iteration 7'
   project_id: 78
