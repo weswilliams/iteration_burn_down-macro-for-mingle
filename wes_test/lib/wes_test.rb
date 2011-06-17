@@ -21,12 +21,11 @@ class WesTest
       chart_url = 'https://chart.googleapis.com/chart?'
       chart_title = 'chtt=Iteration%20Burndown'
       date_range = iteration_date_range
-      weekdays = weekdays_for(date_range)
+      weekdays = weekdays_for(date_range).collect { |day| "#{day.month}-#{day.day}" }.join('|')
       stories = story_info
       total_story_points = calculate_total_story_points stories
       chart_range = "chxr=1,0,#{total_story_points},1"
       ideal_line_data = generate_idea_line_data(total_story_points, date_range)
-#      ideal_line_data = "#{total_story_points},4.5,3,1.5,0"
       burn_down_line = "6,5,4,3,0"
 
       <<-HTML
@@ -46,12 +45,10 @@ class WesTest
   end
 
   def generate_idea_line_data(total_story_points, date_range)
-#    "6,4.5,3,1.5,0"
-    number_of_weekdays = ((date_range.begin)..(date_range.end)).select { |day| WEEKDAYS.include? day.wday }.count
+    number_of_weekdays = weekdays_for(date_range).count
     step = (total_story_points*1.0) / (number_of_weekdays-1)
     idea_data = []
     (0.0..total_story_points).step(step) { |value| idea_data << value }
-    idea_data
     idea_data.reverse.join(',')
   end
 
@@ -81,8 +78,7 @@ class WesTest
   end
 
   def weekdays_for(date_range)
-    weekdays = ((date_range.begin)..(date_range.end)).select { |day| WEEKDAYS.include? day.wday }
-    weekdays.collect { |day| "#{day.month}-#{day.day}" }.join('|')
+    ((date_range.begin)..(date_range.end)).select { |day| WEEKDAYS.include? day.wday }
   end
 
   def current_iteration
