@@ -18,10 +18,14 @@ class WesTest
   def execute
 #    @parameters.each {|key, value| html << "param: '#{key} = #{value}'<br>"}
 
+    chart_url = 'https://chart.googleapis.com/chart?'
+    chart_title = 'chtt=Iteration%20Burndown'
     date_range = iteration_date_range
     weekdays = weekdays_for(date_range)
     stories = story_info
     total_story_points = calculate_total_story_points stories
+    chart_range = "chxr=1,0,#{total_story_points}{,1"
+
     <<-HTML
     h2. Iteration ##{@parameters['current_iteration']} Burndown:
 
@@ -29,7 +33,7 @@ class WesTest
     total story points #{total_story_points} <br>
     story info #{story_info.to_s}
 
-    <img src='https://chart.googleapis.com/chart?cht=lxy&chs=600x400&chds=a&chtt=Iteration%20Burndown&chls=1,6,6&chxt=x,y&chxr=1,0,11,1&chma=50,0,0,50&chdl=Ideal%20Line|Burndown&chco=00FF00,FF0000&chd=t:0,1,2,3,4|11,8.25,5.5,2.75,0|0,1,2,3,4|11,11,6,3,0&chxl=0:|#{weekdays}|1:||1|2|3|4|'></img>
+    <img src='#{chart_url}cht=lxy&chs=600x400&chds=a&#{chart_title}&chls=1,6,6&chxt=x,y&#{chart_range}&chma=50,0,0,50&chdl=Ideal%20Line|Burndown&chco=00FF00,FF0000&chd=t:0,1,2,3,4|11,8.25,5.5,2.75,0|0,1,2,3,4|11,11,6,3,0&chxl=0:|#{weekdays}|1:||1|2|3|4|'></img>
     HTML
   end
 
