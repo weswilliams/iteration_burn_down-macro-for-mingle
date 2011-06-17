@@ -28,11 +28,12 @@ class WesTest
       chart_range = "chxr=1,0,#{total_story_points},1"
       ideal_line_data = generate_idea_line_data(total_story_points, date_range)
       x_data = generate_x_data(date_range)
-      burn_down_line = "6,5,4,3,0"
+      burn_down_line = generate_cumulative_accepted_points_by_weekday(total_story_points, story_info, date_range)
 
       <<-HTML
     h2. Iteration ##{@parameters['current_iteration']} Burndown:
 
+    points by past days = #{generate_cumulative_accepted_points_by_weekday(total_story_points, story_info, date_range)} <br>
     x axis weekdays = #{weekdays_x_axis} <br>
     y axis points = #{points_y_axis} <br>
     total story points #{total_story_points} <br>
@@ -46,6 +47,18 @@ class WesTest
     rescue Exception
       "Something went way wrong: #{$!}"
     end
+  end
+
+  def generate_cumulative_accepted_points_by_weekday(total_story_points, story_info, date_range)
+    weekdays = weekdays_for(date_range)
+    points_by_past_weekdays = {}
+    weekdays.each { |day| points_by_past_weekdays[day] = total_story_points if day < Date.today }
+    story_info.select { |story_hash| story_hash['accepted_on'] }.each do |story_hash|
+      accepted_on = story_hash['accepted_on']
+      points = story_hash['planning_estimate'] || 0
+      points_by_past_weekdays.keys.select { |date| date >= accepted_on }.each { |date| points_by_past_weekdays[date] -= points.to_i }
+    end
+    points_by_past_weekdays.values.join(',')
   end
 
   def generate_x_data(date_range)
