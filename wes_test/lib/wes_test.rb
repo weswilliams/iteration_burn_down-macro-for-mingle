@@ -18,20 +18,21 @@ class WesTest
   def execute
 #    @parameters.each {|key, value| html << "param: '#{key} = #{value}'<br>"}
     
-    weekdays = query_data
+    date_range = iteration_date_range
+    weekdays = get_weekdays(date_range)
 
     <<-HTML
     h2. Iteration ##{@parameters['current_iteration']} Burndown:
 
     weekdays = #{weekdays}
 
-    <img src='https://chart.googleapis.com/chart?cht=lxy&chs=600x400&chds=a&chtt=Iteration%20Burndown&chls=1,6,6&chxt=x,y&chxr=1,0,11,1&chma=50,0,0,50&chdl=Ideal%20Line|Burndown&chco=00FF00,FF0000&chd=t:0,1,2,3,4|11,8.25,5.5,2.75,0|0,1,2,3,4|11,11,6,3,0&chxl=0:|6-9|6-10|6-13|6-14|6-15|1:||1|2|3|4|'></img>
+    <img src='https://chart.googleapis.com/chart?cht=lxy&chs=600x400&chds=a&chtt=Iteration%20Burndown&chls=1,6,6&chxt=x,y&chxr=1,0,11,1&chma=50,0,0,50&chdl=Ideal%20Line|Burndown&chco=00FF00,FF0000&chd=t:0,1,2,3,4|11,8.25,5.5,2.75,0|0,1,2,3,4|11,11,6,3,0&chxl=0:|#{weekdays}|1:||1|2|3|4|'></img>
     HTML
   end
 
-  def get_weekdays(start_date, end_date)
-    weekdays = (Date.parse(start_date)..Date.parse(end_date)).select {|day| WEEKDAYS.include? day.wday }
-    weekdays.collect {|day| "#{day.month}-#{day.day}"}.join(',')
+  def get_weekdays(date_range)
+    weekdays = ((date_range.begin)..(date_range.end)).select {|day| WEEKDAYS.include? day.wday }
+    weekdays.collect {|day| "#{day.month}-#{day.day}"}.join('|')
   end
 
   def iteration
@@ -39,11 +40,11 @@ class WesTest
     iteration ||= /#(\d+).*/.match(@project.value_of_project_variable('Current Iteration'))[1].to_i
   end
 
-  def query_data
+  def iteration_date_range
     begin
       data_rows = @project.execute_mql("SELECT 'Start Date', 'End Date' WHERE Number = #{iteration}")
       throw "##{iteration} is not a valid iteration" if data_rows.empty?
-      get_weekdays(data_rows[0]['start_date'], data_rows[0]['end_date'])
+      Date.parse(data_rows[0]['start_date'])..Date.parse(data_rows[0]['end_date'])
     rescue Exception
       throw "error getting data for iteration #{iteration}: #{$!}"
     end
