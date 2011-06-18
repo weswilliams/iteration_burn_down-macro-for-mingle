@@ -54,9 +54,9 @@ class WesTest
     weekdays = weekdays_for(date_range)
     points_by_past_weekdays = {}
     weekdays.each { |day| points_by_past_weekdays[day] = total_story_points if day < Date.today }
-    story_info.select { |story_hash| story_hash['accepted_on'] }.each do |story_hash|
-      accepted_on = story_hash['accepted_on']
-      points = story_hash['planning_estimate'] || 0
+    story_info.select { |story_hash| story_hash[date_accepted_property] }.each do |story_hash|
+      accepted_on = story_hash[date_accepted_property]
+      points = story_hash[estimate_property] || 0
       points_by_past_weekdays.keys.select { |date| date >= accepted_on }.each { |date| points_by_past_weekdays[date] -= points.to_i }
     end
     points_by_past_weekdays.values.join(',')
@@ -75,15 +75,15 @@ class WesTest
   end
 
   def calculate_total_story_points(stories)
-    stories.inject(0) { |total, hash| hash['planning_estimate'] ? total + hash['planning_estimate'].to_i : total }
+    stories.inject(0) { |total, hash| hash[estimate_property] ? total + hash[estimate_property].to_i : total }
   end
 
   def story_info
     begin
       iteration = /#\d+ (.*)/.match(current_iteration)[1]
       data_rows = @project.execute_mql(
-          "SELECT 'Planning Estimate', 'Accepted On' WHERE type is Story AND Iteration = '#{iteration}'")
-      data_rows.each { |hash| hash.update(hash) { |key, value| (key == 'accepted_on' && value) ? Date.parse(value) : value } }
+          "SELECT '#{property_to_field(estimate_property)}', '#{property_to_field(date_accepted_property)}' WHERE type is Story AND Iteration = '#{iteration}'")
+      data_rows.each { |hash| hash.update(hash) { |key, value| (key == date_accepted_property && value) ? Date.parse(value) : value } }
     rescue Exception
       "[error retrieving story info for iteration '#{iteration}': #{$!}]"
     end
@@ -109,6 +109,18 @@ class WesTest
 
   def iteration
     /#(\d+).*/.match(current_iteration)[1].to_i
+  end
+
+  def property_to_field(field)
+    field.gsub('_', ' ').scan(/\w+/).collect {|word| word.capitalize }.join(' ')
+  end
+
+  def date_accepted_property
+    @parameters['date_accepted'] || 'date_accepted'
+  end
+
+  def estimate_property
+    @parameters['story_points'] || 'story_points'
   end
 
   def can_be_cached?
