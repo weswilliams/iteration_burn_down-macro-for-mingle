@@ -10,7 +10,7 @@ describe "burn down query" do
     @burn_down_macro = IterationBurnDownMacro.new(@parameters, nil, nil)
   end
 
-  subject { @burn_down_macro.generate_cumulative_accepted_points_by_weekday 8, @stories, @date_range }
+  subject { @burn_down_macro.generate_burndown_line_data 8, @stories, @date_range }
 
   context "all finished before weekend" do
     before do

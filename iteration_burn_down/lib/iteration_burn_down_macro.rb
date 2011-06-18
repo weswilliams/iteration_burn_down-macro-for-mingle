@@ -26,7 +26,7 @@ class IterationBurnDownMacro
       chart_range = "chxr=1,0,#{total_story_points},#{y_axis_step(total_story_points)}"
       ideal_line_data = generate_idea_line_data(total_story_points, date_range)
       x_data = generate_x_data(date_range)
-      burn_down_line = generate_cumulative_accepted_points_by_weekday(total_story_points, story_info, date_range)
+      burn_down_line = generate_burndown_line_data(total_story_points, story_info, date_range)
 
       <<-HTML
     h2. Iteration ##{iteration} Burndown:
@@ -42,14 +42,16 @@ class IterationBurnDownMacro
     (total_story_points/10.0).ceil
   end
 
-  def generate_cumulative_accepted_points_by_weekday(total_story_points, story_info, date_range)
+  def generate_burndown_line_data(total_story_points, story_info, date_range)
     weekdays = weekdays_for(date_range)
     points_by_past_weekdays = {}
-    weekdays.each { |day| points_by_past_weekdays[day] = total_story_points if day <= today }
-    story_info.select { |story_hash| story_hash[date_accepted_property] }.each do |story_hash|
-      accepted_on = story_hash[date_accepted_property]
-      points = story_hash[estimate_property] || 0
-      points_by_past_weekdays.keys.select { |date| date >= accepted_on }.each { |date| points_by_past_weekdays[date] -= points.to_i }
+    weekdays.each { |weekday| points_by_past_weekdays[weekday] = total_story_points if weekday <= today }
+    story_info.select { |story| story[date_accepted_property] }.each do |accepted_story|
+      accepted_on = accepted_story[date_accepted_property]
+      points = accepted_story[estimate_property] || 0
+      points_by_past_weekdays.keys.select { |past_day| past_day >= accepted_on }.each do |accumulate_day|
+        points_by_past_weekdays[accumulate_day] -= points.to_i
+      end
     end
     points_by_past_weekdays.values.join(',')
   end
@@ -107,7 +109,7 @@ class IterationBurnDownMacro
   end
 
   def parameter_to_field(field)
-    field.gsub('_', ' ').scan(/\w+/).collect {|word| word.capitalize }.join(' ')
+    field.gsub('_', ' ').scan(/\w+/).collect { |word| word.capitalize }.join(' ')
   end
 
   def date_accepted_property
