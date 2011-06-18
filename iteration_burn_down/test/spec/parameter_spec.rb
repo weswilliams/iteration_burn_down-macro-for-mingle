@@ -1,10 +1,10 @@
 require "rspec"
-require "../../lib/wes_test"
+require "../../lib/iteration_burn_down_macro"
 
 describe "burn down parameter" do
   before do
     @parameters = {}
-    @burn_down_macro = WesTest.new(@parameters, nil, nil)
+    @burn_down_macro = IterationBurnDownMacro.new(@parameters, nil, nil)
   end
 
   subject { @burn_down_macro }

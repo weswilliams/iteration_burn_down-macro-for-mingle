@@ -6,5 +6,5 @@ rescue LoadError
 end
 
 if defined?(RAILS_ENV) && RAILS_ENV == 'production' && defined?(MinglePlugins)
-  MinglePlugins::Macros.register(WesTest, 'wes_test')
+  MinglePlugins::Macros.register(IterationBurnDownMacro, 'iteration_burn_down')
 end 

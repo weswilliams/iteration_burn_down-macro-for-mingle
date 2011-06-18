@@ -1,6 +1,6 @@
 require "date"
 
-class WesTest
+class IterationBurnDownMacro
   MON = 1
   TUE = 2
   WED = 3

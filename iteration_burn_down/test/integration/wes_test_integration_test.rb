@@ -13,14 +13,14 @@ class Wes::WesTestIntegrationTest < Test::Unit::TestCase
   ANOTHER_PROJECT_RESOURCE = 'http://username:password@your.mingle.server:port/lightweight_projects/another_project_identifier.xml'
   
   def test_macro_contents
-    wes_test = Wes::WesTest.new(nil, project(PROJECT_RESOURCE), nil)
-    result = wes_test.execute
+    iteration_burn_down = IterationBurnDownMacro.new(nil, project(PROJECT_RESOURCE), nil)
+    result = iteration_burn_down.execute
     assert result
   end
   
   def test_macro_contents_with_a_project_group
-    wes_test = Wes::WesTest.new(nil, [project(PROJECT_RESOURCE), project(ANOTHER_PROJECT_RESOURCE)], nil)
-    result = wes_test.execute
+    iteration_burn_down = IterationBurnDownMacro.new(nil, [project(PROJECT_RESOURCE), project(ANOTHER_PROJECT_RESOURCE)], nil)
+    result = iteration_burn_down.execute
     assert result
   end
 
