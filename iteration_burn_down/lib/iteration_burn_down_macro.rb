@@ -45,7 +45,7 @@ class IterationBurnDownMacro
   def generate_cumulative_accepted_points_by_weekday(total_story_points, story_info, date_range)
     weekdays = weekdays_for(date_range)
     points_by_past_weekdays = {}
-    weekdays.each { |day| points_by_past_weekdays[day] = total_story_points if day < Date.today }
+    weekdays.each { |day| points_by_past_weekdays[day] = total_story_points if day <= today }
     story_info.select { |story_hash| story_hash[date_accepted_property] }.each do |story_hash|
       accepted_on = story_hash[date_accepted_property]
       points = story_hash[estimate_property] || 0
@@ -116,6 +116,10 @@ class IterationBurnDownMacro
 
   def estimate_property
     @parameters['story_points'] || 'story_points'
+  end
+
+  def today
+    @parameters[:today] || Date.today
   end
 
   def can_be_cached?
