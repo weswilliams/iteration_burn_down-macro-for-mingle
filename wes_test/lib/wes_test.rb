@@ -29,15 +29,7 @@ class WesTest
       burn_down_line = generate_cumulative_accepted_points_by_weekday(total_story_points, story_info, date_range)
 
       <<-HTML
-    h2. Iteration ##{@parameters['current_iteration']} Burndown:
-
-    points by past days = #{generate_cumulative_accepted_points_by_weekday(total_story_points, story_info, date_range)} <br>
-    x axis weekdays = #{weekdays_x_axis} <br>
-    total story points #{total_story_points} <br>
-    date range #{date_range} <br>
-    idea line data = #{ideal_line_data} <br>
-    x data = #{x_data} <br>
-    story info #{story_info.to_s}
+    h2. Iteration ##{iteration} Burndown:
 
     <img src='#{chart_url}cht=lxy&chs=600x400&chds=a&#{chart_title}&chls=1,6,6&chxt=x,y&#{chart_range}&chma=50,0,0,50&chdl=Ideal%20Line|Burndown&chco=00FF00,FF0000&chd=t:#{x_data}|#{ideal_line_data}|#{x_data}|#{burn_down_line}&chxl=0:|#{weekdays_x_axis}|1:|'></img>
       HTML
@@ -126,6 +118,18 @@ class WesTest
   def can_be_cached?
     false # if appropriate, switch to true once you move your macro to production
   end
+
+#  def debug_info
+#    <<-DEBUB_INFO
+#    points by past days = #{generate_cumulative_accepted_points_by_weekday(total_story_points, story_info, date_range)} <br>
+#    x axis weekdays = #{weekdays_x_axis} <br>
+#    total story points #{total_story_points} <br>
+#    date range #{date_range} <br>
+#    idea line data = #{ideal_line_data} <br>
+#    x data = #{x_data} <br>
+#    story info #{story_info.to_s}
+#    DEBUB_INFO
+#  end
 
 end
 
