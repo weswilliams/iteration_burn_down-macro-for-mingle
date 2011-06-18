@@ -72,9 +72,8 @@ class IterationBurnDownMacro
 
   def story_info
     begin
-      iteration = /#\d+ (.*)/.match(current_iteration)[1]
       data_rows = @project.execute_mql(
-          "SELECT '#{parameter_to_field(estimate_property)}', '#{parameter_to_field(date_accepted_property)}' WHERE type is Story AND Iteration = '#{iteration}'")
+          "SELECT '#{parameter_to_field(estimate_property)}', '#{parameter_to_field(date_accepted_property)}' WHERE type is Story AND Iteration = '#{iteration_name}'")
       data_rows.each { |hash| hash.update(hash) { |key, value| (key == date_accepted_property && value) ? Date.parse(value) : value } }
     rescue Exception
       "[error retrieving story info for iteration '#{iteration}': #{$!}]"
@@ -97,6 +96,10 @@ class IterationBurnDownMacro
 
   def current_iteration
     @project.value_of_project_variable('Current Iteration')
+  end
+
+  def iteration_name
+    /#\d+ (.*)/.match(current_iteration)[1]
   end
 
   def iteration

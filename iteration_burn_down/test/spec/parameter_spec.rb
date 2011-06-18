@@ -4,10 +4,26 @@ require "../../lib/iteration_burn_down_macro"
 describe "burn down parameter" do
   before do
     @parameters = {}
-    @burn_down_macro = IterationBurnDownMacro.new(@parameters, nil, nil)
+    @project = double('project', :value_of_project_variable => '#3 Iteration 1')
+    @burn_down_macro = IterationBurnDownMacro.new(@parameters, @project, nil)
   end
 
   subject { @burn_down_macro }
+
+  describe "Current Iteration project property" do
+    subject { @burn_down_macro.current_iteration }
+    it { should == '#3 Iteration 1' }
+  end
+
+  describe "iteration" do
+    subject { @burn_down_macro.iteration }
+    it { should == 3 }
+  end
+
+  describe "iteration_name" do
+    subject { @burn_down_macro.iteration_name }
+    it { should == 'Iteration 1' }
+  end
 
   describe "date accepted property" do
     subject { @burn_down_macro.date_accepted_property }
