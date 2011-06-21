@@ -20,6 +20,20 @@ describe "burn down parameter" do
     it { should == 3 }
   end
 
+  describe "iteration when overriding with parameter" do
+    before { @parameters['iteration'] = '#4 Iteration 2' }
+
+    context "iteration number" do
+      subject { @burn_down_macro.iteration }
+      it { should == 4 }
+    end
+
+    context "iteration name" do
+      subject { @burn_down_macro.iteration_name }
+      it { should == 'Iteration 2' }
+    end
+  end
+
   describe "iteration_name" do
     subject { @burn_down_macro.iteration_name }
     it { should == 'Iteration 1' }
@@ -55,7 +69,7 @@ describe "burn down parameter" do
 
   describe "field conversion" do
     subject { @burn_down_macro.parameter_to_field 'date_accepted' }
-    it { should == 'Date Accepted'}
+    it { should == 'Date Accepted' }
   end
 
 end

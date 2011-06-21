@@ -33,7 +33,7 @@ class IterationBurnDownMacro
 
     <img src='#{chart_url}cht=lxy&chs=600x400&chds=a&#{chart_title}&chls=1,6,6&chxt=x,y&#{chart_range}&chma=50,0,0,50&chdl=Ideal%20Line|Burndown&chco=00FF00,FF0000&chd=t:#{x_data}|#{ideal_line_data}|#{x_data}|#{burn_down_line}&chxl=0:|#{weekdays_x_axis}|1:|'></img>
       HTML
-    rescue Exception
+    rescue
       "Something went way wrong: #{$!}"
     end
   end
@@ -77,7 +77,7 @@ class IterationBurnDownMacro
       data_rows = @project.execute_mql(
           "SELECT '#{parameter_to_field(estimate_property)}', '#{parameter_to_field(date_accepted_property)}' WHERE type is Story AND Iteration = '#{iteration_name}'")
       data_rows.each { |hash| hash.update(hash) { |key, value| (key == date_accepted_property && value) ? Date.parse(value) : value } }
-    rescue Exception
+    rescue
       "[error retrieving story info for iteration '#{iteration}': #{$!}]"
     end
   end
@@ -87,7 +87,7 @@ class IterationBurnDownMacro
       data_rows = @project.execute_mql("SELECT 'Start Date', 'End Date' WHERE Number = #{iteration}")
       throw "##{iteration} is not a valid iteration" if data_rows.empty?
       Date.parse(data_rows[0]['start_date'])..Date.parse(data_rows[0]['end_date'])
-    rescue Exception
+    rescue
       throw "error getting data for iteration #{iteration}: #{$!}"
     end
   end
@@ -97,7 +97,7 @@ class IterationBurnDownMacro
   end
 
   def current_iteration
-    @project.value_of_project_variable('Current Iteration')
+    @parameters['iteration'] || @project.value_of_project_variable('Current Iteration')
   end
 
   def iteration_name

@@ -4,7 +4,12 @@
     <bookmark url="file://$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb" line="62" mnemonic="7" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4b8638f0-6f72-4452-979a-a016d20c8e6d" name="Default" comment="" />
+    <list default="true" id="4b8638f0-6f72-4452-979a-a016d20c8e6d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/mingle-test-macro.iml" afterPath="$PROJECT_DIR$/.idea/mingle-test-macro.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb" afterPath="$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iteration_burn_down/test/spec/parameter_spec.rb" afterPath="$PROJECT_DIR$/iteration_burn_down/test/spec/parameter_spec.rb" />
+    </list>
     <ignored path="mingle-test-macro.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,16 +35,16 @@
       <file leaf-file-name="iteration_burn_down_macro.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="0" selection-start="1438" selection-end="1438" vertical-scroll-proportion="0.2987013">
+            <state line="98" column="23" selection-start="3687" selection-end="3704" vertical-scroll-proportion="0.45356372">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="burn_down_line_data_spec.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/iteration_burn_down/test/spec/burn_down_line_data_spec.rb">
+      <file leaf-file-name="parameter_spec.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/iteration_burn_down/test/spec/parameter_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="25" selection-start="1597" selection-end="1597" vertical-scroll-proportion="0.0">
+            <state line="23" column="35" selection-start="657" selection-end="666" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -56,9 +61,6 @@
     <option name="CHECKOUT_INCLUDE_TAGS" value="false" />
     <option name="UPDATE_CHANGES_POLICY" value="STASH" />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///IRB console" root0="SKIP_HIGHLIGHTING" />
-  </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
@@ -69,13 +71,13 @@
         <option value="$PROJECT_DIR$/wes_test/test/integration/wes_test_integration_test.rb" />
         <option value="$PROJECT_DIR$/wes_test/test/unit/wes_test_test.rb" />
         <option value="$PROJECT_DIR$/wes_test/test/unit/iteration_burn_down_test.rb" />
-        <option value="$PROJECT_DIR$/iteration_burn_down/test/spec/parameter_spec.rb" />
         <option value="$PROJECT_DIR$/iteration_burn_down/test/spec/data_query_spec.rb" />
         <option value="$PROJECT_DIR$/iteration_burn_down/test/spec/total_story_points_spec.rb" />
         <option value="$PROJECT_DIR$/iteration_burn_down/test/spec/generate_ideal_line_spec.rb" />
         <option value="$PROJECT_DIR$/iteration_burn_down/test/spec/generate_x_axis_data_spec.rb" />
         <option value="$PROJECT_DIR$/iteration_burn_down/test/spec/y_axis_step_spec.rb" />
         <option value="$PROJECT_DIR$/iteration_burn_down/test/spec/burn_down_line_data_spec.rb" />
+        <option value="$PROJECT_DIR$/iteration_burn_down/test/spec/parameter_spec.rb" />
         <option value="$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb" />
       </list>
     </option>
@@ -106,7 +108,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Favorites" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -181,7 +183,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Favorites" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -307,31 +309,32 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+      <changelist id="4b8638f0-6f72-4452-979a-a016d20c8e6d" name="Default" comment="" />
       <created>1308341877216</created>
       <updated>1308341877216</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-3" y="24" width="892" height="874" extended-state="0" />
-    <editor active="false" />
+    <frame x="98" y="24" width="892" height="874" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293011" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2488263" sideWeight="0.68010753" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32392472" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3293011" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32258064" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293011" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293011" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsManagerConfiguration">
@@ -382,112 +385,84 @@
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/.rvm/gems/ruby-1.9.2-p180/gems/rspec-core-2.6.4/lib/rspec/core.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="22" selection-start="22" selection-end="22" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="22" selection-start="22" selection-end="22" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/.rvm/gems/ruby-1.9.2-p180/gems/rspec-2.6.0/lib/rspec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="14" selection-start="14" selection-end="14" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="14" selection-start="14" selection-end="14" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/.rvm/gems/ruby-1.9.2-p180/gems/rspec-core-2.6.4/lib/rspec/core/hooks.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="145" column="10" selection-start="4338" selection-end="4338" vertical-scroll-proportion="0.33333334">
-          <folding />
-        </state>
+        <state line="145" column="10" selection-start="4338" selection-end="4338" vertical-scroll-proportion="0.33333334" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iteration_burn_down/tasks/deploy.rake">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iteration_burn_down/test/integration/wes_test_integration_test.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="26" selection-start="1103" selection-end="1103" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="21" column="26" selection-start="1103" selection-end="1103" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iteration_burn_down/test/unit/iteration_burn_down_test.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="29" selection-start="493" selection-end="493" vertical-scroll-proportion="0.4516129">
-          <folding />
-        </state>
+        <state line="14" column="29" selection-start="493" selection-end="493" vertical-scroll-proportion="0.4516129" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iteration_burn_down/init.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="58" selection-start="262" selection-end="262" vertical-scroll-proportion="0.25104603">
-          <folding />
-        </state>
+        <state line="8" column="58" selection-start="262" selection-end="262" vertical-scroll-proportion="0.25104603" />
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/.rvm/gems/ruby-1.9.2-p180/gems/rspec-mocks-2.6.0/lib/rspec/mocks/spec_methods.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="10" selection-start="757" selection-end="757" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/iteration_burn_down/test/spec/parameter_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="16" selection-end="474" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="25" column="10" selection-start="757" selection-end="757" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iteration_burn_down/test/spec/total_story_points_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="368" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="368" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iteration_burn_down/test/spec/generate_ideal_line_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="5" selection-start="0" selection-end="418" vertical-scroll-proportion="0.36995515">
-          <folding />
-        </state>
+        <state line="11" column="5" selection-start="0" selection-end="418" vertical-scroll-proportion="0.36995515" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iteration_burn_down/test/spec/generate_x_axis_data_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="29" selection-start="0" selection-end="373" vertical-scroll-proportion="0.31380752">
-          <folding />
-        </state>
+        <state line="10" column="29" selection-start="0" selection-end="373" vertical-scroll-proportion="0.31380752" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iteration_burn_down/test/spec/y_axis_step_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="22" selection-start="900" selection-end="900" vertical-scroll-proportion="0.87447697">
-          <folding />
-        </state>
+        <state line="31" column="22" selection-start="900" selection-end="900" vertical-scroll-proportion="0.87447697" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iteration_burn_down/test/spec/data_query_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="75" selection-start="740" selection-end="796" vertical-scroll-proportion="0.12556054">
-          <folding />
-        </state>
+        <state line="20" column="75" selection-start="740" selection-end="796" vertical-scroll-proportion="0.12556054" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iteration_burn_down/test/spec/burn_down_line_data_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="25" selection-start="1597" selection-end="1597" vertical-scroll-proportion="0.0">
+        <state line="52" column="25" selection-start="1597" selection-end="1597" vertical-scroll-proportion="0.8114525" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iteration_burn_down/test/spec/parameter_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="35" selection-start="657" selection-end="666" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="0" selection-start="1438" selection-end="1438" vertical-scroll-proportion="0.2987013">
+        <state line="98" column="23" selection-start="3687" selection-end="3704" vertical-scroll-proportion="0.45356372">
           <folding />
         </state>
       </provider>
