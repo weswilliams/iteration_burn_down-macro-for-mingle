@@ -11,12 +11,12 @@ describe "burn down parameter" do
   subject { @burn_down_macro }
 
   describe "Current Iteration project property" do
-    subject { @burn_down_macro.current_iteration }
+    subject { @burn_down_macro.iteration }
     it { should == '#3 Iteration 1' }
   end
 
   describe "iteration" do
-    subject { @burn_down_macro.iteration }
+    subject { @burn_down_macro.iteration_number }
     it { should == 3 }
   end
 
@@ -24,7 +24,7 @@ describe "burn down parameter" do
     before { @parameters['iteration'] = '#4 Iteration 2' }
 
     context "iteration number" do
-      subject { @burn_down_macro.iteration }
+      subject { @burn_down_macro.iteration_number }
       it { should == 4 }
     end
 

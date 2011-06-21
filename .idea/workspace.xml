@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4b8638f0-6f72-4452-979a-a016d20c8e6d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/mingle-test-macro.iml" afterPath="$PROJECT_DIR$/.idea/mingle-test-macro.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb" afterPath="$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iteration_burn_down/test/spec/parameter_spec.rb" afterPath="$PROJECT_DIR$/iteration_burn_down/test/spec/parameter_spec.rb" />
@@ -35,7 +34,7 @@
       <file leaf-file-name="iteration_burn_down_macro.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="98" column="23" selection-start="3687" selection-end="3704" vertical-scroll-proportion="0.45356372">
+            <state line="103" column="14" selection-start="3862" selection-end="3862" vertical-scroll-proportion="0.61555076">
               <folding />
             </state>
           </provider>
@@ -44,7 +43,7 @@
       <file leaf-file-name="parameter_spec.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/iteration_burn_down/test/spec/parameter_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="35" selection-start="657" selection-end="666" vertical-scroll-proportion="0.0">
+            <state line="23" column="35" selection-start="656" selection-end="665" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -319,8 +318,10 @@
     <frame x="98" y="24" width="892" height="874" extended-state="0" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293011" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2488263" sideWeight="0.68010753" order="0" side_tool="false" content_ui="tabs" />
@@ -330,8 +331,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293011" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -352,7 +351,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- renaming to make more clear" />
+    <option name="LAST_COMMIT_MESSAGE" value="- added iteration parameter to override default of 'Current Iteration' project property" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -378,6 +377,7 @@
     <MESSAGE value="- added spec for limiting the y axis to 10 major grid points" />
     <MESSAGE value="- added ability to override today for testing&#10;- added spec for calculating burn down line data" />
     <MESSAGE value="- renaming to make more clear" />
+    <MESSAGE value="- added iteration parameter to override default of 'Current Iteration' project property" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -455,14 +455,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/iteration_burn_down/test/spec/parameter_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="35" selection-start="657" selection-end="666" vertical-scroll-proportion="0.0">
+        <state line="23" column="35" selection-start="656" selection-end="665" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="98" column="23" selection-start="3687" selection-end="3704" vertical-scroll-proportion="0.45356372">
+        <state line="103" column="14" selection-start="3862" selection-end="3862" vertical-scroll-proportion="0.61555076">
           <folding />
         </state>
       </provider>

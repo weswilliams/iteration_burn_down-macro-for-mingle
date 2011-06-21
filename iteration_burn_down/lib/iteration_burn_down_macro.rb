@@ -29,7 +29,7 @@ class IterationBurnDownMacro
       burn_down_line = generate_burndown_line_data(total_story_points, story_info, date_range)
 
       <<-HTML
-    h2. Iteration ##{iteration} Burndown:
+    h2. Iteration ##{iteration_number} Burndown:
 
     <img src='#{chart_url}cht=lxy&chs=600x400&chds=a&#{chart_title}&chls=1,6,6&chxt=x,y&#{chart_range}&chma=50,0,0,50&chdl=Ideal%20Line|Burndown&chco=00FF00,FF0000&chd=t:#{x_data}|#{ideal_line_data}|#{x_data}|#{burn_down_line}&chxl=0:|#{weekdays_x_axis}|1:|'></img>
       HTML
@@ -78,17 +78,17 @@ class IterationBurnDownMacro
           "SELECT '#{parameter_to_field(estimate_property)}', '#{parameter_to_field(date_accepted_property)}' WHERE type is Story AND Iteration = '#{iteration_name}'")
       data_rows.each { |hash| hash.update(hash) { |key, value| (key == date_accepted_property && value) ? Date.parse(value) : value } }
     rescue
-      "[error retrieving story info for iteration '#{iteration}': #{$!}]"
+      "[error retrieving story info for iteration '#{iteration_number}': #{$!}]"
     end
   end
 
   def iteration_date_range
     begin
-      data_rows = @project.execute_mql("SELECT 'Start Date', 'End Date' WHERE Number = #{iteration}")
-      throw "##{iteration} is not a valid iteration" if data_rows.empty?
+      data_rows = @project.execute_mql("SELECT 'Start Date', 'End Date' WHERE Number = #{iteration_number}")
+      throw "##{iteration_number} is not a valid iteration" if data_rows.empty?
       Date.parse(data_rows[0]['start_date'])..Date.parse(data_rows[0]['end_date'])
     rescue
-      throw "error getting data for iteration #{iteration}: #{$!}"
+      throw "error getting data for iteration #{iteration_number}: #{$!}"
     end
   end
 
@@ -96,16 +96,16 @@ class IterationBurnDownMacro
     ((date_range.begin)..(date_range.end)).select { |day| WEEKDAYS.include? day.wday }
   end
 
-  def current_iteration
+  def iteration
     @parameters['iteration'] || @project.value_of_project_variable('Current Iteration')
   end
 
   def iteration_name
-    /#\d+ (.*)/.match(current_iteration)[1]
+    /#\d+ (.*)/.match(iteration)[1]
   end
 
-  def iteration
-    /#(\d+).*/.match(current_iteration)[1].to_i
+  def iteration_number
+    /#(\d+).*/.match(iteration)[1].to_i
   end
 
   def parameter_to_field(field)
