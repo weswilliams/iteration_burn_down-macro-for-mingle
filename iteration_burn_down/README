@@ -1,0 +1,24 @@
+Create an iteration burndown daily based on iteration start and end dates and accepted story points and accepted date.
+
+Please try this and give me feedback.
+
+uses type Iteration - 'Start Date' and 'End Date' (not configurable)
+uses Project Parameter - 'Current Iteration' - overriden with iteration: '#3 Iteration 5' parameter
+uses type Story - 'Story Points' and 'Date Accepted' (both configurable) with (story_points: planning_estimate and date_accepted:accepted_on) parameters
+
+ex. using all default values
+
+{{
+ iteration_burn_down
+}}
+
+ex. overriding defaults
+
+{{
+  iteration_burn_down
+    iteration" '#34 Iteration Name'
+    story_points: planning_estimate
+    date_accepted: accepted_on
+}}
+
+
