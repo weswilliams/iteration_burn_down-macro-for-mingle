@@ -33,8 +33,17 @@ class IterationBurnDownMacro
 
     <img src='#{chart_url}cht=lxy&chs=600x400&chds=a&#{chart_title}&chls=1,6,6&chxt=x,y&#{chart_range}&chma=50,0,0,50&chdl=Ideal%20Line|Burndown&chco=00FF00,FF0000&chd=t:#{x_data}|#{ideal_line_data}|#{x_data}|#{burn_down_line}&chxl=0:|#{weekdays_x_axis}|1:|'></img>
       HTML
-    rescue
-      "Something went way wrong: #{$!}"
+    rescue Exception => e
+      <<-ERROR
+    h2. Iteration ##{iteration_number} Burndown:
+
+    "An Error occurred: #{e}"
+
+    iteration: [#{iteration}]<br>
+    date accepted property: [#{date_accepted_property}]<br>
+    estimate property: #{estimate_property}<br>
+
+      ERROR
     end
   end
 
@@ -77,18 +86,18 @@ class IterationBurnDownMacro
       data_rows = @project.execute_mql(
           "SELECT '#{parameter_to_field(estimate_property)}', '#{parameter_to_field(date_accepted_property)}' WHERE type is Story AND Iteration = '#{iteration_name}'")
       data_rows.each { |hash| hash.update(hash) { |key, value| (key == date_accepted_property && value) ? Date.parse(value) : value } }
-    rescue
-      "[error retrieving story info for iteration '#{iteration_number}': #{$!}]"
+    rescue Exception => e
+      raise "[error retrieving story info for iteration '#{iteration}': #{e}]"
     end
   end
 
   def iteration_date_range
     begin
       data_rows = @project.execute_mql("SELECT 'Start Date', 'End Date' WHERE Number = #{iteration_number}")
-      throw "##{iteration_number} is not a valid iteration" if data_rows.empty?
+      raise "##{iteration} is not a valid iteration" if data_rows.empty?
       Date.parse(data_rows[0]['start_date'])..Date.parse(data_rows[0]['end_date'])
-    rescue
-      throw "error getting data for iteration #{iteration_number}: #{$!}"
+    rescue Exception => e
+      raise "error getting data for iteration #{iteration}: #{e}"
     end
   end
 
@@ -101,11 +110,21 @@ class IterationBurnDownMacro
   end
 
   def iteration_name
-    /#\d+ (.*)/.match(iteration)[1]
+    match_data = /#\d+ (.*)/.match(iteration)
+    if  match_data
+      match_data[1]
+    else
+      'Unknown'
+    end
   end
 
   def iteration_number
-    /#(\d+).*/.match(iteration)[1].to_i
+    match_data = /#(\d+).*/.match(iteration)
+    if  match_data
+      match_data[1].to_i
+    else
+      'Unknown'
+    end
   end
 
   def parameter_to_field(field)
