@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4b8638f0-6f72-4452-979a-a016d20c8e6d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb" afterPath="$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb" />
     </list>
     <ignored path="mingle-test-macro.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,7 +29,7 @@
       <file leaf-file-name="iteration_burn_down_macro.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="5" selection-start="2529" selection-end="2529" vertical-scroll-proportion="0.3541963">
+            <state line="99" column="42" selection-start="3722" selection-end="3722" vertical-scroll-proportion="0.95163584">
               <folding />
             </state>
           </provider>
@@ -302,7 +301,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- better error handling" />
+    <option name="LAST_COMMIT_MESSAGE" value="- handle no story points in iteration" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -331,6 +330,7 @@
     <MESSAGE value="- added iteration parameter to override default of 'Current Iteration' project property" />
     <MESSAGE value="- refactored names &#10;-- iteration to iteration_number&#10;-- current_iteration to iteration" />
     <MESSAGE value="- better error handling" />
+    <MESSAGE value="- handle no story points in iteration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -427,7 +427,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="5" selection-start="2529" selection-end="2529" vertical-scroll-proportion="0.3541963">
+        <state line="99" column="42" selection-start="3722" selection-end="3722" vertical-scroll-proportion="0.95163584">
           <folding />
         </state>
       </provider>
