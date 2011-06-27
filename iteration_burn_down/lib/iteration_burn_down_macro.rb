@@ -48,10 +48,12 @@ class IterationBurnDownMacro
   end
 
   def y_axis_step(total_story_points)
-    (total_story_points/10.0).ceil
+    step = (total_story_points/10.0).ceil
+    step <=0 ? 1 : step
   end
 
   def generate_burndown_line_data(total_story_points, story_info, date_range)
+    return '' if total_story_points == 0
     weekdays = weekdays_for(date_range)
     points_by_past_weekdays = {}
     weekdays.each { |weekday| points_by_past_weekdays[weekday] = total_story_points if weekday <= today }
@@ -70,6 +72,7 @@ class IterationBurnDownMacro
   end
 
   def generate_idea_line_data(total_story_points, date_range)
+    return '' if total_story_points == 0
     number_of_weekdays = weekdays_for(date_range).count
     step = (total_story_points*1.0) / (number_of_weekdays-1)
     idea_data = []
