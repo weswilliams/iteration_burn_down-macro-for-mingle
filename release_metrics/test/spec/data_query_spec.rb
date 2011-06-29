@@ -26,22 +26,22 @@ describe "#last_3_iterations" do
     end
 
     context do
-      subject { @macro.last_3_iterations.length }
-      it { should == 3 }
+      subject { @macro.iterations.length }
+      it { should == 4 }
     end
 
     context do
-      subject { @macro.last_3_iterations[0] }
+      subject { @macro.iterations[0] }
       it { should have_value 'Iteration 5' }
     end
 
     context do
-      subject { @macro.last_3_iterations[2] }
+      subject { @macro.iterations[2] }
       it { should have_value 'Iteration 3' }
     end
 
     context "average velocity" do
-      subject { @macro.average_velocity @macro.last_3_iterations }
+      subject { @macro.average_velocity @macro.iterations.first(3) }
       it { should == 10 }
     end
   end

@@ -17,8 +17,8 @@ class ReleaseMetrics
 
   def execute
     begin
-      iterations = last_3_iterations
-      average_velocity = average_velocity last_3_iterations
+      iterations = iterations
+      average_velocity = average_velocity iterations.first(3)
 
       <<-HTML
     h2. Metrics for #{release}
@@ -44,11 +44,15 @@ class ReleaseMetrics
   end
 
   def last_3_iterations
+    iterations.first(3)
+  end
+
+  def iterations
     begin
       data_rows = @project.execute_mql(
           "SELECT number, name, 'end date', velocity WHERE Type = iteration AND 'End Date' < today AND release = '#{release_name}' ORDER BY 'end date' desc")
       raise "##{release} is not a valid release" if data_rows.empty?
-      data_rows.first(3)
+      data_rows
     rescue Exception => e
       raise "[error retrieving story info for iteration '#{iteration}': #{e}]"
     end
@@ -91,14 +95,6 @@ class ReleaseMetrics
 
   def parameter_to_field(field)
     field.gsub('_', ' ').scan(/\w+/).collect { |word| word.capitalize }.join(' ')
-  end
-
-  def date_accepted_property
-    @parameters['date_accepted'] || 'date_accepted'
-  end
-
-  def estimate_property
-    @parameters['story_points'] || 'story_points'
   end
 
   def today
