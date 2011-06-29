@@ -26,12 +26,14 @@ class ReleaseMetrics
     h2. Metrics for #{release}
 
     Current Iteration: #{iteration} <br>
-    Average Velocity: #{average_velocity} (last 3 iterations) <br>
+    Average Velocity: #{"%.2f" % average_velocity} (last 3 iterations) <br>
     Completed Iterations: #{iterations.length} <br>
     Remaining Story Points: #{remaining_story_points} (includes all stories not in a past iteration)<br>
 
-    Incomplete Stories: #{remaining_stories}
-    Iterations: #{iterations}
+    h3. Projected Iterations to Complete
+
+    Based on average of last 3 iterations: #{(remaining_story_points/average_velocity).ceil}
+
       HTML
     rescue Exception => e
       <<-ERROR
@@ -67,7 +69,7 @@ class ReleaseMetrics
 
   def average_velocity(iterations)
     total_velocity = iterations.inject(0) { |total, hash| hash['velocity'] ? total + hash['velocity'].to_i : total }
-    total_velocity / iterations.length
+    total_velocity / (iterations.length * 1.0)
   end
 
   def completed_iterations
