@@ -19,15 +19,18 @@ class ReleaseMetrics
     begin
       iterations = completed_iterations
       average_velocity = average_velocity last_3_iterations(iterations)
+      remaining_stories = incomplete_stories iterations
+      remaining_story_points = story_points_for remaining_stories
 
       <<-HTML
     h2. Metrics for #{release}
 
     Current Iteration: #{iteration} <br>
     Average Velocity: #{average_velocity} (last 3 iterations) <br>
-    Completed Iterations: #{iterations.length}
+    Completed Iterations: #{iterations.length} <br>
+    Remaining Story Points: #{remaining_story_points} (includes all stories not in a past iteration)<br>
 
-    Incomplete Stories: #{incomplete_stories iterations}
+    Incomplete Stories: #{remaining_stories}
     Iterations: #{iterations}
       HTML
     rescue Exception => e
@@ -38,6 +41,10 @@ class ReleaseMetrics
 
       ERROR
     end
+  end
+
+  def story_points_for(stories)
+    stories.inject(0) {|total, story| story['story_points'] ? total + story['story_points'].to_i : total }
   end
 
   def incomplete_stories(iterations)

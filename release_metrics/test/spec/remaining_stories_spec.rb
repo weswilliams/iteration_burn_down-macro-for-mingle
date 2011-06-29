@@ -15,7 +15,7 @@ describe "remaining stories" do
         {'story_points' => '5'},
         {'story_points' => '3'},
         {'story_points' => '8'},
-        {'story_points' => '1'},
+        {'story_points' => ''},
     ]
     @project = double('project',
                       :value_of_project_variable => '#1 Release 1',
@@ -29,15 +29,19 @@ describe "remaining stories" do
     it { should == "'Iteration 5','Iteration 4','Iteration 3','Iteration 2'" }
   end
 
-    context do
-      before do
-        @project.should_receive(:execute_mql).with(
-            "SELECT 'story points' " +
-            "WHERE Type = story AND release = 'Release 1' AND NOT iteration in ('Iteration 5','Iteration 4','Iteration 3','Iteration 2')")
-      end
-
-      subject { @macro.incomplete_stories @iterations }
-      it { should == @stories }
+  context "retrieve incomplete stories" do
+    before do
+      @project.should_receive(:execute_mql).with(
+          "SELECT 'story points' WHERE Type = story AND release = 'Release 1' AND " +
+          "NOT iteration in ('Iteration 5','Iteration 4','Iteration 3','Iteration 2')")
     end
 
+    subject { @macro.incomplete_stories @iterations }
+    it { should == @stories }
+  end
+
+  context "calculate remaining story points" do
+    subject { @macro.story_points_for @stories }
+    it { should == 16 }
+  end
 end

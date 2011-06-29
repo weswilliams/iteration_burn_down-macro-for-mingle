@@ -31,7 +31,7 @@
       <file leaf-file-name="release_metrics.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="14" selection-start="749" selection-end="749" vertical-scroll-proportion="0.2548596">
+            <state line="31" column="0" selection-start="842" selection-end="842" vertical-scroll-proportion="0.5183585">
               <folding />
             </state>
           </provider>
@@ -49,16 +49,7 @@
       <file leaf-file-name="remaining_stories_spec.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/remaining_stories_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="75" selection-start="1072" selection-end="1072" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="completed_iterations_spec.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/completed_iterations_spec.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="0" selection-start="136" selection-end="560" vertical-scroll-proportion="0.0">
+            <state line="28" column="7" selection-start="1003" selection-end="1003" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -206,6 +197,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="release_metrics" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mingle-test-macro" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mingle-test-macro" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iteration_burn_down" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mingle-test-macro" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mingle-test-macro" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iteration_burn_down" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -417,7 +440,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- retrieving accepted stories" />
+    <option name="LAST_COMMIT_MESSAGE" value="- retrieving stories not completed in a previous iteration" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -452,6 +475,7 @@
     <MESSAGE value="- show number of completed iterations" />
     <MESSAGE value="- refactoring spec context" />
     <MESSAGE value="- retrieving accepted stories" />
+    <MESSAGE value="- retrieving stories not completed in a previous iteration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -485,13 +509,6 @@
     <entry file="file://$PROJECT_DIR$/iteration_burn_down/init.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="4" selection-start="288" selection-end="288" vertical-scroll-proportion="0.18854749">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="99" column="42" selection-start="3722" selection-end="3722" vertical-scroll-proportion="0.95732576">
           <folding />
         </state>
       </provider>
@@ -531,13 +548,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/completed_iterations_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="136" selection-end="560" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/parameter_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="42" column="19" selection-start="1078" selection-end="1078" vertical-scroll-proportion="0.0">
@@ -545,16 +555,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/completed_iterations_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="0" selection-start="136" selection-end="560" vertical-scroll-proportion="0.27521008">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="99" column="42" selection-start="3722" selection-end="3722" vertical-scroll-proportion="0.6283784">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/remaining_stories_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="75" selection-start="1072" selection-end="1072" vertical-scroll-proportion="0.0">
+        <state line="28" column="7" selection-start="1003" selection-end="1003" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="14" selection-start="749" selection-end="749" vertical-scroll-proportion="0.2548596">
+        <state line="31" column="0" selection-start="842" selection-end="842" vertical-scroll-proportion="0.5183585">
           <folding />
         </state>
       </provider>
