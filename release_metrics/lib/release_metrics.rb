@@ -18,7 +18,7 @@ class ReleaseMetrics
   def execute
     begin
       iterations = completed_iterations
-      average_velocity = average_velocity iterations.first(3)
+      average_velocity = average_velocity last_3_iterations(iterations)
 
       <<-HTML
     h2. Metrics for #{release}
@@ -27,6 +27,7 @@ class ReleaseMetrics
     Average Velocity: #{average_velocity} (last 3 iterations) <br>
     Completed Iterations: #{iterations.length}
 
+    Stories: #{stories iterations}
     Iterations: #{iterations}
       HTML
     rescue Exception => e
@@ -39,13 +40,27 @@ class ReleaseMetrics
     end
   end
 
+  def stories(iterations)
+    iter_names = iteration_names iterations
+    begin
+      @project.execute_mql(
+          "SELECT 'story points' WHERE Type = story AND iteration in (#{iter_names}) AND status = 'Accepted'")
+    rescue Exception => e
+      raise "[error retrieving stories for release '#{release}': #{e}]"
+    end
+  end
+
+  def iteration_names(iterations)
+    iterations.collect {|iter| "'#{iter['name']}'" }.join ","
+  end
+
+  def last_3_iterations(iterations)
+    iterations.first(3)
+  end
+
   def average_velocity(iterations)
     total_velocity = iterations.inject(0) { |total, hash| hash['velocity'] ? total + hash['velocity'].to_i : total }
     total_velocity / iterations.length
-  end
-
-  def last_3_iterations
-    iterations.first(3)
   end
 
   def completed_iterations
@@ -55,7 +70,7 @@ class ReleaseMetrics
       raise "##{release} is not a valid release" if data_rows.empty?
       data_rows
     rescue Exception => e
-      raise "[error retrieving story info for iteration '#{iteration}': #{e}]"
+      raise "[error retrieving completed iterations for #{release}: #{e}]"
     end
   end
 
@@ -72,26 +87,17 @@ class ReleaseMetrics
     end
   end
 
-  def iteration
-    @parameters['iteration'] || @project.value_of_project_variable('Current Iteration')
-  end
-
-  def iteration_name
-    match_data = /#\d+ (.*)/.match(iteration)
-    if  match_data
-      match_data[1]
-    else
-      'Unknown'
-    end
-  end
-
-  def iteration_number
-    match_data = /#(\d+).*/.match(iteration)
+  def release_number
+    match_data = /#(\d+).*/.match(release)
     if  match_data
       match_data[1].to_i
     else
       'Unknown'
     end
+  end
+
+  def iteration
+    @parameters['iteration'] || @project.value_of_project_variable('Current Iteration')
   end
 
   def parameter_to_field(field)
