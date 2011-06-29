@@ -31,7 +31,7 @@
       <file leaf-file-name="release_metrics.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="60" selection-start="386" selection-end="386" vertical-scroll-proportion="-5.9259257">
+            <state line="19" column="39" selection-start="335" selection-end="335" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -40,7 +40,7 @@
       <file leaf-file-name="data_query_spec.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/data_query_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="65" selection-start="1492" selection-end="1492" vertical-scroll-proportion="0.6785714">
+            <state line="29" column="21" selection-start="1174" selection-end="1174" vertical-scroll-proportion="0.52100843">
               <folding />
             </state>
           </provider>
@@ -383,7 +383,7 @@
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33685446" sideWeight="0.67741936" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32258064" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32258064" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293011" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -408,7 +408,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- calculating velocity of last 3 iterations" />
+    <option name="LAST_COMMIT_MESSAGE" value="- refactoring" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -439,6 +439,7 @@
     <MESSAGE value="- better error handling" />
     <MESSAGE value="- handle no story points in iteration" />
     <MESSAGE value="- calculating velocity of last 3 iterations" />
+    <MESSAGE value="- refactoring" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -534,14 +535,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="60" selection-start="386" selection-end="386" vertical-scroll-proportion="-5.9259257">
+        <state line="19" column="39" selection-start="335" selection-end="335" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/data_query_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="65" selection-start="1492" selection-end="1492" vertical-scroll-proportion="0.6785714">
+        <state line="29" column="21" selection-start="1174" selection-end="1174" vertical-scroll-proportion="0.52100843">
           <folding />
         </state>
       </provider>

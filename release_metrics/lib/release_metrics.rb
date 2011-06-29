@@ -17,7 +17,7 @@ class ReleaseMetrics
 
   def execute
     begin
-      iterations = iterations
+      iterations = completed_iterations
       average_velocity = average_velocity iterations.first(3)
 
       <<-HTML
@@ -25,8 +25,9 @@ class ReleaseMetrics
 
     Current Iteration: #{iteration} <br>
     Average Velocity: #{average_velocity} (last 3 iterations) <br>
+    Completed Iterations: #{iterations.length}
 
-    Last 3 Iterations: #{iterations}
+    Iterations: #{iterations}
       HTML
     rescue Exception => e
       <<-ERROR
@@ -47,7 +48,7 @@ class ReleaseMetrics
     iterations.first(3)
   end
 
-  def iterations
+  def completed_iterations
     begin
       data_rows = @project.execute_mql(
           "SELECT number, name, 'end date', velocity WHERE Type = iteration AND 'End Date' < today AND release = '#{release_name}' ORDER BY 'end date' desc")
