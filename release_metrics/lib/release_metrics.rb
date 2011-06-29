@@ -19,6 +19,7 @@ class ReleaseMetrics
     begin
       iterations = completed_iterations
       average_velocity = average_velocity last_3_iterations(iterations)
+      best_velocity = best_velocity_for iterations * 1.0
       remaining_stories = incomplete_stories iterations
       remaining_story_points = story_points_for remaining_stories
 
@@ -28,11 +29,12 @@ class ReleaseMetrics
     Current Iteration: #{iteration} <br>
     Average Velocity: #{"%.2f" % average_velocity} (last 3 iterations) <br>
     Completed Iterations: #{iterations.length} <br>
-    Remaining Story Points: #{remaining_story_points} (includes all stories not in a past iteration)<br>
+    Remaining Story Points: #{remaining_story_points} (includes all stories not in a past iteration) <br>
 
     h3. Projected Iterations to Complete
 
-    Based on average of last 3 iterations: #{(remaining_story_points/average_velocity).ceil}
+    Based on average of last 3 iterations: #{(remaining_story_points/average_velocity).ceil} <br>
+    Based on best velocity (#{best_velocity}): #{(remaining_story_points/best_velocity).ceil} <br>
 
       HTML
     rescue Exception => e
@@ -65,6 +67,10 @@ class ReleaseMetrics
 
   def last_3_iterations(iterations)
     iterations.first(3)
+  end
+
+  def best_velocity_for(iterations)
+    iterations.inject(0) {|best, iter| iter['velocity'] && iter['velocity'].to_i > best ? iter['velocity'].to_i : best }
   end
 
   def average_velocity(iterations)
