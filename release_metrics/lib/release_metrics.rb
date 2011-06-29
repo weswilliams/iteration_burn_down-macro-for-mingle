@@ -23,6 +23,9 @@ class ReleaseMetrics
       wost_velocity = worst_velocity_for iterations
       remaining_stories = incomplete_stories iterations
       remaining_story_points = story_points_for remaining_stories
+      last_end_date = last_iteration_end_date iterations[0]
+      iter_length = iteration_length_in_days iterations[0]
+      remaining_iters_for_avg = (remaining_story_points/average_velocity).ceil
 
       <<-HTML
     h2. Metrics for #{release}
@@ -34,7 +37,8 @@ class ReleaseMetrics
 
     h3. Projected Iterations to Complete (Based on ...)
 
-    Average of last 3 iterations (#{"%.2f" % average_velocity}): #{(remaining_story_points/average_velocity).ceil} <br>
+    Average of last 3 iterations (#{"%.2f" % average_velocity}): #{remaining_iters_for_avg}
+    (#{expected_completion_date_for last_end_date, iter_length, remaining_iters_for_avg })<br>
     Best velocity (#{best_velocity}): #{(remaining_story_points/best_velocity).ceil} <br>
     Worst velocity (#{wost_velocity}): #{(remaining_story_points/wost_velocity).ceil} <br>
 
