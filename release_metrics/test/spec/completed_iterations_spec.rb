@@ -51,5 +51,10 @@ describe "completed iterations" do
     subject { @macro.best_velocity_for @iterations }
     it { should == 12 }
   end
+
+  context "worst velocity" do
+    subject { @macro.worst_velocity_for @iterations }
+    it { should == 5 }
+  end
 end
 
