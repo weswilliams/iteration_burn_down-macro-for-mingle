@@ -2,7 +2,7 @@ require "rspec"
 require "date"
 require "../../lib/release_metrics"
 
-describe "#last_3_iterations" do
+describe "completed iterations" do
   before do
     @parameters = {}
     @iterations = [
@@ -17,7 +17,7 @@ describe "#last_3_iterations" do
     @macro = ReleaseMetrics.new(@parameters, @project, nil)
   end
 
-  context "query with default parameters" do
+  context do
     before do
       @project.should_receive(:execute_mql).with(
           "SELECT number, name, 'end date', velocity " +
@@ -25,17 +25,17 @@ describe "#last_3_iterations" do
               "ORDER BY 'end date' desc")
     end
 
-    context do
+    context "number of iterations" do
       subject { @macro.completed_iterations.length }
       it { should == 4 }
     end
 
-    context do
+    context "most recent iteration" do
       subject { @macro.completed_iterations[0] }
       it { should have_value 'Iteration 5' }
     end
 
-    context do
+    context "last iteration used in last 3 velocity" do
       subject { @macro.completed_iterations[2] }
       it { should have_value 'Iteration 3' }
     end
