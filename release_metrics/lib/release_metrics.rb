@@ -49,6 +49,10 @@ class ReleaseMetrics
     end
   end
 
+  def expected_completion_date_for(last_end_date, iter_length, remaining_iterations)
+    last_end_date + (iter_length * remaining_iterations - 1)
+  end
+
   def story_points_for(stories)
     stories.inject(0) {|total, story| story['story_points'] ? total + story['story_points'].to_i : total }
   end

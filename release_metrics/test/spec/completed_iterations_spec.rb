@@ -61,5 +61,11 @@ describe "completed iterations" do
     subject { @macro.worst_velocity_for @iterations }
     it { should == 5 }
   end
+
+  context "expected completion date for end data and velocity" do
+    subject { @macro.expected_completion_date_for Date.parse('2011-07-05'), 7, 5 }
+    it { should == Date.parse('2011-08-08') }
+  end
+
 end
 
