@@ -17,12 +17,16 @@ class ReleaseMetrics
 
   def execute
     begin
+      iterations = last_3_iterations
+      average_velocity = average_velocity last_3_iterations
+
       <<-HTML
     h2. Metrics for #{release}
 
-    Current Iteration: #{iteration}
+    Current Iteration: #{iteration} <br>
+    Average Velocity: #{average_velocity} (last 3 iterations) <br>
 
-    Last 3 Iterations: #{last_3_iterations}
+    Last 3 Iterations: #{iterations}
       HTML
     rescue Exception => e
       <<-ERROR
@@ -34,14 +38,15 @@ class ReleaseMetrics
     end
   end
 
-  def calculate_total_story_points(stories)
-    stories.inject(0) { |total, hash| hash[estimate_property] ? total + hash[estimate_property].to_i : total }
+  def average_velocity(iterations)
+    total_velocity = iterations.inject(0) { |total, hash| hash['velocity'] ? total + hash['velocity'].to_i : total }
+    total_velocity / iterations.length
   end
 
   def last_3_iterations
     begin
       data_rows = @project.execute_mql(
-          "SELECT number, name, 'end date' WHERE Type = iteration AND 'End Date' < today AND release = '#{release_name}' ORDER BY 'end date' desc")
+          "SELECT number, name, 'end date', velocity WHERE Type = iteration AND 'End Date' < today AND release = '#{release_name}' ORDER BY 'end date' desc")
       raise "##{release} is not a valid release" if data_rows.empty?
       data_rows.first(3)
     rescue Exception => e
