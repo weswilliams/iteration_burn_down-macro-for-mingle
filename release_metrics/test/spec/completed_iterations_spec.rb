@@ -6,11 +6,11 @@ describe "completed iterations" do
   before do
     @parameters = {}
     @iterations = [
-        {'number' => '5', 'name' => 'Iteration 5', 'end_date' => '2011-07-05', 'velocity' => '12'},
-        {'number' => '4', 'name' => 'Iteration 4', 'end_date' => '2011-06-28', 'velocity' => '8'},
-        {'number' => '3', 'name' => 'Iteration 3', 'end_date' => '2011-06-21', 'velocity' => '10'},
-        {'number' => '2', 'name' => 'Iteration 2', 'end_date' => '2011-06-14', 'velocity' => '5'},
-        {'number' => '1', 'name' => 'Iteration 1', 'end_date' => '2011-06-14', 'velocity' => '0'},
+        {'start_date' => '2011-06-29', 'end_date' => '2011-07-05', 'velocity' => '12'},
+        {'start_date' => '2011-06-22', 'end_date' => '2011-06-28', 'velocity' => '8'},
+        {'start_date' => '2011-06-15', 'end_date' => '2011-06-21', 'velocity' => '10'},
+        {'start_date' => '2011-06-08', 'end_date' => '2011-06-14', 'velocity' => '5'},
+        {'start_date' => '2011-06-01', 'end_date' => '2011-06-07', 'velocity' => '0'},
     ]
     @project = double('project',
                       :value_of_project_variable => '#1 Release 1',
@@ -21,7 +21,7 @@ describe "completed iterations" do
   context do
     before do
       @project.should_receive(:execute_mql).with(
-          "SELECT number, name, 'end date', velocity " +
+          "SELECT 'start date', 'end date', velocity " +
               "WHERE Type = iteration AND 'End Date' < today AND release = 'Release 1' " +
               "ORDER BY 'end date' desc")
     end
@@ -33,17 +33,22 @@ describe "completed iterations" do
 
     context "most recent iteration" do
       subject { @macro.completed_iterations[0] }
-      it { should have_value 'Iteration 5' }
+      it { should have_value '2011-06-29' }
     end
 
     context "last iteration used in last 3 velocity" do
       subject { @macro.completed_iterations[2] }
-      it { should have_value 'Iteration 3' }
+      it { should have_value '2011-06-15' }
     end
 
     context "average velocity" do
       subject { @macro.average_velocity @macro.completed_iterations.first(3) }
       it { should == 10 }
+    end
+
+    context "iteration length in days" do
+      subject { @macro.iteration_length_in_days @macro.completed_iterations[0] }
+      it { should == 7 }
     end
   end
 

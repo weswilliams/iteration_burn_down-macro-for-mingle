@@ -63,6 +63,16 @@ class ReleaseMetrics
     end
   end
 
+  def last_iteration_end_date(most_recent_iter)
+    Date.parse(most_recent_iter['end_date'])
+  end
+
+  def iteration_length_in_days(most_recent_iter)
+    start_date = Date.parse(most_recent_iter['start_date'])
+    end_date = last_iteration_end_date(most_recent_iter)
+    (end_date - start_date) + 1
+  end
+
   def iteration_names(iterations)
     iterations.collect {|iter| "'#{iter['name']}'" }.join ","
   end
@@ -90,7 +100,7 @@ class ReleaseMetrics
   def completed_iterations
     begin
       data_rows = @project.execute_mql(
-          "SELECT number, name, 'end date', velocity WHERE Type = iteration AND 'End Date' < today AND release = '#{release_name}' ORDER BY 'end date' desc")
+          "SELECT 'start date', 'end date', velocity WHERE Type = iteration AND 'End Date' < today AND release = '#{release_name}' ORDER BY 'end date' desc")
       raise "##{release} is not a valid release" if data_rows.empty?
       data_rows
     rescue Exception => e
