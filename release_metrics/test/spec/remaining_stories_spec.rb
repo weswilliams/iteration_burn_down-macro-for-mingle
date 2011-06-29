@@ -33,10 +33,10 @@ describe "remaining stories" do
       before do
         @project.should_receive(:execute_mql).with(
             "SELECT 'story points' " +
-            "WHERE Type = story AND iteration in ('Iteration 5','Iteration 4','Iteration 3','Iteration 2') AND status = 'Accepted'")
+            "WHERE Type = story AND release = 'Release 1' AND NOT iteration in ('Iteration 5','Iteration 4','Iteration 3','Iteration 2')")
       end
 
-      subject { @macro.stories @iterations }
+      subject { @macro.incomplete_stories @iterations }
       it { should == @stories }
     end
 

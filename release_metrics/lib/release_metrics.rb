@@ -27,7 +27,7 @@ class ReleaseMetrics
     Average Velocity: #{average_velocity} (last 3 iterations) <br>
     Completed Iterations: #{iterations.length}
 
-    Stories: #{stories iterations}
+    Incomplete Stories: #{incomplete_stories iterations}
     Iterations: #{iterations}
       HTML
     rescue Exception => e
@@ -40,11 +40,11 @@ class ReleaseMetrics
     end
   end
 
-  def stories(iterations)
+  def incomplete_stories(iterations)
     iter_names = iteration_names iterations
     begin
       @project.execute_mql(
-          "SELECT 'story points' WHERE Type = story AND iteration in (#{iter_names}) AND status = 'Accepted'")
+          "SELECT 'story points' WHERE Type = story AND release = '#{release_name}' AND NOT iteration in (#{iter_names})")
     rescue Exception => e
       raise "[error retrieving stories for release '#{release}': #{e}]"
     end
