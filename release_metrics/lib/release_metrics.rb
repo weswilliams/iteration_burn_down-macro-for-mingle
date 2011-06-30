@@ -77,7 +77,6 @@ class ReleaseMetrics
   def incomplete_stories(iterations)
     iter_names = iteration_names iterations
     begin
-      story_points_field = parameter_to_field story_points_parameter
       @project.execute_mql(
           "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{release_name}' AND NOT iteration in (#{iter_names})")
     rescue Exception => e
@@ -156,12 +155,8 @@ class ReleaseMetrics
     @parameters['iteration'] || @project.value_of_project_variable('Current Iteration')
   end
 
-  def story_points_parameter
-    @parameters['story_points'] || 'story_points'
-  end
-
-  def parameter_to_field(field)
-    field.gsub('_', ' ').scan(/\w+/).collect { |word| word.capitalize }.join(' ')
+  def parameter_to_field(param)
+    param.gsub('_', ' ').scan(/\w+/).collect { |word| word.capitalize }.join(' ')
   end
 
   def today
@@ -170,6 +165,27 @@ class ReleaseMetrics
 
   def can_be_cached?
     false # if appropriate, switch to true once you move your macro to production
+  end
+
+  def method_missing(method_sym, *arguments, &block)
+    if method_sym.to_s =~ /^(.*)_field$/
+      parameter_to_field(send  "#{$1}_parameter".to_s)
+    elsif  method_sym.to_s =~ /^(.*)_parameter$/
+        @parameters[$1] || $1
+    else
+      super
+    end
+  end
+
+  def respond_to?(method_sym, include_private = false)
+    puts 'in respond to'
+    if method_sym.to_s =~ /^(.*)_field$/
+      true
+    elsif method_sym.to_s =~ /^(.*)_parameter$/
+        true
+    else
+      super
+    end
   end
 
 end
