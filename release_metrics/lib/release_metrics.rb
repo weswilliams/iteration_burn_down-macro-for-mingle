@@ -158,6 +158,7 @@ class ReleaseMetrics
     false # if appropriate, switch to true once you move your macro to production
   end
 
+  #noinspection RubyUnusedLocalVariable
   def method_missing(method_sym, *arguments, &block)
     if method_sym.to_s =~ /^(.*)_field$/
       parameter_to_field(send "#{$1}_parameter".to_s)
