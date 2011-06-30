@@ -40,11 +40,12 @@ class ReleaseMetrics
       <<-HTML
     h2. Metrics for #{release}
 
-    Current Iteration: #{iteration} <br>
-    Average Velocity: #{"%.2f" % average_velocity} (last 3 iterations) <br>
-    Completed Iterations: #{iterations.length} <br>
-    Remaining Story Points: #{remaining_story_points} (includes all stories not in a past iteration) <br>
-    Iteration Length: #{iter_length} days <br>
+    |_.Metric |_. Value |
+    | Current Iteration | #{iteration} |
+    | Average Velocity (last 3 iterations) | #{"%.2f" % average_velocity} |
+    | Completed Iterations | #{iterations.length} |
+    | Remaining Story Points <br> (includes all stories not in a past iteration) | #{remaining_story_points} |
+    | Iteration Length | #{iter_length} days |
 
     h3. Projected Iterations to Complete (Based on ...) - (Expected End Date of Last Iteration)
 

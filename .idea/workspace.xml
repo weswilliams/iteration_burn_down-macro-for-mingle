@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b8638f0-6f72-4452-979a-a016d20c8e6d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/wes.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/wes.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" afterPath="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
     </list>
@@ -31,7 +30,7 @@
       <file leaf-file-name="release_metrics.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="3" selection-start="1444" selection-end="1444" vertical-scroll-proportion="0.59179264">
+            <state line="37" column="0" selection-start="1352" selection-end="1352" vertical-scroll-proportion="0.39740822">
               <folding />
             </state>
           </provider>
@@ -449,7 +448,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- show expected end date of last iteration in projections" />
+    <option name="LAST_COMMIT_MESSAGE" value="- added expected end dates of last iteration" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -462,7 +461,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="-added spec for story_info query" />
     <MESSAGE value="- added spec for iteration date range query" />
     <MESSAGE value="- added spec for calculating total_story_points" />
     <MESSAGE value="- added spec for ideal line data" />
@@ -487,6 +485,7 @@
     <MESSAGE value="- calculate iteration length based on last iteration completed&#10;" />
     <MESSAGE value="- calculate expected completion date" />
     <MESSAGE value="- show expected end date of last iteration in projections" />
+    <MESSAGE value="- added expected end dates of last iteration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -589,7 +588,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="3" selection-start="1444" selection-end="1444" vertical-scroll-proportion="0.59179264">
+        <state line="37" column="0" selection-start="1352" selection-end="1352" vertical-scroll-proportion="0.39740822">
           <folding />
         </state>
       </provider>
