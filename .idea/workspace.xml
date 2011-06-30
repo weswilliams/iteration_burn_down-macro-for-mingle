@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4b8638f0-6f72-4452-979a-a016d20c8e6d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" afterPath="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/test/spec/completed_iterations_spec.rb" afterPath="$PROJECT_DIR$/release_metrics/test/spec/completed_iterations_spec.rb" />
     </list>
     <ignored path="mingle-test-macro.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -420,7 +418,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- removing more duplication with dynamic parameter method" />
+    <option name="LAST_COMMIT_MESSAGE" value="- fixed defect with not getting names for the iterations" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -433,7 +431,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="- better error handling" />
     <MESSAGE value="- handle no story points in iteration" />
     <MESSAGE value="- calculating velocity of last 3 iterations" />
     <MESSAGE value="- refactoring" />
@@ -458,6 +455,7 @@
     <MESSAGE value="- ability to have any parameter/field dynamically" />
     <MESSAGE value="- added ability to define defaults for parameters" />
     <MESSAGE value="- removing more duplication with dynamic parameter method" />
+    <MESSAGE value="- fixed defect with not getting names for the iterations" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
