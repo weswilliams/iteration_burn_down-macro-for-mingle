@@ -124,7 +124,7 @@ class ReleaseMetrics
   def completed_iterations
     begin
       data_rows = @project.execute_mql(
-          "SELECT 'start date', 'end date', velocity WHERE Type = iteration AND 'End Date' < today AND release = '#{release_name}' ORDER BY 'end date' desc")
+          "SELECT name, 'start date', 'end date', velocity WHERE Type = iteration AND 'End Date' < today AND release = '#{release_name}' ORDER BY 'end date' desc")
       raise "##{release_parameter} is not a valid release" if data_rows.empty?
       data_rows
     rescue Exception => e
