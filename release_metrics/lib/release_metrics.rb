@@ -13,6 +13,8 @@ class ReleaseMetrics
     @parameters = parameters
     @project = project
     @current_user = current_user
+    @parameter_defaults = Hash.new { |h, k| h[k]=k }
+    @parameter_defaults['iteration'] = lambda { @project.value_of_project_variable('Current Iteration') }
   end
 
   def execute
@@ -44,7 +46,7 @@ class ReleaseMetrics
       <<-HTML
     h2. Metrics for #{release}
 
-    |_. Current Iteration | #{iteration} |_. #{empty_column_header} |_. Estimated Completion <br> of #{release} <br> Based on ... |_. Required <br> Iterations |_. Calculated End Date <br> Based on #{iter_length} Day Iterations |
+    |_. Current Iteration | #{iteration_parameter} |_. #{empty_column_header} |_. Estimated Completion <br> of #{release} <br> Based on ... |_. Required <br> Iterations |_. Calculated End Date <br> Based on #{iter_length} Day Iterations |
     |_. Average Velocity <br> (last 3 iterations) | #{"%.2f" % average_velocity} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % average_velocity}) | #{remaining_iters_for_avg} | #{avg_end_date} |
     |_. Completed Iterations | #{iterations.length} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{all_iter_velocity}) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
     |_. Remaining Story Points <br> (includes all stories not <br> in a past iteration) | #{remaining_story_points} |_. #{empty_column_header}  | Best velocity (#{best_velocity}) | #{remaining_iters_for_best} | #{best_end_date} |
@@ -71,7 +73,7 @@ class ReleaseMetrics
   end
 
   def story_points_for(stories)
-    stories.inject(0) {|total, story| story["#{story_points_parameter}"] ? total + story["#{story_points_parameter}"].to_i : total }
+    stories.inject(0) { |total, story| story["#{story_points_parameter}"] ? total + story["#{story_points_parameter}"].to_i : total }
   end
 
   def incomplete_stories(iterations)
@@ -95,7 +97,7 @@ class ReleaseMetrics
   end
 
   def iteration_names(iterations)
-    iterations.collect {|iter| "'#{iter['name']}'" }.join ","
+    iterations.collect { |iter| "'#{iter['name']}'" }.join ","
   end
 
   def last_3_iterations(iterations)
@@ -103,7 +105,7 @@ class ReleaseMetrics
   end
 
   def best_velocity_for(iterations)
-    iterations.inject(1) {|best, iter| iter['velocity'] && iter['velocity'].to_i > best ? iter['velocity'].to_i : best }.to_f
+    iterations.inject(1) { |best, iter| iter['velocity'] && iter['velocity'].to_i > best ? iter['velocity'].to_i : best }.to_f
   end
 
   def worst_velocity_for(iterations)
@@ -151,10 +153,6 @@ class ReleaseMetrics
     end
   end
 
-  def iteration
-    @parameters['iteration'] || @project.value_of_project_variable('Current Iteration')
-  end
-
   def parameter_to_field(param)
     param.gsub('_', ' ').scan(/\w+/).collect { |word| word.capitalize }.join(' ')
   end
@@ -169,9 +167,14 @@ class ReleaseMetrics
 
   def method_missing(method_sym, *arguments, &block)
     if method_sym.to_s =~ /^(.*)_field$/
-      parameter_to_field(send  "#{$1}_parameter".to_s)
+      parameter_to_field(send "#{$1}_parameter".to_s)
     elsif  method_sym.to_s =~ /^(.*)_parameter$/
-        @parameters[$1] || $1
+      param = @parameters[$1] || @parameter_defaults[$1]
+      if param.respond_to? :call
+        param.call
+      else
+        param
+      end
     else
       super
     end
@@ -182,7 +185,7 @@ class ReleaseMetrics
     if method_sym.to_s =~ /^(.*)_field$/
       true
     elsif method_sym.to_s =~ /^(.*)_parameter$/
-        true
+      true
     else
       super
     end

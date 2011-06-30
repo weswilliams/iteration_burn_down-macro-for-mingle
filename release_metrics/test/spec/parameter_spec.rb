@@ -62,6 +62,16 @@ describe "story points" do
     subject { @macro.story_points_field }
     it { should == 'Estimate Field' }
   end
+
+  context "field" do
+    before do
+      @parameters = {}
+      @project = double('project', :value_of_project_variable => '#3 Iteration 5')
+      @macro = ReleaseMetrics.new(@parameters, @project, nil)
+    end
+    subject { @macro.story_points_field }
+    it { should == 'Story Points' }
+  end
 end
 
 describe "iteration parameter" do
@@ -71,6 +81,9 @@ describe "iteration parameter" do
     @macro = ReleaseMetrics.new(@parameters, @project, nil)
   end
 
-  subject { @macro.iteration }
-  it { should == '#3 Iteration 5' }
+  context "#iteration_parameter" do
+    subject { @macro.iteration_parameter }
+    it { should == '#3 Iteration 5' }
+  end
+
 end
