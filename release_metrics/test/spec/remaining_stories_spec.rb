@@ -32,7 +32,7 @@ describe "remaining stories" do
   context "retrieve incomplete stories" do
     before do
       @project.should_receive(:execute_mql).with(
-          "SELECT 'story points' WHERE Type = story AND release = 'Release 1' AND " +
+          "SELECT 'Story Points' WHERE Type = story AND release = 'Release 1' AND " +
           "NOT iteration in ('Iteration 5','Iteration 4','Iteration 3','Iteration 2')")
     end
 

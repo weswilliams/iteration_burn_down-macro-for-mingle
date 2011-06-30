@@ -40,7 +40,6 @@ class ReleaseMetrics
       worst_end_date = expected_completion_date_for last_end_date, iter_length, remaining_iters_for_worst
 
       empty_column_header = "%{color:#EEEEEE}-%"
-      empty_column = "%{color:#white}-%"
 
       <<-HTML
     h2. Metrics for #{release}
@@ -72,14 +71,15 @@ class ReleaseMetrics
   end
 
   def story_points_for(stories)
-    stories.inject(0) {|total, story| story['story_points'] ? total + story['story_points'].to_i : total }
+    stories.inject(0) {|total, story| story["#{story_points_parameter}"] ? total + story["#{story_points_parameter}"].to_i : total }
   end
 
   def incomplete_stories(iterations)
     iter_names = iteration_names iterations
     begin
+      story_points_field = parameter_to_field story_points_parameter
       @project.execute_mql(
-          "SELECT 'story points' WHERE Type = story AND release = '#{release_name}' AND NOT iteration in (#{iter_names})")
+          "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{release_name}' AND NOT iteration in (#{iter_names})")
     rescue Exception => e
       raise "[error retrieving stories for release '#{release}': #{e}]"
     end
@@ -154,6 +154,10 @@ class ReleaseMetrics
 
   def iteration
     @parameters['iteration'] || @project.value_of_project_variable('Current Iteration')
+  end
+
+  def story_points_parameter
+    @parameters['story_points'] || 'story_points'
   end
 
   def parameter_to_field(field)
