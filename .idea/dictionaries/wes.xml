@@ -2,6 +2,7 @@
   <dictionary name="wes">
     <words>
       <w>burndown</w>
+      <w>iters</w>
     </words>
   </dictionary>
 </component>

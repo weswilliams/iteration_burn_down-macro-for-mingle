@@ -18,14 +18,24 @@ class ReleaseMetrics
   def execute
     begin
       iterations = completed_iterations
+
       average_velocity = average_velocity last_3_iterations(iterations)
       best_velocity = best_velocity_for iterations
-      wost_velocity = worst_velocity_for iterations
+      worst_velocity = worst_velocity_for iterations
+
       remaining_stories = incomplete_stories iterations
       remaining_story_points = story_points_for remaining_stories
       last_end_date = last_iteration_end_date iterations[0]
       iter_length = iteration_length_in_days iterations[0]
-      remaining_iters_for_avg = (remaining_story_points/average_velocity).ceil
+
+      remaining_iters_for_avg = remaining_iterations(average_velocity, remaining_story_points)
+      remaining_iters_for_best = remaining_iterations(best_velocity, remaining_story_points)
+      remaining_iters_for_worst = remaining_iterations(worst_velocity, remaining_story_points)
+
+      avg_end_date = expected_completion_date_for last_end_date, iter_length, remaining_iters_for_avg
+      best_end_date = expected_completion_date_for last_end_date, iter_length, remaining_iters_for_best
+      worst_end_date = expected_completion_date_for last_end_date, iter_length, remaining_iters_for_worst
+
 
       <<-HTML
     h2. Metrics for #{release}
@@ -34,13 +44,13 @@ class ReleaseMetrics
     Average Velocity: #{"%.2f" % average_velocity} (last 3 iterations) <br>
     Completed Iterations: #{iterations.length} <br>
     Remaining Story Points: #{remaining_story_points} (includes all stories not in a past iteration) <br>
+    Iteration Length: #{iter_length} days <br>
 
-    h3. Projected Iterations to Complete (Based on ...)
+    h3. Projected Iterations to Complete (Based on ...) - (Expected End Date of Last Iteration)
 
-    Average of last 3 iterations (#{"%.2f" % average_velocity}): #{remaining_iters_for_avg}
-    (#{expected_completion_date_for last_end_date, iter_length, remaining_iters_for_avg })<br>
-    Best velocity (#{best_velocity}): #{(remaining_story_points/best_velocity).ceil} <br>
-    Worst velocity (#{wost_velocity}): #{(remaining_story_points/wost_velocity).ceil} <br>
+    Average of last 3 iterations (#{"%.2f" % average_velocity}): #{remaining_iters_for_avg} - (#{avg_end_date})<br>
+    Best velocity (#{best_velocity}): #{remaining_iters_for_best} - (#{best_end_date}) <br>
+    Worst velocity (#{worst_velocity}): #{remaining_iters_for_worst} - (#{worst_end_date}) <br>
 
       HTML
     rescue Exception => e
@@ -51,6 +61,10 @@ class ReleaseMetrics
 
       ERROR
     end
+  end
+
+  def remaining_iterations(velocity, remaining_story_points)
+    (remaining_story_points/velocity).ceil
   end
 
   def expected_completion_date_for(last_end_date, iter_length, remaining_iterations)
