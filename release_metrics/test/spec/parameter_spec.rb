@@ -11,7 +11,7 @@ describe "release parameter" do
   subject { @burn_down_macro }
 
   describe "Current Release project property" do
-    subject { @macro.release }
+    subject { @macro.release_parameter }
     it { should == '#1 Release 1' }
   end
 

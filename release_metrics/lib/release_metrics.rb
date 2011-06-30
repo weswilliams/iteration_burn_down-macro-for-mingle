@@ -15,6 +15,7 @@ class ReleaseMetrics
     @current_user = current_user
     @parameter_defaults = Hash.new { |h, k| h[k]=k }
     @parameter_defaults['iteration'] = lambda { @project.value_of_project_variable('Current Iteration') }
+    @parameter_defaults['release'] = lambda { @project.value_of_project_variable('Current Release') }
   end
 
   def execute
@@ -44,9 +45,9 @@ class ReleaseMetrics
       empty_column_header = "%{color:#EEEEEE}-%"
 
       <<-HTML
-    h2. Metrics for #{release}
+    h2. Metrics for #{release_parameter}
 
-    |_. Current Iteration | #{iteration_parameter} |_. #{empty_column_header} |_. Estimated Completion <br> of #{release} <br> Based on ... |_. Required <br> Iterations |_. Calculated End Date <br> Based on #{iter_length} Day Iterations |
+    |_. Current Iteration | #{iteration_parameter} |_. #{empty_column_header} |_. Estimated Completion <br> of #{release_parameter} <br> Based on ... |_. Required <br> Iterations |_. Calculated End Date <br> Based on #{iter_length} Day Iterations |
     |_. Average Velocity <br> (last 3 iterations) | #{"%.2f" % average_velocity} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % average_velocity}) | #{remaining_iters_for_avg} | #{avg_end_date} |
     |_. Completed Iterations | #{iterations.length} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{all_iter_velocity}) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
     |_. Remaining Story Points <br> (includes all stories not <br> in a past iteration) | #{remaining_story_points} |_. #{empty_column_header}  | Best velocity (#{best_velocity}) | #{remaining_iters_for_best} | #{best_end_date} |
@@ -82,7 +83,7 @@ class ReleaseMetrics
       @project.execute_mql(
           "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{release_name}' AND NOT iteration in (#{iter_names})")
     rescue Exception => e
-      raise "[error retrieving stories for release '#{release}': #{e}]"
+      raise "[error retrieving stories for release '#{release_parameter}': #{e}]"
     end
   end
 
@@ -124,19 +125,15 @@ class ReleaseMetrics
     begin
       data_rows = @project.execute_mql(
           "SELECT 'start date', 'end date', velocity WHERE Type = iteration AND 'End Date' < today AND release = '#{release_name}' ORDER BY 'end date' desc")
-      raise "##{release} is not a valid release" if data_rows.empty?
+      raise "##{release_parameter} is not a valid release" if data_rows.empty?
       data_rows
     rescue Exception => e
-      raise "[error retrieving completed iterations for #{release}: #{e}]"
+      raise "[error retrieving completed iterations for #{release_parameter}: #{e}]"
     end
   end
 
-  def release
-    @parameters['release'] || @project.value_of_project_variable('Current Release')
-  end
-
   def release_name
-    match_data = /#\d+ (.*)/.match(release)
+    match_data = /#\d+ (.*)/.match(release_parameter)
     if  match_data
       match_data[1]
     else
@@ -145,7 +142,7 @@ class ReleaseMetrics
   end
 
   def release_number
-    match_data = /#(\d+).*/.match(release)
+    match_data = /#(\d+).*/.match(release_parameter)
     if  match_data
       match_data[1].to_i
     else
@@ -155,10 +152,6 @@ class ReleaseMetrics
 
   def parameter_to_field(param)
     param.gsub('_', ' ').scan(/\w+/).collect { |word| word.capitalize }.join(' ')
-  end
-
-  def today
-    @parameters[:today] || Date.today
   end
 
   def can_be_cached?
