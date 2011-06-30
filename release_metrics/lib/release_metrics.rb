@@ -40,17 +40,13 @@ class ReleaseMetrics
       <<-HTML
     h2. Metrics for #{release}
 
-    |_. Current Iteration | #{iteration} |
-    |_. Average Velocity <br> (last 3 iterations) | #{"%.2f" % average_velocity} |
-    |_. Completed Iterations | #{iterations.length} |
-    |_. Remaining Story Points <br> (includes all stories not <br> in a past iteration) | #{remaining_story_points} |
-    |_. Iteration Length | #{iter_length} days |
+    |_. Current Iteration | #{iteration} |_. - |_. Estimated Completion <br> for #{release} <br> Based on ... |_. Required <br> Iterations |_. Calculated End Date <br> Based on #{iter_length} Day Iterations |
+    |_. Average Velocity <br> (last 3 iterations) | #{"%.2f" % average_velocity} |_. -  | Average velocity of <br> last 3 iterations (#{"%.2f" % average_velocity}) | #{remaining_iters_for_avg} | #{avg_end_date} |
+    |_. Completed Iterations | #{iterations.length} |_. -  | Best velocity (#{best_velocity}) | #{remaining_iters_for_best} | #{best_end_date} |
+    |_. Remaining Story Points <br> (includes all stories not <br> in a past iteration) | #{remaining_story_points} |_. -  | Worst velocity (#{worst_velocity}) | #{remaining_iters_for_worst} | #{worst_end_date} |
+    |_. Iteration Length | #{iter_length} days |_. -  | - | - | - |
 
-    |_. Estimated Completion <br> for #{release} <br> Based on ... |_. Required <br> Iterations |_. Calculated End Date <br> Based on #{iter_length} Day Iterations |
-    | Average velocity of <br> last 3 iterations (#{"%.2f" % average_velocity}) | #{remaining_iters_for_avg} | #{avg_end_date} |
-    | Best velocity (#{best_velocity}) | #{remaining_iters_for_best} | #{best_end_date} |
-    | Worst velocity (#{worst_velocity}) | #{remaining_iters_for_worst} | #{worst_end_date} |
-
+    <br>
       HTML
     rescue Exception => e
       <<-ERROR
