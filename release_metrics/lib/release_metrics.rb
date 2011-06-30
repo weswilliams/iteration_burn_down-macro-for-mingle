@@ -40,18 +40,16 @@ class ReleaseMetrics
       <<-HTML
     h2. Metrics for #{release}
 
-    |_.Metric |_. Value |
-    | Current Iteration | #{iteration} |
-    | Average Velocity (last 3 iterations) | #{"%.2f" % average_velocity} |
-    | Completed Iterations | #{iterations.length} |
-    | Remaining Story Points <br> (includes all stories not in a past iteration) | #{remaining_story_points} |
-    | Iteration Length | #{iter_length} days |
+    |_. Current Iteration | #{iteration} |
+    |_. Average Velocity <br> (last 3 iterations) | #{"%.2f" % average_velocity} |
+    |_. Completed Iterations | #{iterations.length} |
+    |_. Remaining Story Points <br> (includes all stories not <br> in a past iteration) | #{remaining_story_points} |
+    |_. Iteration Length | #{iter_length} days |
 
-    h3. Projected Iterations to Complete (Based on ...) - (Expected End Date of Last Iteration)
-
-    Average of last 3 iterations (#{"%.2f" % average_velocity}): #{remaining_iters_for_avg} - (#{avg_end_date})<br>
-    Best velocity (#{best_velocity}): #{remaining_iters_for_best} - (#{best_end_date}) <br>
-    Worst velocity (#{worst_velocity}): #{remaining_iters_for_worst} - (#{worst_end_date}) <br>
+    |_. Estimated Completion <br> for #{release} <br> Based on ... |_. Required <br> Iterations |_. Calculated End Date <br> Based on #{iter_length} Day Iterations |
+    | Average velocity of <br> last 3 iterations (#{"%.2f" % average_velocity}) | #{remaining_iters_for_avg} | #{avg_end_date} |
+    | Best velocity (#{best_velocity}) | #{remaining_iters_for_best} | #{best_end_date} |
+    | Worst velocity (#{worst_velocity}) | #{remaining_iters_for_worst} | #{worst_end_date} |
 
       HTML
     rescue Exception => e
