@@ -21,9 +21,9 @@ describe "completed iterations" do
   context do
     before do
       @project.should_receive(:execute_mql).with(
-          "SELECT name, 'start date', 'end date', velocity " +
+          "SELECT name, 'Start Date', 'End Date', Velocity " +
               "WHERE Type = iteration AND 'End Date' < today AND release = 'Release 1' " +
-              "ORDER BY 'end date' desc")
+              "ORDER BY 'End Date' desc")
     end
 
     context "number of iterations" do

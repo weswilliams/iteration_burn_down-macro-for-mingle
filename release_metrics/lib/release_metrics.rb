@@ -77,22 +77,12 @@ class ReleaseMetrics
     stories.inject(0) { |total, story| story["#{story_points_parameter}"] ? total + story["#{story_points_parameter}"].to_i : total }
   end
 
-  def incomplete_stories(iterations)
-    iter_names = iteration_names iterations
-    begin
-      @project.execute_mql(
-          "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{release_name}' AND NOT iteration in (#{iter_names})")
-    rescue Exception => e
-      raise "[error retrieving stories for release '#{release_parameter}': #{e}]"
-    end
-  end
-
   def last_iteration_end_date(most_recent_iter)
-    Date.parse(most_recent_iter['end_date'])
+    Date.parse(most_recent_iter[end_date_parameter])
   end
 
   def iteration_length_in_days(most_recent_iter)
-    start_date = Date.parse(most_recent_iter['start_date'])
+    start_date = Date.parse(most_recent_iter[start_date_parameter])
     end_date = last_iteration_end_date(most_recent_iter)
     (end_date - start_date) + 1
   end
@@ -106,29 +96,39 @@ class ReleaseMetrics
   end
 
   def best_velocity_for(iterations)
-    iterations.inject(1) { |best, iter| iter['velocity'] && iter['velocity'].to_i > best ? iter['velocity'].to_i : best }.to_f
+    iterations.inject(1) { |best, iter| iter[velocity_parameter] && iter[velocity_parameter].to_i > best ? iter[velocity_parameter].to_i : best }.to_f
   end
 
   def worst_velocity_for(iterations)
     iterations.inject(best_velocity_for(iterations)) do |worst, iter|
-      iter_velocity = iter['velocity'].to_i
+      iter_velocity = iter[velocity_parameter].to_i
       iter_velocity && iter_velocity < worst && iter_velocity > 0 ? iter_velocity : worst
     end.to_f
   end
 
   def average_velocity(iterations)
-    total_velocity = iterations.inject(0) { |total, hash| hash['velocity'] ? total + hash['velocity'].to_i : total }
+    total_velocity = iterations.inject(0) { |total, hash| hash[velocity_parameter] ? total + hash[velocity_parameter].to_i : total }
     total_velocity / (iterations.length * 1.0)
   end
 
   def completed_iterations
     begin
       data_rows = @project.execute_mql(
-          "SELECT name, 'start date', 'end date', velocity WHERE Type = iteration AND 'End Date' < today AND release = '#{release_name}' ORDER BY 'end date' desc")
+          "SELECT name, '#{start_date_field}', '#{end_date_field}', #{velocity_field} WHERE Type = iteration AND '#{end_date_field}' < today AND release = '#{release_name}' ORDER BY '#{end_date_field}' desc")
       raise "##{release_parameter} is not a valid release" if data_rows.empty?
       data_rows
     rescue Exception => e
       raise "[error retrieving completed iterations for #{release_parameter}: #{e}]"
+    end
+  end
+
+  def incomplete_stories(iterations)
+    iter_names = iteration_names iterations
+    begin
+      @project.execute_mql(
+          "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{release_name}' AND NOT iteration in (#{iter_names})")
+    rescue Exception => e
+      raise "[error retrieving stories for release '#{release_parameter}': #{e}]"
     end
   end
 
