@@ -52,6 +52,27 @@ describe "completed iterations" do
     end
   end
 
+  context "no completed iterations" do
+
+    context "should retrieve all stories in the release" do
+      before do
+        @stories = [{}]
+        @project.stub(:execute_mql) { @stories }
+        @project.should_receive(:execute_mql).with(
+            "SELECT 'Story Points' WHERE Type = story AND release = 'Release 1'")
+      end
+
+      subject { @macro.incomplete_stories [] }
+      it { should == @stories }
+    end
+    
+    context "average velocity with no iterations" do
+      subject { @macro.average_velocity [] }
+      it { should == 0 }
+    end
+
+  end
+
   context "best velocity" do
     subject { @macro.best_velocity_for @iterations }
     it { should == 12 }
@@ -65,11 +86,6 @@ describe "completed iterations" do
   context "expected completion date for end data and velocity" do
     subject { @macro.expected_completion_date_for Date.parse('2011-07-05'), 7, 5 }
     it { should == Date.parse('2011-08-08') }
-  end
-
-  context "average velocity with no iterations" do
-    subject { @macro.average_velocity [] }
-    it { should == 0 }
   end
 
 end

@@ -140,11 +140,15 @@ class ReleaseMetrics
     end
   end
 
-  def incomplete_stories(iterations)
-    iter_names = iteration_names iterations
+  def incomplete_stories(completed_iterations)
+    iter_names = iteration_names completed_iterations
+    if completed_iterations.length > 0
+      mql = "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{release_name}' AND NOT #{time_box_type} in (#{iter_names})"
+    else
+      mql = "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{release_name}'"
+    end
     begin
-      @project.execute_mql(
-          "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{release_name}' AND NOT #{time_box_type} in (#{iter_names})")
+      @project.execute_mql(mql)
     rescue Exception => e
       raise "[error retrieving stories for release '#{release_parameter}': #{e}]"
     end
