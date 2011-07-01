@@ -81,7 +81,10 @@ class ReleaseMetrics
   end
 
   def story_points_for(stories)
-    stories.inject(0) { |total, story| story["#{story_points_parameter}"] ? total + story["#{story_points_parameter}"].to_i : total }
+    stories.inject(0) do |total, story|
+      story_points = story["#{story_points_parameter}"]
+      story_points ? total + story_points.to_i : total
+    end
   end
 
   def last_iteration_end_date(most_recent_iter)
@@ -104,7 +107,10 @@ class ReleaseMetrics
 
   def best_velocity_for(iterations)
     return 0 if iterations.length == 0
-    iterations.inject(1) { |best, iter| iter[velocity_parameter] && iter[velocity_parameter].to_i > best ? iter[velocity_parameter].to_i : best }.to_f
+    iterations.inject(1) do |best, iter|
+      velocity = iter[velocity_parameter]
+      (velocity && velocity.to_i > best ? velocity.to_i : best).to_f
+    end
   end
 
   def worst_velocity_for(iterations)
@@ -117,7 +123,10 @@ class ReleaseMetrics
 
   def average_velocity(iterations)
     return 0 if iterations.length == 0
-    total_velocity = iterations.inject(0) { |total, hash| hash[velocity_parameter] ? total + hash[velocity_parameter].to_i : total }
+    total_velocity = iterations.inject(0) do |total, hash|
+      velocity = hash[velocity_parameter]
+      velocity ? total + velocity.to_i : total
+    end
     total_velocity / (iterations.length * 1.0)
   end
 
@@ -138,7 +147,9 @@ class ReleaseMetrics
   def completed_iterations
     begin
       @project.execute_mql(
-          "SELECT name, '#{start_date_field}', '#{end_date_field}', #{velocity_field} WHERE Type = #{time_box_type} AND '#{end_date_field}' < today AND release = '#{release_name}' ORDER BY '#{end_date_field}' desc")
+          "SELECT name, '#{start_date_field}', '#{end_date_field}', #{velocity_field} " +
+          "WHERE Type = #{time_box_type} AND '#{end_date_field}' < today AND release = '#{release_name}' " +
+          "ORDER BY '#{end_date_field}' desc")
     rescue Exception => e
       raise "[error retrieving completed iterations for #{release_parameter}: #{e}]"
     end
@@ -147,7 +158,8 @@ class ReleaseMetrics
   def incomplete_stories(completed_iterations)
     iter_names = iteration_names completed_iterations
     if completed_iterations.length > 0
-      mql = "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{release_name}' AND NOT #{time_box_type} in (#{iter_names})"
+      mql = "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{release_name}' AND " +
+            "NOT #{time_box_type} in (#{iter_names})"
     else
       mql = "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{release_name}'"
     end
