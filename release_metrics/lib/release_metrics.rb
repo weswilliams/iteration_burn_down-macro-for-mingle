@@ -160,6 +160,7 @@ class ReleaseMetrics
   end
 
   def stories(completed_iterations, remaining_stories = true)
+    return [] if completed_iterations.length == 0 && !remaining_stories
     iter_names = iteration_names completed_iterations
     if completed_iterations.length > 0
       mql = "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{release_name}' AND " +
