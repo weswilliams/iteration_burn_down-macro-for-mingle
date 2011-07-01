@@ -21,6 +21,8 @@ class ReleaseMetrics
 
   def execute
     begin
+      release = current_release
+      release_end = release_end_date release
       iterations = completed_iterations
 
       average_velocity = average_velocity last_3_iterations(iterations)
@@ -47,6 +49,8 @@ class ReleaseMetrics
 
       <<-HTML
     h2. Metrics for #{release_parameter}
+
+    * Scheduled End Date is #{release_end}
 
     |_. Current Iteration | #{iteration_parameter} |_. #{empty_column_header} |_. Estimated Completion <br> of #{release_parameter} <br> Based on ... |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iter_length} Day Iterations |
     |_. Average Velocity <br> (last 3 iterations) | #{"%.2f" % average_velocity} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % average_velocity}) | #{remaining_iters_for_avg} | #{avg_end_date} |
@@ -110,6 +114,20 @@ class ReleaseMetrics
   def average_velocity(iterations)
     total_velocity = iterations.inject(0) { |total, hash| hash[velocity_parameter] ? total + hash[velocity_parameter].to_i : total }
     total_velocity / (iterations.length * 1.0)
+  end
+
+  def release_end_date(release)
+    release[end_date_parameter]
+  end
+
+  def current_release
+    begin
+      data_rows = @project.execute_mql("SELECT '#{end_date_field}' WHERE Number = #{release_number}")
+      raise "##{release_parameter} is not a valid release" if data_rows.empty?
+      data_rows[0]
+    rescue Exception => e
+      raise "[error retrieving release for #{release_parameter}: #{e}]"
+    end
   end
 
   def completed_iterations
