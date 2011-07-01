@@ -16,6 +16,7 @@ class ReleaseMetrics
     @parameter_defaults = Hash.new { |h, k| h[k]=k }
     @parameter_defaults['iteration'] = lambda { @project.value_of_project_variable('Current Iteration') }
     @parameter_defaults['release'] = lambda { @project.value_of_project_variable('Current Release') }
+    @parameter_defaults['time_box'] = 'iteration'
   end
 
   def execute
@@ -114,7 +115,7 @@ class ReleaseMetrics
   def completed_iterations
     begin
       data_rows = @project.execute_mql(
-          "SELECT name, '#{start_date_field}', '#{end_date_field}', #{velocity_field} WHERE Type = iteration AND '#{end_date_field}' < today AND release = '#{release_name}' ORDER BY '#{end_date_field}' desc")
+          "SELECT name, '#{start_date_field}', '#{end_date_field}', #{velocity_field} WHERE Type = #{time_box_type} AND '#{end_date_field}' < today AND release = '#{release_name}' ORDER BY '#{end_date_field}' desc")
       raise "##{release_parameter} is not a valid release" if data_rows.empty?
       data_rows
     rescue Exception => e
@@ -126,7 +127,7 @@ class ReleaseMetrics
     iter_names = iteration_names iterations
     begin
       @project.execute_mql(
-          "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{release_name}' AND NOT iteration in (#{iter_names})")
+          "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{release_name}' AND NOT #{time_box_type} in (#{iter_names})")
     rescue Exception => e
       raise "[error retrieving stories for release '#{release_parameter}': #{e}]"
     end
@@ -162,7 +163,7 @@ class ReleaseMetrics
   def method_missing(method_sym, *arguments, &block)
     if method_sym.to_s =~ /^(.*)_field$/
       parameter_to_field(send "#{$1}_parameter".to_s)
-    elsif  method_sym.to_s =~ /^(.*)_parameter$/
+    elsif  method_sym.to_s =~ /^(.*)_(parameter|type)$/
       param = @parameters[$1] || @parameter_defaults[$1]
       if param.respond_to? :call
         param.call
@@ -176,9 +177,7 @@ class ReleaseMetrics
 
   def respond_to?(method_sym, include_private = false)
     puts 'in respond to'
-    if method_sym.to_s =~ /^(.*)_field$/
-      true
-    elsif method_sym.to_s =~ /^(.*)_parameter$/
+    if method_sym.to_s =~ /^(.*)_[field|parameter|type]$/
       true
     else
       super
