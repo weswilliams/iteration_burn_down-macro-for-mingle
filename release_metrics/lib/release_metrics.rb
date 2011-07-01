@@ -103,10 +103,12 @@ class ReleaseMetrics
   end
 
   def best_velocity_for(iterations)
+    return 0 if iterations.length == 0
     iterations.inject(1) { |best, iter| iter[velocity_parameter] && iter[velocity_parameter].to_i > best ? iter[velocity_parameter].to_i : best }.to_f
   end
 
   def worst_velocity_for(iterations)
+    return 0 if iterations.length == 0
     iterations.inject(best_velocity_for(iterations)) do |worst, iter|
       iter_velocity = iter[velocity_parameter].to_i
       iter_velocity && iter_velocity < worst && iter_velocity > 0 ? iter_velocity : worst
