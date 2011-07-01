@@ -44,4 +44,10 @@ describe "remaining stories" do
     subject { @macro.story_points_for @stories }
     it { should == 16 }
   end
+
+  context "calculate remaining story points when no stories exists" do
+    subject { @macro.story_points_for [] }
+    it { should == 0 }
+  end
+
 end
