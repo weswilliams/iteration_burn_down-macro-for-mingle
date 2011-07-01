@@ -30,7 +30,9 @@ class ReleaseMetrics
       best_velocity = best_velocity_for iterations
       worst_velocity = worst_velocity_for iterations
 
-      remaining_stories = incomplete_stories iterations
+      completed_stories = stories iterations, false
+      completed_story_points = story_points_for completed_stories
+      remaining_stories = stories iterations
       remaining_story_points = story_points_for remaining_stories
       last_end_date = iterations.length == 0 ? Date.today : last_iteration_end_date(iterations[0])
       iter_length = iterations.length == 0 ? 7 : iteration_length_in_days(iterations[0])
@@ -46,6 +48,7 @@ class ReleaseMetrics
       worst_end_date = expected_completion_date_for last_end_date, iter_length, remaining_iters_for_worst
 
       empty_column_header = "%{color:#EEEEEE}-%"
+      empty_column = "%{color:white}-%"
 
       <<-HTML
     h2. Metrics for #{release_parameter}
@@ -57,6 +60,7 @@ class ReleaseMetrics
     |_. Completed Iterations | #{iterations.length} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{all_iter_velocity}) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
     |_. Remaining Story Points <br> (includes all stories not <br> in a past iteration) | #{remaining_story_points} |_. #{empty_column_header}  | Best velocity (#{best_velocity}) | #{remaining_iters_for_best} | #{best_end_date} |
     |_. Iteration Length <br> (calculated based on <br> last iteration completed) | #{iter_length} days |_. #{empty_column_header}  | Worst velocity (#{worst_velocity}) | #{remaining_iters_for_worst} | #{worst_end_date} |
+    |_. Completed Story Points | #{completed_story_points} |_. #{empty_column_header}  | #{empty_column} | #{empty_column} | #{empty_column} |
 
     <br>
       HTML
@@ -155,26 +159,11 @@ class ReleaseMetrics
     end
   end
 
-  def incomplete_stories(completed_iterations)
+  def stories(completed_iterations, remaining_stories = true)
     iter_names = iteration_names completed_iterations
     if completed_iterations.length > 0
       mql = "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{release_name}' AND " +
-            "NOT #{time_box_type} in (#{iter_names})"
-    else
-      mql = "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{release_name}'"
-    end
-    begin
-      @project.execute_mql(mql)
-    rescue Exception => e
-      raise "[error retrieving stories for release '#{release_parameter}': #{e}]"
-    end
-  end
-
-  def completed_stories(completed_iterations)
-    iter_names = iteration_names completed_iterations
-    if completed_iterations.length > 0
-      mql = "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{release_name}' AND " +
-            "#{time_box_type} in (#{iter_names})"
+            "#{remaining_stories ? 'NOT ' : ''}#{time_box_type} in (#{iter_names})"
     else
       mql = "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{release_name}'"
     end

@@ -36,7 +36,7 @@ describe "remaining stories" do
           "NOT iteration in ('Iteration 5','Iteration 4','Iteration 3','Iteration 2')")
     end
 
-    subject { @macro.incomplete_stories @iterations }
+    subject { @macro.stories @iterations }
     it { should == @stories }
   end
 

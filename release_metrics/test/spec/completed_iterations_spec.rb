@@ -62,7 +62,7 @@ describe "completed iterations" do
             "SELECT 'Story Points' WHERE Type = story AND release = 'Release 1'")
       end
 
-      subject { @macro.incomplete_stories [] }
+      subject { @macro.stories [] }
       it { should == @stories }
     end
     

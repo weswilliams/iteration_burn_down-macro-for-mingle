@@ -31,7 +31,7 @@ describe "remaining stories" do
           "iteration in ('Iteration 5','Iteration 4','Iteration 3','Iteration 2')")
     end
 
-    subject { @macro.completed_stories @iterations }
+    subject { @macro.stories @iterations, false }
     it { should == @stories }
   end
 
