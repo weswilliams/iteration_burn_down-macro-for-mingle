@@ -112,6 +112,7 @@ class ReleaseMetrics
   end
 
   def average_velocity(iterations)
+    return 0 if iterations.length == 0
     total_velocity = iterations.inject(0) { |total, hash| hash[velocity_parameter] ? total + hash[velocity_parameter].to_i : total }
     total_velocity / (iterations.length * 1.0)
   end
@@ -132,10 +133,8 @@ class ReleaseMetrics
 
   def completed_iterations
     begin
-      data_rows = @project.execute_mql(
+      @project.execute_mql(
           "SELECT name, '#{start_date_field}', '#{end_date_field}', #{velocity_field} WHERE Type = #{time_box_type} AND '#{end_date_field}' < today AND release = '#{release_name}' ORDER BY '#{end_date_field}' desc")
-      raise "##{release_parameter} is not a valid release" if data_rows.empty?
-      data_rows
     rescue Exception => e
       raise "[error retrieving completed iterations for #{release_parameter}: #{e}]"
     end

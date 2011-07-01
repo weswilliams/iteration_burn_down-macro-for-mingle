@@ -67,5 +67,12 @@ describe "completed iterations" do
     it { should == Date.parse('2011-08-08') }
   end
 
+  context "average velocity with no iterations" do
+    subject { @macro.average_velocity [] }
+    it { should == 0 }
+  end
+
 end
+
+
 
