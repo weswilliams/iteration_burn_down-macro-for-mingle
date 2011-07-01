@@ -171,18 +171,17 @@ class ReleaseMetrics
   end
 
   def release_name
-    match_data = /#\d+ (.*)/.match(release_parameter)
-    if  match_data
-      match_data[1]
-    else
-      'Unknown'
-    end
+    find_first_match(release_parameter, /#\d+ (.*)/)
   end
 
   def release_number
-    match_data = /#(\d+).*/.match(release_parameter)
+    find_first_match(release_parameter, /#(\d+).*/).to_i
+  end
+
+  def find_first_match(data, regex)
+    match_data = regex.match(data)
     if  match_data
-      match_data[1].to_i
+      match_data[1]
     else
       'Unknown'
     end
