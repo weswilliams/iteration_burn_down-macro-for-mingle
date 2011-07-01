@@ -32,8 +32,8 @@ class ReleaseMetrics
 
       remaining_stories = incomplete_stories iterations
       remaining_story_points = story_points_for remaining_stories
-      last_end_date = last_iteration_end_date iterations[0]
-      iter_length = iteration_length_in_days iterations[0]
+      last_end_date = iterations.length == 0 ? Date.today : last_iteration_end_date(iterations[0])
+      iter_length = iterations.length == 0 ? 7 : iteration_length_in_days(iterations[0])
 
       remaining_iters_for_avg = remaining_iterations(average_velocity, remaining_story_points)
       remaining_iter_for_all_velocity = remaining_iterations(all_iter_velocity, remaining_story_points)
@@ -71,10 +71,12 @@ class ReleaseMetrics
   end
 
   def remaining_iterations(velocity, remaining_story_points)
+    return 'Unknown' if velocity <= 0
     (remaining_story_points/velocity).ceil
   end
 
   def expected_completion_date_for(last_end_date, iter_length, remaining_iterations)
+    return 'Unknown' if remaining_iterations == 'Unknown'
     last_end_date + (iter_length * remaining_iterations - 1)
   end
 
