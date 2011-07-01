@@ -170,6 +170,21 @@ class ReleaseMetrics
     end
   end
 
+  def completed_stories(completed_iterations)
+    iter_names = iteration_names completed_iterations
+    if completed_iterations.length > 0
+      mql = "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{release_name}' AND " +
+            "#{time_box_type} in (#{iter_names})"
+    else
+      mql = "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{release_name}'"
+    end
+    begin
+      @project.execute_mql(mql)
+    rescue Exception => e
+      raise "[error retrieving stories for release '#{release_parameter}': #{e}]"
+    end
+  end
+
   def release_name
     find_first_match(release_parameter, /#\d+ (.*)/)
   end
