@@ -4,8 +4,8 @@ require 'rake/packagetask'
 
 Dir['tasks/**/*.rake'].each { |t| load t }
 
-desc "Runs all units and integration tests"
-task :test => ['test:units', 'test:integration']
+desc "Runs all units and integration tests and specifications"
+task :test => ['test:units', 'test:integration', 'spec']
 
 Rake::PackageTask.new("release_metrics", :noversion) do |p|
   p.need_zip = true
