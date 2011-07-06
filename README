@@ -1,4 +1,8 @@
-Create an iteration burndown daily based on iteration start and end dates and accepted story points and accepted date.
+Source includes two mingle macros: iteration_burn_down and release_metrics
+
+* iteration_burn_down
+
+ Create an iteration burndown daily based on iteration start and end dates and accepted story points and accepted date.
 
 Please try this and give me feedback.
 
@@ -22,3 +26,36 @@ ex. overriding defaults
 }}
 
 
+
+* release_metrics
+
+shows information about the current release
+
+** average velocity for last 3 iterations
+** competed iterations
+** completed story points
+** remaining story points
+** iteration length (in days based on the last completed iteration)
+** estimates for remaining iteration and end dates based on
+*** average velocity for last 3 iterations
+*** average velocity for all iterations in the release
+*** best velocity
+*** worst velocity
+
+If you are using Iteration type with Velocity, Start Date and End Date fields, a Release type with an End Date
+ field, and a Current Release project variable then you can use the defaults.
+
+{{
+  release_metrics
+}}
+
+override the defaults: (note: end_date is used on both the Release and time_box types)
+
+{{
+  release_metrics
+    time_box: 'sprint'
+    release: '#1 Release 1'
+    start_date: 'Begin Date'
+    end_date: 'Finish Date'
+    velocity: 'Completed Story Estimate Sum'
+}}
