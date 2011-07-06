@@ -74,7 +74,7 @@ class IterationBurnDownMacro
   def generate_idea_line_data(total_story_points, date_range)
     return '' if total_story_points == 0
     number_of_weekdays = weekdays_for(date_range).count
-    step = (total_story_points*1.0) / (number_of_weekdays-1)
+    step = (total_story_points * 1.0) / (number_of_weekdays - 1)
     idea_data = []
     (0.0..total_story_points).step(step) { |value| idea_data << value }
     idea_data.reverse.join(',')

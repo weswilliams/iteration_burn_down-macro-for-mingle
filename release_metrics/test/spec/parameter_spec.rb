@@ -1,5 +1,5 @@
 require "rspec"
-require "../../lib/release_metrics"
+require "./lib/release_metrics"
 
 describe "parameters" do
 
