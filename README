@@ -16,7 +16,7 @@ ex. using all default values
  iteration_burn_down
 }}
 
-ex. overriding defaults
+ex. overriding defaults (iteration can be THIS CARD if the macro is included in the iteration card description)
 
 {{
   iteration_burn_down
