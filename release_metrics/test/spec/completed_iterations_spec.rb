@@ -85,7 +85,12 @@ describe "completed iterations" do
 
   context "expected completion date for end data and velocity" do
     subject { @macro.expected_completion_date_for Date.parse('2011-07-05'), 7, 5 }
-    it { should == Date.parse('2011-08-08') }
+    it { should == Date.parse('2011-08-09') }
+  end
+
+  context "expected completion date for end data and velocity" do
+    subject { @macro.expected_completion_date_for Date.parse('2011-07-04'), 7, 13 }
+    it { should == Date.parse('2011-10-03') }
   end
 
 end

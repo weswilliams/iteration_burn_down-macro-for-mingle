@@ -81,7 +81,7 @@ class ReleaseMetrics
 
   def expected_completion_date_for(last_end_date, iter_length, remaining_iterations)
     return 'Unknown' if remaining_iterations == 'Unknown'
-    last_end_date + (iter_length * remaining_iterations - 1)
+    last_end_date + (iter_length * remaining_iterations)
   end
 
   def story_points_for(stories)
