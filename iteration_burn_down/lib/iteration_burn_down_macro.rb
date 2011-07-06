@@ -86,8 +86,10 @@ class IterationBurnDownMacro
 
   def story_info
     begin
+      iteration_where = "Iteration = '#{iteration_name}'"
+      iteration_where = "Iteration = #{iteration}" if iteration == 'THIS CARD'
       data_rows = @project.execute_mql(
-          "SELECT '#{parameter_to_field(estimate_property)}', '#{parameter_to_field(date_accepted_property)}' WHERE type is Story AND Iteration = '#{iteration_name}'")
+          "SELECT '#{parameter_to_field(estimate_property)}', '#{parameter_to_field(date_accepted_property)}' WHERE type is Story AND #{iteration_where}")
       data_rows.each { |hash| hash.update(hash) { |key, value| (key == date_accepted_property && value) ? Date.parse(value) : value } }
     rescue Exception => e
       raise "[error retrieving story info for iteration '#{iteration}': #{e}]"
@@ -96,7 +98,9 @@ class IterationBurnDownMacro
 
   def iteration_date_range
     begin
-      data_rows = @project.execute_mql("SELECT 'Start Date', 'End Date' WHERE Number = #{iteration_number}")
+      iteration_where = "Number = #{iteration_number}"
+      iteration_where = "Number = #{iteration}.'Number'" if iteration == 'THIS CARD'
+      data_rows = @project.execute_mql("SELECT 'Start Date', 'End Date' WHERE #{iteration_where}")
       raise "##{iteration} is not a valid iteration" if data_rows.empty?
       Date.parse(data_rows[0]['start_date'])..Date.parse(data_rows[0]['end_date'])
     rescue Exception => e

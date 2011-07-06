@@ -20,6 +20,25 @@ describe "iteration date range query" do
     end
     it { should == ((Date.parse('2011-06-01'))..(Date.parse('2011-06-07'))) }
   end
+
+  context "query with iteration parameter" do
+    before do
+      @parameters['iteration'] = '#34 Iteration 54'
+      @project.should_receive(:execute_mql).with(
+          "SELECT 'Start Date', 'End Date' WHERE Number = 34")
+    end
+    it { should == ((Date.parse('2011-06-01'))..(Date.parse('2011-06-07'))) }
+  end
+
+  context "query with iteration parameter of THIS CARD" do
+    before do
+      @parameters['iteration'] = 'THIS CARD'
+      @project.should_receive(:execute_mql).with(
+          "SELECT 'Start Date', 'End Date' WHERE Number = THIS CARD.'Number'")
+    end
+    it { should == ((Date.parse('2011-06-01'))..(Date.parse('2011-06-07'))) }
+  end
+
 end
 
 describe "burn down query" do
@@ -39,6 +58,25 @@ describe "burn down query" do
     before do
       @project.should_receive(:execute_mql).with(
           "SELECT 'Story Points', 'Date Accepted' WHERE type is Story AND Iteration = 'Iteration 1'")
+    end
+    it { should == @story_info }
+  end
+
+  context "query with iteration parameter" do
+    before do
+      @parameters['iteration'] = '#23 Iteration 45'
+      @project.should_receive(:execute_mql).with(
+          "SELECT 'Story Points', 'Date Accepted' WHERE type is Story AND Iteration = 'Iteration 45'")
+    end
+    it { should == @story_info }
+  end
+
+  subject { @burn_down_macro.story_info }
+  context "query with iteration parameter 'THIS CARD'" do
+    before do
+      @parameters['iteration'] = 'THIS CARD'
+      @project.should_receive(:execute_mql).with(
+          "SELECT 'Story Points', 'Date Accepted' WHERE type is Story AND Iteration = THIS CARD")
     end
     it { should == @story_info }
   end
