@@ -1,5 +1,5 @@
 require "rspec"
-require "../../lib/iteration_burn_down_macro"
+require "./lib/iteration_burn_down_macro"
 
 describe "calculate total story points" do
   before do

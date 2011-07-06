@@ -1,5 +1,5 @@
 require "rspec"
-require "../../lib/iteration_burn_down_macro"
+require "./lib/iteration_burn_down_macro"
 
 describe "burn down parameter" do
   before do

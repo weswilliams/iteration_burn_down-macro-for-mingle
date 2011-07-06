@@ -1,5 +1,5 @@
 require "rspec"
-require "../../lib/iteration_burn_down_macro"
+require "./lib/iteration_burn_down_macro"
 
 describe "steps between y grid values" do
   describe "limit y axis to 10 major points in grid" do

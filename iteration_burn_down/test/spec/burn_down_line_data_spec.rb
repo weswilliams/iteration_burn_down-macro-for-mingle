@@ -1,6 +1,6 @@
 require "rspec"
 require "date"
-require "../../lib/iteration_burn_down_macro"
+require "./lib/iteration_burn_down_macro"
 
 
 describe "burn down query" do
