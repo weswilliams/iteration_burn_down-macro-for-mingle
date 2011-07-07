@@ -19,12 +19,12 @@ describe "parameters" do
     end
 
     describe "current release number" do
-      subject { @macro.release_number }
+      subject { @macro.card_number @macro.release_parameter}
       it { should == 1 }
     end
 
     describe "release_name" do
-      subject { @macro.release_name }
+      subject { @macro.card_name @macro.release_parameter }
       it { should == 'Release 1' }
     end
 
@@ -32,12 +32,12 @@ describe "parameters" do
       before { @parameters['release'] = '#4 Release 2' }
 
       context "release number" do
-        subject { @macro.release_number }
+        subject { @macro.card_number @macro.release_parameter }
         it { should == 4 }
       end
 
       context "release name" do
-        subject { @macro.release_name }
+        subject { @macro.card_name @macro.release_parameter }
         it { should == 'Release 2' }
       end
     end

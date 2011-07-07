@@ -7,6 +7,7 @@
     <list default="true" id="4b8638f0-6f72-4452-979a-a016d20c8e6d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" afterPath="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/test/spec/parameter_spec.rb" afterPath="$PROJECT_DIR$/release_metrics/test/spec/parameter_spec.rb" />
     </list>
     <ignored path="mingle-test-macro.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -18,7 +19,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager" choice="3">
-    <SUITE FILE_PATH="coverage/mingle-test-macro@Release_Metrics_Specs.rcov" NAME="Release Metrics Specs Coverage Results" MODIFIED="1310072256981" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/release_metrics/" />
+    <SUITE FILE_PATH="coverage/mingle-test-macro@Release_Metrics_Specs.rcov" NAME="Release Metrics Specs Coverage Results" MODIFIED="1310073916372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/release_metrics/" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -35,7 +36,16 @@
       <file leaf-file-name="release_metrics.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="100" column="5" selection-start="5050" selection-end="5050" vertical-scroll-proportion="0.6581986">
+            <state line="88" column="18" selection-start="4619" selection-end="4619" vertical-scroll-proportion="0.8869565">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="iteration_burn_down_macro.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="133" column="0" selection-start="4436" selection-end="4720" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -44,7 +54,16 @@
       <file leaf-file-name="parameter_spec.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/parameter_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="0" selection-start="463" selection-end="463" vertical-scroll-proportion="0.0">
+            <state line="34" column="61" selection-start="945" selection-end="945" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="remaining_stories_spec.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/remaining_stories_spec.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="39" column="7" selection-start="1418" selection-end="1418" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -77,8 +96,8 @@
         <option value="$PROJECT_DIR$/release_metrics/test/spec/completed_iterations_spec.rb" />
         <option value="$PROJECT_DIR$/release_metrics/test/spec/completed_stories_spec.rb" />
         <option value="$PROJECT_DIR$/release_metrics/test/spec/current_iteration_spec.rb" />
-        <option value="$PROJECT_DIR$/release_metrics/test/spec/parameter_spec.rb" />
         <option value="$PROJECT_DIR$/release_metrics/test/spec/remaining_stories_spec.rb" />
+        <option value="$PROJECT_DIR$/release_metrics/test/spec/parameter_spec.rb" />
         <option value="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
       </list>
     </option>
@@ -443,7 +462,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- added mini mode" />
+    <option name="LAST_COMMIT_MESSAGE" value="- making release links work cross project" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -456,7 +475,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="- added ability to override time_box type, defaults to iteration can be changed to sprint" />
     <MESSAGE value="- changed the text for the completion date to indicate dev/test completion" />
     <MESSAGE value="- added release scheduled end date" />
     <MESSAGE value="- allow for no completed iterations in the release&#10;- return 0 for average if no completed iterations" />
@@ -481,6 +499,7 @@
     <MESSAGE value="- update to README" />
     <MESSAGE value="- fixed a small display issue with rounding of average velocity" />
     <MESSAGE value="- added mini mode" />
+    <MESSAGE value="- making release links work cross project" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -516,11 +535,6 @@
         <state line="1" column="0" selection-start="16" selection-end="16" vertical-scroll-proportion="0.032608695" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="98" column="16" selection-start="3678" selection-end="3678" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/iteration_burn_down/test/spec/data_query_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="19" column="7" selection-start="716" selection-end="716" vertical-scroll-proportion="0.0" />
@@ -552,13 +566,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/remaining_stories_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="9" selection-start="9" selection-end="9" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/rubystubs19/string.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="748" column="20" selection-start="26469" selection-end="26473" vertical-scroll-proportion="0.33183858">
@@ -566,16 +573,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="133" column="0" selection-start="4436" selection-end="4720" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/remaining_stories_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="7" selection-start="1418" selection-end="1418" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/parameter_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="0" selection-start="463" selection-end="463" vertical-scroll-proportion="0.0">
+        <state line="34" column="61" selection-start="945" selection-end="945" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="5" selection-start="5050" selection-end="5050" vertical-scroll-proportion="0.6581986">
+        <state line="88" column="18" selection-start="4619" selection-end="4619" vertical-scroll-proportion="0.8869565">
           <folding />
         </state>
       </provider>
