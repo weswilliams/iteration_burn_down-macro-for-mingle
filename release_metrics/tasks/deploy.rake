@@ -17,7 +17,7 @@ namespace :macro do |ns|
     FileUtils.cp_r(macro_folder, mingle_plugins_folder)
 
     puts "start mingle"
-    system "lexport JAVA_HOME=/usr/lib/jvm/java-6-sun;export PATH=$JAVA_HOME/bin:$PATH;unset GEM_HOME GEM_PATH;#{mingle_folder}/MingleServer --mingle.dataDir=~/mingle/data start"
+    system "export JAVA_HOME=/usr/lib/jvm/java-6-sun;export PATH=$JAVA_HOME/bin:$PATH;unset GEM_HOME GEM_PATH;#{mingle_folder}/MingleServer --mingle.dataDir=~/mingle/data start"
 
     puts "#{macro_folder} successfully deployed to #{mingle_plugins_folder}. Mingle server has been restarted."
 

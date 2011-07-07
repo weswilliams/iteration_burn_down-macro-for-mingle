@@ -4,8 +4,9 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4b8638f0-6f72-4452-979a-a016d20c8e6d" name="Default" comment="- made iteration link work across projects">
+    <list default="true" id="4b8638f0-6f72-4452-979a-a016d20c8e6d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iteration_burn_down/tasks/deploy.rake" afterPath="$PROJECT_DIR$/iteration_burn_down/tasks/deploy.rake" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/tasks/deploy.rake" afterPath="$PROJECT_DIR$/release_metrics/tasks/deploy.rake" />
     </list>
     <ignored path="mingle-test-macro.iws" />
@@ -35,7 +36,16 @@
       <file leaf-file-name="deploy.rake" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/release_metrics/tasks/deploy.rake">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="109" selection-start="967" selection-end="967" vertical-scroll-proportion="0.7274827">
+            <state line="12" column="36" selection-start="481" selection-end="481" vertical-scroll-proportion="0.4157044">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="deploy.rake" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/iteration_burn_down/tasks/deploy.rake">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="12" selection-start="690" selection-end="690" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -55,7 +65,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/iteration_burn_down/test/spec/generate_x_axis_data_spec.rb" />
         <option value="$PROJECT_DIR$/iteration_burn_down/test/spec/parameter_spec.rb" />
         <option value="$PROJECT_DIR$/iteration_burn_down/test/spec/total_story_points_spec.rb" />
         <option value="$PROJECT_DIR$/iteration_burn_down/test/spec/y_axis_step_spec.rb" />
@@ -70,6 +79,7 @@
         <option value="$PROJECT_DIR$/release_metrics/test/spec/parameter_spec.rb" />
         <option value="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
         <option value="$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb" />
+        <option value="$PROJECT_DIR$/iteration_burn_down/tasks/deploy.rake" />
         <option value="$PROJECT_DIR$/release_metrics/tasks/deploy.rake" />
       </list>
     </option>
@@ -434,7 +444,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- made iteration link work across projects" />
+    <option name="LAST_COMMIT_MESSAGE" value="- added stop and start the server for deploy task&#10;- deleted macro dir if it exists" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -447,7 +457,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="- retrieve all stories if there are no iterations" />
     <MESSAGE value="- added test for remaining story points when there are no stories" />
     <MESSAGE value="- show unknown when no iterations completed for remaining estimates" />
     <MESSAGE value="- fixed calculation for best and worst iterations when no iterations completed, should be unknown" />
@@ -472,16 +481,12 @@
     <MESSAGE value="- removed duplication getting card number and name" />
     <MESSAGE value="- removed duplication getting card link" />
     <MESSAGE value="- made iteration link work across projects" />
+    <MESSAGE value="- added stop and start the server for deploy task&#10;- deleted macro dir if it exists" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/iteration_burn_down/test/spec/parameter_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="16" selection-end="16" vertical-scroll-proportion="-1.6101322" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/iteration_burn_down/test/spec/generate_x_axis_data_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="0" selection-start="16" selection-end="16" vertical-scroll-proportion="0.034013607" />
@@ -572,9 +577,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/iteration_burn_down/tasks/deploy.rake">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="12" selection-start="690" selection-end="690" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/tasks/deploy.rake">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="109" selection-start="967" selection-end="967" vertical-scroll-proportion="0.7274827">
+        <state line="12" column="36" selection-start="481" selection-end="481" vertical-scroll-proportion="0.4157044">
           <folding />
         </state>
       </provider>
