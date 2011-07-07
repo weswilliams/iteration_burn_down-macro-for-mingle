@@ -53,18 +53,18 @@ class ReleaseMetrics
       if mini_parameter.downcase == 'yes'
 
         <<-HTML
-      |_. Scheduled End Date | #{release_end} |_. #{empty_column_header} |_. Estimated Completion <br> of #{release_link} |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iter_length} Day Iterations |
+      |_. Scheduled End Date | #{release_end} |_. #{empty_column_header} |_. Estimated Completion <br> of #{card_link release_parameter} |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iter_length} Day Iterations |
       |_. Completed Story Points | #{completed_story_points} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % average_velocity}) | #{remaining_iters_for_avg} | #{avg_end_date} |
       |_. Remaining Story Points | #{remaining_story_points} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{"%.2f" % all_iter_velocity}) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
         HTML
 
       else
         <<-HTML
-      h2. Metrics for #{release_link}
+      h2. Metrics for #{card_link release_parameter}
 
       * Scheduled End Date is #{release_end}
 
-      |_. Current Iteration | #{iteration_link} |_. #{empty_column_header} |_. Estimated Completion <br> of #{release_link} <br> Based on ... |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iter_length} Day Iterations |
+      |_. Current Iteration | #{card_link iteration_parameter} |_. #{empty_column_header} |_. Estimated Completion <br> of #{card_link release_parameter} <br> Based on ... |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iter_length} Day Iterations |
       |_. Average Velocity <br> (last 3 iterations) | #{"%.2f" % average_velocity} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % average_velocity}) | #{remaining_iters_for_avg} | #{avg_end_date} |
       |_. Completed Iterations | #{iterations.length} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{"%.2f" % all_iter_velocity}) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
       |_. Completed Story Points | #{completed_story_points} |_. #{empty_column_header}  | Best velocity (#{best_velocity}) | #{remaining_iters_for_best} | #{best_end_date} |
@@ -86,14 +86,9 @@ class ReleaseMetrics
     end
   end
 
-  def release_link
-    return "#{card_name release_parameter} #{@project.identifier}/##{card_number release_parameter}" if @parameters['project']
-    release_parameter
-  end
-
-  def iteration_link
-    return "#{card_name iteration_parameter} #{@project.identifier}/##{card_number iteration_parameter}" if @parameters['project']
-    iteration_parameter
+  def card_link(card_identifier_name)
+    return "#{card_name card_identifier_name} #{@project.identifier}/##{card_number card_identifier_name}" if @parameters['project']
+    card_identifier_name
   end
 
   def remaining_iterations(velocity, remaining_story_points)
