@@ -50,21 +50,21 @@ class ReleaseMetrics
       empty_column_header = "%{color:#EEEEEE}-%"
       empty_column = "%{color:white}-%"
 
-      if mini_parameter == 'yes'
+      if mini_parameter.downcase == 'yes'
 
         <<-HTML
-      |_. Scheduled End Date | #{release_end} |_. #{empty_column_header} |_. Estimated Completion <br> of #{release_parameter} |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iter_length} Day Iterations |
+      |_. Scheduled End Date | #{release_end} |_. #{empty_column_header} |_. Estimated Completion <br> of #{release_link} |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iter_length} Day Iterations |
       |_. Completed Story Points | #{completed_story_points} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % average_velocity}) | #{remaining_iters_for_avg} | #{avg_end_date} |
       |_. Remaining Story Points | #{remaining_story_points} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{"%.2f" % all_iter_velocity}) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
         HTML
 
       else
         <<-HTML
-      h2. Metrics for #{release_parameter}
+      h2. Metrics for #{release_link}
 
       * Scheduled End Date is #{release_end}
 
-      |_. Current Iteration | #{iteration_parameter} |_. #{empty_column_header} |_. Estimated Completion <br> of #{release_parameter} <br> Based on ... |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iter_length} Day Iterations |
+      |_. Current Iteration | #{iteration_parameter} |_. #{empty_column_header} |_. Estimated Completion <br> of #{release_link} <br> Based on ... |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iter_length} Day Iterations |
       |_. Average Velocity <br> (last 3 iterations) | #{"%.2f" % average_velocity} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % average_velocity}) | #{remaining_iters_for_avg} | #{avg_end_date} |
       |_. Completed Iterations | #{iterations.length} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{"%.2f" % all_iter_velocity}) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
       |_. Completed Story Points | #{completed_story_points} |_. #{empty_column_header}  | Best velocity (#{best_velocity}) | #{remaining_iters_for_best} | #{best_end_date} |
@@ -84,6 +84,10 @@ class ReleaseMetrics
 
       ERROR
     end
+  end
+
+  def release_link
+    "#{release_name} #{@project.identifier}/##{release_number}"
   end
 
   def remaining_iterations(velocity, remaining_story_points)
