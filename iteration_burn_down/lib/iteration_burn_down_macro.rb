@@ -29,7 +29,7 @@ class IterationBurnDownMacro
       burn_down_line = generate_burndown_line_data(total_story_points, story_info, date_range)
 
       <<-HTML
-    h2. Iteration ##{iteration_number} Burndown:
+    h2. #{iteration_link} Burndown
 
     <img src='#{chart_url}cht=lxy&chs=600x400&chds=a&#{chart_title}&chls=1,6,6&chxt=x,y&#{chart_range}&chma=50,0,0,50&chdl=Ideal%20Line|Burndown&chco=00FF00,FF0000&chd=t:#{x_data}|#{ideal_line_data}|#{x_data}|#{burn_down_line}&chxl=0:|#{weekdays_x_axis}|1:|'></img>
       HTML
@@ -132,6 +132,11 @@ class IterationBurnDownMacro
     else
       'Unknown'
     end
+  end
+
+  def iteration_link
+    return "#{iteration_name} #{@project.identifier}/##{iteration_number}" if @parameters['project']
+    iteration
   end
 
   def parameter_to_field(field)
