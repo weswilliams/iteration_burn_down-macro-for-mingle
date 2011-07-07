@@ -57,7 +57,7 @@ class ReleaseMetrics
 
     |_. Current Iteration | #{iteration_parameter} |_. #{empty_column_header} |_. Estimated Completion <br> of #{release_parameter} <br> Based on ... |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iter_length} Day Iterations |
     |_. Average Velocity <br> (last 3 iterations) | #{"%.2f" % average_velocity} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % average_velocity}) | #{remaining_iters_for_avg} | #{avg_end_date} |
-    |_. Completed Iterations | #{iterations.length} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{all_iter_velocity}) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
+    |_. Completed Iterations | #{iterations.length} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{"%.2f" % all_iter_velocity}) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
     |_. Completed Story Points | #{completed_story_points} |_. #{empty_column_header}  | Best velocity (#{best_velocity}) | #{remaining_iters_for_best} | #{best_end_date} |
     |_. Remaining Story Points <br> (includes all stories not <br> in a past iteration) | #{remaining_story_points} |_. #{empty_column_header}  | Worst velocity (#{worst_velocity}) | #{remaining_iters_for_worst} | #{worst_end_date} |
     |_. Iteration Length <br> (calculated based on <br> last iteration completed) | #{iter_length} days |_. #{empty_column_header} | #{empty_column} | #{empty_column} | #{empty_column} |
