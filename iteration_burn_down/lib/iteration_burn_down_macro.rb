@@ -23,7 +23,10 @@ module CustomMacro
       @parameter_defaults['today'] = Date.today
       @parameter_defaults['chart_width'] = 600
       @parameter_defaults['chart_height'] = 400
-    end
+      @parameter_defaults['ideal_line_color'] = "00FF00"
+      @parameter_defaults['burndown_line_color'] = "FF0000"
+
+   end
 
     def execute
       begin
@@ -41,7 +44,7 @@ module CustomMacro
         <<-HTML
     h2. #{iteration_link} Burndown
 
-    <img src='#{chart_url}cht=lxy&chs=#{chart_width_parameter}x#{chart_height_parameter}&chds=a&#{chart_title}&chls=1,6,6&chxt=x,y&#{chart_range}&chma=50,0,0,50&chdl=Ideal%20Line|Burndown&chco=00FF00,FF0000&chd=t:#{x_data}|#{ideal_line_data}|#{x_data}|#{burn_down_line}&chxl=0:|#{weekdays_x_axis}|1:|'></img>
+    <img src='#{chart_url}cht=lxy&chs=#{chart_width_parameter}x#{chart_height_parameter}&chds=a&#{chart_title}&chls=1,6,6&chxt=x,y&#{chart_range}&chma=50,0,0,50&chdl=Ideal%20Line|Burndown&chco=#{ideal_line_color_parameter},#{burndown_line_color_parameter}&chd=t:#{x_data}|#{ideal_line_data}|#{x_data}|#{burn_down_line}&chxl=0:|#{weekdays_x_axis}|1:|'></img>
         HTML
       rescue Exception => e
         <<-ERROR
