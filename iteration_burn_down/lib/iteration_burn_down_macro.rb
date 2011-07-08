@@ -15,6 +15,12 @@ module CustomMacro
       @parameters = parameters
       @project = project
       @current_user = current_user
+
+      @parameter_defaults = Hash.new { |h, k| h[k]=k }
+      @parameter_defaults['iteration'] = lambda { @project.value_of_project_variable('Current Iteration') }
+      @parameter_defaults['release'] = lambda { @project.value_of_project_variable('Current Release') }
+      @parameter_defaults['time_box'] = 'iteration'
+      @parameter_defaults['today'] = Date.today
     end
 
     def execute
@@ -42,8 +48,8 @@ module CustomMacro
     "An Error occurred: #{e}"
 
     iteration: [#{iteration}]<br>
-    date accepted property: [#{date_accepted_property}]<br>
-    estimate property: #{estimate_property}<br>
+    date accepted property: [#{date_accepted_parameter}]<br>
+    estimate property: #{story_points_parameter}<br>
 
         ERROR
       end
@@ -59,9 +65,9 @@ module CustomMacro
       weekdays = weekdays_for(date_range)
       points_by_past_weekdays = {}
       weekdays.each { |weekday| points_by_past_weekdays[weekday] = total_story_points if weekday <= today }
-      story_info.select { |story| story[date_accepted_property] }.each do |accepted_story|
-        accepted_on = accepted_story[date_accepted_property]
-        points = accepted_story[estimate_property] || 0
+      story_info.select { |story| story[date_accepted_parameter] }.each do |accepted_story|
+        accepted_on = accepted_story[date_accepted_parameter]
+        points = accepted_story[story_points_parameter] || 0
         points_by_past_weekdays.keys.select { |past_day| past_day >= accepted_on }.each do |accumulate_day|
           points_by_past_weekdays[accumulate_day] -= points.to_i
         end
@@ -83,7 +89,7 @@ module CustomMacro
     end
 
     def calculate_total_story_points(stories)
-      stories.inject(0) { |total, hash| hash[estimate_property] ? total + hash[estimate_property].to_i : total }
+      stories.inject(0) { |total, hash| hash[story_points_parameter] ? total + hash[story_points_parameter].to_i : total }
     end
 
     def story_info
@@ -91,8 +97,8 @@ module CustomMacro
         iteration_where = "Iteration = '#{iteration_name}'"
         iteration_where = "Iteration = #{iteration}" if iteration == 'THIS CARD'
         data_rows = @project.execute_mql(
-            "SELECT '#{parameter_to_field(estimate_property)}', '#{parameter_to_field(date_accepted_property)}' WHERE type is Story AND #{iteration_where}")
-        data_rows.each { |hash| hash.update(hash) { |key, value| (key == date_accepted_property && value) ? Date.parse(value) : value } }
+            "SELECT '#{parameter_to_field(story_points_parameter)}', '#{date_accepted_field}' WHERE type is Story AND #{iteration_where}")
+        data_rows.each { |hash| hash.update(hash) { |key, value| (key == date_accepted_parameter && value) ? Date.parse(value) : value } }
       rescue Exception => e
         raise "[error retrieving story info for iteration '#{iteration}': #{e}]"
       end
@@ -145,20 +151,37 @@ module CustomMacro
       field.gsub('_', ' ').scan(/\w+/).collect { |word| word.capitalize }.join(' ')
     end
 
-    def date_accepted_property
-      @parameters['date_accepted'] || 'date_accepted'
-    end
-
-    def estimate_property
-      @parameters['story_points'] || 'story_points'
-    end
-
     def today
       @parameters[:today] || Date.today
     end
 
     def can_be_cached?
       false # if appropriate, switch to true once you move your macro to production
+    end
+
+    #noinspection RubyUnusedLocalVariable
+    def method_missing(method_sym, *arguments, &block)
+      if method_sym.to_s =~ /^(.*)_field$/
+        parameter_to_field(send "#{$1}_parameter".to_s)
+      elsif  method_sym.to_s =~ /^(.*)_(parameter|type)$/
+        param = @parameters[$1] || @parameter_defaults[$1]
+        if param.respond_to? :call
+          param.call
+        else
+          param
+        end
+      else
+        super
+      end
+    end
+
+    def respond_to?(method_sym, include_private = false)
+      puts 'in respond to'
+      if method_sym.to_s =~ /^(.*)_[field|parameter|type]$/
+        true
+      else
+        super
+      end
     end
 
   end

@@ -40,7 +40,7 @@ describe "burn down parameter" do
   end
 
   describe "date accepted property" do
-    subject { @burn_down_macro.date_accepted_property }
+    subject { @burn_down_macro.date_accepted_parameter }
 
     context "when using default" do
       it { should == 'date_accepted' }
@@ -54,7 +54,7 @@ describe "burn down parameter" do
   end
 
   describe "date accepted property" do
-    subject { @burn_down_macro.estimate_property }
+    subject { @burn_down_macro.story_points_parameter }
 
     context "when using default" do
       it { should == 'story_points' }
