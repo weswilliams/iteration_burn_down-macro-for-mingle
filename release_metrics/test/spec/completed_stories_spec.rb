@@ -20,7 +20,7 @@ describe "remaining stories" do
     @project = double('project',
                       :value_of_project_variable => '#1 Release 1',
                       :execute_mql => @stories)
-    @macro = ReleaseMetrics.new(@parameters, @project, nil)
+    @macro = CustomMacro::ReleaseMetrics.new(@parameters, @project, nil)
 
   end
 

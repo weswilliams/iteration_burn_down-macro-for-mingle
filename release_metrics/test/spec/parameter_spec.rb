@@ -6,7 +6,7 @@ describe "parameters" do
   before do
     @parameters = {}
     @project = double('project', :value_of_project_variable => '#1 Release 1')
-    @macro = ReleaseMetrics.new(@parameters, @project, nil)
+    @macro = CustomMacro::ReleaseMetrics.new(@parameters, @project, nil)
   end
 
   describe "release parameter" do

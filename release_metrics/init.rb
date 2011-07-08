@@ -6,5 +6,13 @@ rescue LoadError
 end
 
 if defined?(RAILS_ENV) && RAILS_ENV == 'production' && defined?(MinglePlugins)
-  MinglePlugins::Macros.register(ReleaseMetrics, 'release_metrics')
+  def load_all_files_in(dir)
+    Dir[File.join(File.dirname(__FILE__), dir, '**', '*.rb')].each do |f|
+      require f
+    end
+  end
+
+  load_all_files_in('lib')
+
+  MinglePlugins::Macros.register(CustomMacro::ReleaseMetrics, 'release_metrics')
 end 
