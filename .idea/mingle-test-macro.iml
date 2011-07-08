@@ -1,61 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="RUBY_MODULE" version="4">
-  <component name="GemRequirementsHolder" version="3">
-    <requirement>
-      <requirement>
-        <dependency name="activesupport" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
-      </requirement>
-      <source manual="true" />
-    </requirement>
-    <requirement>
-      <requirement>
-        <dependency name="diff-lcs" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
-      </requirement>
-      <source manual="true" />
-    </requirement>
-    <requirement>
-      <requirement>
-        <dependency name="mingle-macro-development-toolkit" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
-      </requirement>
-      <source manual="true" />
-    </requirement>
-    <requirement>
-      <requirement>
-        <dependency name="rcov" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
-      </requirement>
-      <source manual="true" />
-    </requirement>
-    <requirement>
-      <requirement>
-        <dependency name="rspec" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
-      </requirement>
-      <source manual="true" />
-    </requirement>
-    <requirement>
-      <requirement>
-        <dependency name="rspec-core" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
-      </requirement>
-      <source manual="true" />
-    </requirement>
-    <requirement>
-      <requirement>
-        <dependency name="rspec-expectations" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
-      </requirement>
-      <source manual="true" />
-    </requirement>
-    <requirement>
-      <requirement>
-        <dependency name="rspec-mocks" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
-      </requirement>
-      <source manual="true" />
-    </requirement>
-    <requirement>
-      <requirement>
-        <dependency name="test-unit" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
-      </requirement>
-      <source manual="true" />
-    </requirement>
-  </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/release_metrics/lib" isTestSource="false" />
@@ -68,10 +12,6 @@
     <orderEntry type="library" scope="PROVIDED" name="[gem] rspec-core (v2.6.4, /home/wes/.rvm/gems/ruby-1.9.2-p180/gems/rspec-core-2.6.4)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] rspec-expectations (v2.6.0, /home/wes/.rvm/gems/ruby-1.9.2-p180/gems/rspec-expectations-2.6.0)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] rspec-mocks (v2.6.0, /home/wes/.rvm/gems/ruby-1.9.2-p180/gems/rspec-mocks-2.6.0)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] activesupport (v2.3.5, /home/wes/.rvm/gems/ruby-1.9.2-p180/gems/activesupport-2.3.5)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] mingle-macro-development-toolkit (v1.3.3, /home/wes/.rvm/gems/ruby-1.9.2-p180/gems/mingle-macro-development-toolkit-1.3.3)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] test-unit (v2.3.0, /home/wes/.rvm/gems/ruby-1.9.2-p180@global/gems/test-unit-2.3.0)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] rcov (v0.9.9, /home/wes/.rvm/gems/ruby-1.9.2-p180/gems/rcov-0.9.9)" level="application" />
   </component>
 </module>
 

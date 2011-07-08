@@ -64,7 +64,7 @@ module CustomMacro
       return '' if total_story_points == 0
       weekdays = weekdays_for(date_range)
       points_by_past_weekdays = {}
-      weekdays.each { |weekday| points_by_past_weekdays[weekday] = total_story_points if weekday <= today }
+      weekdays.each { |weekday| points_by_past_weekdays[weekday] = total_story_points if weekday <= today_parameter }
       story_info.select { |story| story[date_accepted_parameter] }.each do |accepted_story|
         accepted_on = accepted_story[date_accepted_parameter]
         points = accepted_story[story_points_parameter] || 0
@@ -149,10 +149,6 @@ module CustomMacro
 
     def parameter_to_field(field)
       field.gsub('_', ' ').scan(/\w+/).collect { |word| word.capitalize }.join(' ')
-    end
-
-    def today
-      @parameters[:today] || Date.today
     end
 
     def can_be_cached?

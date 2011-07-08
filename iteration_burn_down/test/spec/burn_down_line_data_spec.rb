@@ -44,7 +44,7 @@ describe "burn down query" do
 
   context "stories finished in future not displayed" do
     before do
-      @parameters[:today] = Date.parse('2011-06-03')
+      @parameters['today'] = Date.parse('2011-06-03')
       @stories = [
           {'story_points' => '3', 'date_accepted' => Date.parse('2011-06-02')},
           {'story_points' => '5', 'date_accepted' => Date.parse('2011-06-06')}
