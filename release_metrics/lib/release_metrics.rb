@@ -158,7 +158,9 @@ module CustomMacro
 
     def current_release
       begin
-        data_rows = @project.execute_mql("SELECT '#{end_date_field}' WHERE Number = #{card_number release_parameter}")
+        release_where = "Number = #{card_number release_parameter}"
+        release_where = "Number = #{release_parameter}.'Number'" if release_parameter == 'THIS CARD'
+        data_rows = @project.execute_mql("SELECT '#{end_date_field}' WHERE #{release_where}")
         raise "##{release_parameter} is not a valid release" if data_rows.empty?
         data_rows[0]
       rescue Exception => e
@@ -168,9 +170,12 @@ module CustomMacro
 
     def completed_iterations
       begin
+        release_where = "release = '#{card_name release_parameter}'"
+        release_where = "release = #{release_parameter}" if release_parameter == 'THIS CARD'
+
         @project.execute_mql(
             "SELECT name, '#{start_date_field}', '#{end_date_field}', #{velocity_field} " +
-                "WHERE Type = #{time_box_type} AND '#{end_date_field}' < today AND release = '#{card_name release_parameter}' " +
+                "WHERE Type = #{time_box_type} AND '#{end_date_field}' < today AND #{release_where} " +
                 "ORDER BY '#{end_date_field}' desc")
       rescue Exception => e
         raise "[error retrieving completed iterations for #{release_parameter}: #{e}]"
@@ -179,9 +184,11 @@ module CustomMacro
 
     def stories(completed_iterations, remaining_stories = true)
       return [] if completed_iterations.length == 0 && !remaining_stories
+      release_where = "release = '#{card_name release_parameter}'"
+      release_where = "release = #{release_parameter}" if release_parameter == 'THIS CARD'
       iter_names = iteration_names completed_iterations
       if completed_iterations.length > 0
-        mql = "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{card_name release_parameter}' AND " +
+        mql = "SELECT '#{story_points_field}' WHERE Type = story AND #{release_where} AND " +
             "#{remaining_stories ? 'NOT ' : ''}#{time_box_type} in (#{iter_names})"
       else
         mql = "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{card_name release_parameter}'"

@@ -6,13 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4b8638f0-6f72-4452-979a-a016d20c8e6d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/init.rb" afterPath="$PROJECT_DIR$/release_metrics/init.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" afterPath="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/test/spec/completed_iterations_spec.rb" afterPath="$PROJECT_DIR$/release_metrics/test/spec/completed_iterations_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/test/spec/completed_stories_spec.rb" afterPath="$PROJECT_DIR$/release_metrics/test/spec/completed_stories_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/test/spec/current_iteration_spec.rb" afterPath="$PROJECT_DIR$/release_metrics/test/spec/current_iteration_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/test/spec/parameter_spec.rb" afterPath="$PROJECT_DIR$/release_metrics/test/spec/parameter_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/test/spec/remaining_stories_spec.rb" afterPath="$PROJECT_DIR$/release_metrics/test/spec/remaining_stories_spec.rb" />
     </list>
     <ignored path="mingle-test-macro.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,7 +18,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager" choice="3">
-    <SUITE FILE_PATH="coverage/mingle-test-macro@Release_Metrics_Specs.rcov" NAME="Release Metrics Specs Coverage Results" MODIFIED="1310152410562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/release_metrics/" />
+    <SUITE FILE_PATH="coverage/mingle-test-macro@Release_Metrics_Specs.rcov" NAME="Release Metrics Specs Coverage Results" MODIFIED="1310153026616" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/release_metrics/" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -38,19 +32,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="remaining_stories_spec.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/remaining_stories_spec.rb">
+      <file leaf-file-name="iteration_burn_down_macro.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="13" selection-start="855" selection-end="855" vertical-scroll-proportion="0.0">
+            <state line="94" column="7" selection-start="3716" selection-end="3716" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="iteration_burn_down_macro.rb" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb">
+      <file leaf-file-name="release_metrics.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="21" selection-start="1970" selection-end="1970" vertical-scroll-proportion="0.42299348">
+            <state line="175" column="29" selection-start="7809" selection-end="7809" vertical-scroll-proportion="0.2281106">
               <folding />
             </state>
           </provider>
@@ -80,12 +74,12 @@
         <option value="$PROJECT_DIR$/iteration_burn_down/test/spec/burn_down_line_data_spec.rb" />
         <option value="$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb" />
         <option value="$PROJECT_DIR$/release_metrics/init.rb" />
-        <option value="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
         <option value="$PROJECT_DIR$/release_metrics/test/spec/completed_iterations_spec.rb" />
         <option value="$PROJECT_DIR$/release_metrics/test/spec/completed_stories_spec.rb" />
         <option value="$PROJECT_DIR$/release_metrics/test/spec/current_iteration_spec.rb" />
         <option value="$PROJECT_DIR$/release_metrics/test/spec/parameter_spec.rb" />
         <option value="$PROJECT_DIR$/release_metrics/test/spec/remaining_stories_spec.rb" />
+        <option value="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
       </list>
     </option>
   </component>
@@ -417,7 +411,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34170154" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.67741936" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.335041" sideWeight="0.70013946" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.335041" sideWeight="0.70013946" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29986054" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293011" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
@@ -445,7 +439,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- chart height and width are now configurable" />
+    <option name="LAST_COMMIT_MESSAGE" value="- moved ReleaseMetrics into CustomMacro module" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -458,7 +452,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="- refactored to remove duplication" />
     <MESSAGE value="- retrieve completed stories" />
     <MESSAGE value="- added completed story points to the metrics" />
     <MESSAGE value="- fixed issue with completed story points when there are no completed iterations" />
@@ -483,6 +476,7 @@
     <MESSAGE value="- moved iteration_burndown macro to CustomMacro namespace" />
     <MESSAGE value="- removed today and replaced with dynamic today_parameter method" />
     <MESSAGE value="- chart height and width are now configurable" />
+    <MESSAGE value="- moved ReleaseMetrics into CustomMacro module" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -573,23 +567,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="248" column="0" selection-start="9957" selection-end="9957" vertical-scroll-proportion="0.8733032">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/remaining_stories_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="13" selection-start="855" selection-end="855" vertical-scroll-proportion="0.0">
+        <state line="22" column="13" selection-start="855" selection-end="855" vertical-scroll-proportion="0.12658228">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="21" selection-start="1970" selection-end="1970" vertical-scroll-proportion="0.42299348">
+        <state line="94" column="7" selection-start="3716" selection-end="3716" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="175" column="29" selection-start="7809" selection-end="7809" vertical-scroll-proportion="0.2281106">
           <folding />
         </state>
       </provider>
