@@ -4,7 +4,7 @@ require "./lib/iteration_burn_down_macro"
 describe "steps between y grid values" do
   describe "limit y axis to 10 major points in grid" do
     before do
-      @burn_down_macro = IterationBurnDownMacro.new({}, nil, nil)
+      @burn_down_macro = CustomMacro::IterationBurnDownMacro.new({}, nil, nil)
     end
 
     context "when total story points is 10" do

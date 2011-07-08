@@ -7,7 +7,7 @@ describe "burn down query" do
   before do
     @date_range = ((Date.parse('2011-06-01'))..(Date.parse('2011-06-07')))
     @parameters = {}
-    @burn_down_macro = IterationBurnDownMacro.new(@parameters, nil, nil)
+    @burn_down_macro = CustomMacro::IterationBurnDownMacro.new(@parameters, nil, nil)
   end
 
   subject { @burn_down_macro.generate_burndown_line_data 8, @stories, @date_range }

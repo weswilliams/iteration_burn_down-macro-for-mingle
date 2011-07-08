@@ -5,7 +5,7 @@ describe "burn down parameter" do
   before do
     @parameters = {}
     @project = double('project', :value_of_project_variable => '#3 Iteration 1')
-    @burn_down_macro = IterationBurnDownMacro.new(@parameters, @project, nil)
+    @burn_down_macro = CustomMacro::IterationBurnDownMacro.new(@parameters, @project, nil)
   end
 
   subject { @burn_down_macro }

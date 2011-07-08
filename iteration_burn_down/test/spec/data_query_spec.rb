@@ -9,7 +9,7 @@ describe "iteration date range query" do
     @project = double('project',
                       :value_of_project_variable => '#3 Iteration 1',
                       :execute_mql => @iteration_date_range)
-    @burn_down_macro = IterationBurnDownMacro.new(@parameters, @project, nil)
+    @burn_down_macro = CustomMacro::IterationBurnDownMacro.new(@parameters, @project, nil)
   end
 
   subject { @burn_down_macro.iteration_date_range }
@@ -50,7 +50,7 @@ describe "burn down query" do
     @project = double('project',
                       :value_of_project_variable => '#3 Iteration 1',
                       :execute_mql => @story_info)
-    @burn_down_macro = IterationBurnDownMacro.new(@parameters, @project, nil)
+    @burn_down_macro = CustomMacro::IterationBurnDownMacro.new(@parameters, @project, nil)
   end
 
   subject { @burn_down_macro.story_info }

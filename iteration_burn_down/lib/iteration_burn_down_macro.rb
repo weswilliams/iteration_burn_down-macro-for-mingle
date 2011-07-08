@@ -1,40 +1,42 @@
 require "date"
 
-class IterationBurnDownMacro
-  MON = 1
-  TUE = 2
-  WED = 3
-  THU = 4
-  FRI = 5
+module CustomMacro
 
-  WEEKDAYS = [MON, TUE, WED, THU, FRI]
+  class IterationBurnDownMacro
+    MON = 1
+    TUE = 2
+    WED = 3
+    THU = 4
+    FRI = 5
 
-  def initialize(parameters, project, current_user)
-    @parameters = parameters
-    @project = project
-    @current_user = current_user
-  end
+    WEEKDAYS = [MON, TUE, WED, THU, FRI]
 
-  def execute
-    begin
-      chart_url = 'https://chart.googleapis.com/chart?'
-      chart_title = 'chtt=Iteration%20Burndown'
-      date_range = iteration_date_range
-      weekdays_x_axis = weekdays_for(date_range).collect { |day| "#{day.month}-#{day.day}" }.join('|')
-      stories = story_info
-      total_story_points = calculate_total_story_points stories
-      chart_range = "chxr=1,0,#{total_story_points},#{y_axis_step(total_story_points)}"
-      ideal_line_data = generate_idea_line_data(total_story_points, date_range)
-      x_data = generate_x_data(date_range)
-      burn_down_line = generate_burndown_line_data(total_story_points, story_info, date_range)
+    def initialize(parameters, project, current_user)
+      @parameters = parameters
+      @project = project
+      @current_user = current_user
+    end
 
-      <<-HTML
+    def execute
+      begin
+        chart_url = 'https://chart.googleapis.com/chart?'
+        chart_title = 'chtt=Iteration%20Burndown'
+        date_range = iteration_date_range
+        weekdays_x_axis = weekdays_for(date_range).collect { |day| "#{day.month}-#{day.day}" }.join('|')
+        stories = story_info
+        total_story_points = calculate_total_story_points stories
+        chart_range = "chxr=1,0,#{total_story_points},#{y_axis_step(total_story_points)}"
+        ideal_line_data = generate_idea_line_data(total_story_points, date_range)
+        x_data = generate_x_data(date_range)
+        burn_down_line = generate_burndown_line_data(total_story_points, story_info, date_range)
+
+        <<-HTML
     h2. #{iteration_link} Burndown
 
     <img src='#{chart_url}cht=lxy&chs=600x400&chds=a&#{chart_title}&chls=1,6,6&chxt=x,y&#{chart_range}&chma=50,0,0,50&chdl=Ideal%20Line|Burndown&chco=00FF00,FF0000&chd=t:#{x_data}|#{ideal_line_data}|#{x_data}|#{burn_down_line}&chxl=0:|#{weekdays_x_axis}|1:|'></img>
-      HTML
-    rescue Exception => e
-      <<-ERROR
+        HTML
+      rescue Exception => e
+        <<-ERROR
     h2. Iteration ##{iteration_number} Burndown:
 
     "An Error occurred: #{e}"
@@ -43,133 +45,122 @@ class IterationBurnDownMacro
     date accepted property: [#{date_accepted_property}]<br>
     estimate property: #{estimate_property}<br>
 
-      ERROR
-    end
-  end
-
-  def y_axis_step(total_story_points)
-    step = (total_story_points/10.0).ceil
-    step <=0 ? 1 : step
-  end
-
-  def generate_burndown_line_data(total_story_points, story_info, date_range)
-    return '' if total_story_points == 0
-    weekdays = weekdays_for(date_range)
-    points_by_past_weekdays = {}
-    weekdays.each { |weekday| points_by_past_weekdays[weekday] = total_story_points if weekday <= today }
-    story_info.select { |story| story[date_accepted_property] }.each do |accepted_story|
-      accepted_on = accepted_story[date_accepted_property]
-      points = accepted_story[estimate_property] || 0
-      points_by_past_weekdays.keys.select { |past_day| past_day >= accepted_on }.each do |accumulate_day|
-        points_by_past_weekdays[accumulate_day] -= points.to_i
+        ERROR
       end
     end
-    points_by_past_weekdays.values.join(',')
-  end
 
-  def generate_x_data(date_range)
-    (0...(weekdays_for(date_range).count)).to_a.join(',')
-  end
-
-  def generate_idea_line_data(total_story_points, date_range)
-    return '' if total_story_points == 0
-    number_of_weekdays = weekdays_for(date_range).count
-    step = (total_story_points * 1.0) / (number_of_weekdays - 1)
-    idea_data = []
-    (0.0..total_story_points).step(step) { |value| idea_data << value }
-    idea_data.reverse.join(',')
-  end
-
-  def calculate_total_story_points(stories)
-    stories.inject(0) { |total, hash| hash[estimate_property] ? total + hash[estimate_property].to_i : total }
-  end
-
-  def story_info
-    begin
-      iteration_where = "Iteration = '#{iteration_name}'"
-      iteration_where = "Iteration = #{iteration}" if iteration == 'THIS CARD'
-      data_rows = @project.execute_mql(
-          "SELECT '#{parameter_to_field(estimate_property)}', '#{parameter_to_field(date_accepted_property)}' WHERE type is Story AND #{iteration_where}")
-      data_rows.each { |hash| hash.update(hash) { |key, value| (key == date_accepted_property && value) ? Date.parse(value) : value } }
-    rescue Exception => e
-      raise "[error retrieving story info for iteration '#{iteration}': #{e}]"
+    def y_axis_step(total_story_points)
+      step = (total_story_points/10.0).ceil
+      step <=0 ? 1 : step
     end
-  end
 
-  def iteration_date_range
-    begin
-      iteration_where = "Number = #{iteration_number}"
-      iteration_where = "Number = #{iteration}.'Number'" if iteration == 'THIS CARD'
-      data_rows = @project.execute_mql("SELECT 'Start Date', 'End Date' WHERE #{iteration_where}")
-      raise "##{iteration} is not a valid iteration" if data_rows.empty?
-      Date.parse(data_rows[0]['start_date'])..Date.parse(data_rows[0]['end_date'])
-    rescue Exception => e
-      raise "error getting data for iteration #{iteration}: #{e}"
+    def generate_burndown_line_data(total_story_points, story_info, date_range)
+      return '' if total_story_points == 0
+      weekdays = weekdays_for(date_range)
+      points_by_past_weekdays = {}
+      weekdays.each { |weekday| points_by_past_weekdays[weekday] = total_story_points if weekday <= today }
+      story_info.select { |story| story[date_accepted_property] }.each do |accepted_story|
+        accepted_on = accepted_story[date_accepted_property]
+        points = accepted_story[estimate_property] || 0
+        points_by_past_weekdays.keys.select { |past_day| past_day >= accepted_on }.each do |accumulate_day|
+          points_by_past_weekdays[accumulate_day] -= points.to_i
+        end
+      end
+      points_by_past_weekdays.values.join(',')
     end
-  end
 
-  def weekdays_for(date_range)
-    ((date_range.begin)..(date_range.end)).select { |day| WEEKDAYS.include? day.wday }
-  end
-
-  def iteration
-    @parameters['iteration'] || @project.value_of_project_variable('Current Iteration')
-  end
-
-  def iteration_name
-    match_data = /#\d+ (.*)/.match(iteration)
-    if  match_data
-      match_data[1]
-    else
-      'Unknown'
+    def generate_x_data(date_range)
+      (0...(weekdays_for(date_range).count)).to_a.join(',')
     end
-  end
 
-  def iteration_number
-    match_data = /#(\d+).*/.match(iteration)
-    if  match_data
-      match_data[1].to_i
-    else
-      'Unknown'
+    def generate_idea_line_data(total_story_points, date_range)
+      return '' if total_story_points == 0
+      number_of_weekdays = weekdays_for(date_range).count
+      step = (total_story_points * 1.0) / (number_of_weekdays - 1)
+      idea_data = []
+      (0.0..total_story_points).step(step) { |value| idea_data << value }
+      idea_data.reverse.join(',')
     end
-  end
 
-  def iteration_link
-    return "#{iteration_name} #{@project.identifier}/##{iteration_number}" if @parameters['project']
-    iteration
-  end
+    def calculate_total_story_points(stories)
+      stories.inject(0) { |total, hash| hash[estimate_property] ? total + hash[estimate_property].to_i : total }
+    end
 
-  def parameter_to_field(field)
-    field.gsub('_', ' ').scan(/\w+/).collect { |word| word.capitalize }.join(' ')
-  end
+    def story_info
+      begin
+        iteration_where = "Iteration = '#{iteration_name}'"
+        iteration_where = "Iteration = #{iteration}" if iteration == 'THIS CARD'
+        data_rows = @project.execute_mql(
+            "SELECT '#{parameter_to_field(estimate_property)}', '#{parameter_to_field(date_accepted_property)}' WHERE type is Story AND #{iteration_where}")
+        data_rows.each { |hash| hash.update(hash) { |key, value| (key == date_accepted_property && value) ? Date.parse(value) : value } }
+      rescue Exception => e
+        raise "[error retrieving story info for iteration '#{iteration}': #{e}]"
+      end
+    end
 
-  def date_accepted_property
-    @parameters['date_accepted'] || 'date_accepted'
-  end
+    def iteration_date_range
+      begin
+        iteration_where = "Number = #{iteration_number}"
+        iteration_where = "Number = #{iteration}.'Number'" if iteration == 'THIS CARD'
+        data_rows = @project.execute_mql("SELECT 'Start Date', 'End Date' WHERE #{iteration_where}")
+        raise "##{iteration} is not a valid iteration" if data_rows.empty?
+        Date.parse(data_rows[0]['start_date'])..Date.parse(data_rows[0]['end_date'])
+      rescue Exception => e
+        raise "error getting data for iteration #{iteration}: #{e}"
+      end
+    end
 
-  def estimate_property
-    @parameters['story_points'] || 'story_points'
-  end
+    def weekdays_for(date_range)
+      ((date_range.begin)..(date_range.end)).select { |day| WEEKDAYS.include? day.wday }
+    end
 
-  def today
-    @parameters[:today] || Date.today
-  end
+    def iteration
+      @parameters['iteration'] || @project.value_of_project_variable('Current Iteration')
+    end
 
-  def can_be_cached?
-    false # if appropriate, switch to true once you move your macro to production
-  end
+    def iteration_name
+      match_data = /#\d+ (.*)/.match(iteration)
+      if  match_data
+        match_data[1]
+      else
+        'Unknown'
+      end
+    end
 
-#  def debug_info
-#    <<-DEBUB_INFO
-#    points by past days = #{generate_cumulative_accepted_points_by_weekday(total_story_points, story_info, date_range)} <br>
-#    x axis weekdays = #{weekdays_x_axis} <br>
-#    total story points #{total_story_points} <br>
-#    date range #{date_range} <br>
-#    idea line data = #{ideal_line_data} <br>
-#    x data = #{x_data} <br>
-#    story info #{story_info.to_s}
-#    DEBUB_INFO
-#  end
+    def iteration_number
+      match_data = /#(\d+).*/.match(iteration)
+      if  match_data
+        match_data[1].to_i
+      else
+        'Unknown'
+      end
+    end
+
+    def iteration_link
+      return "#{iteration_name} #{@project.identifier}/##{iteration_number}" if @parameters['project']
+      iteration
+    end
+
+    def parameter_to_field(field)
+      field.gsub('_', ' ').scan(/\w+/).collect { |word| word.capitalize }.join(' ')
+    end
+
+    def date_accepted_property
+      @parameters['date_accepted'] || 'date_accepted'
+    end
+
+    def estimate_property
+      @parameters['story_points'] || 'story_points'
+    end
+
+    def today
+      @parameters[:today] || Date.today
+    end
+
+    def can_be_cached?
+      false # if appropriate, switch to true once you move your macro to production
+    end
+
+  end
 
 end
-
