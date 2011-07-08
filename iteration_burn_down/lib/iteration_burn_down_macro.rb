@@ -21,6 +21,8 @@ module CustomMacro
       @parameter_defaults['release'] = lambda { @project.value_of_project_variable('Current Release') }
       @parameter_defaults['time_box'] = 'iteration'
       @parameter_defaults['today'] = Date.today
+      @parameter_defaults['chart_width'] = 600
+      @parameter_defaults['chart_height'] = 400
     end
 
     def execute
@@ -39,7 +41,7 @@ module CustomMacro
         <<-HTML
     h2. #{iteration_link} Burndown
 
-    <img src='#{chart_url}cht=lxy&chs=600x400&chds=a&#{chart_title}&chls=1,6,6&chxt=x,y&#{chart_range}&chma=50,0,0,50&chdl=Ideal%20Line|Burndown&chco=00FF00,FF0000&chd=t:#{x_data}|#{ideal_line_data}|#{x_data}|#{burn_down_line}&chxl=0:|#{weekdays_x_axis}|1:|'></img>
+    <img src='#{chart_url}cht=lxy&chs=#{chart_width_parameter}x#{chart_height_parameter}&chds=a&#{chart_title}&chls=1,6,6&chxt=x,y&#{chart_range}&chma=50,0,0,50&chdl=Ideal%20Line|Burndown&chco=00FF00,FF0000&chd=t:#{x_data}|#{ideal_line_data}|#{x_data}|#{burn_down_line}&chxl=0:|#{weekdays_x_axis}|1:|'></img>
         HTML
       rescue Exception => e
         <<-ERROR
