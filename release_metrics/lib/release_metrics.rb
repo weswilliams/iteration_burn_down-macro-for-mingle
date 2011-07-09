@@ -170,9 +170,6 @@ module CustomMacro
 
     def completed_iterations
       begin
-        release_where = "release = '#{card_name release_parameter}'"
-        release_where = "release = #{release_parameter}" if release_parameter == 'THIS CARD'
-
         @project.execute_mql(
             "SELECT name, '#{start_date_field}', '#{end_date_field}', #{velocity_field} " +
                 "WHERE Type = #{time_box_type} AND '#{end_date_field}' < today AND #{release_where} " +
@@ -182,16 +179,18 @@ module CustomMacro
       end
     end
 
+    def release_where
+      release_parameter == 'THIS CARD' ? "release = #{release_parameter}" : "release = '#{card_name release_parameter}'"
+    end
+
     def stories(completed_iterations, remaining_stories = true)
       return [] if completed_iterations.length == 0 && !remaining_stories
-      release_where = "release = '#{card_name release_parameter}'"
-      release_where = "release = #{release_parameter}" if release_parameter == 'THIS CARD'
       iter_names = iteration_names completed_iterations
       if completed_iterations.length > 0
         mql = "SELECT '#{story_points_field}' WHERE Type = story AND #{release_where} AND " +
             "#{remaining_stories ? 'NOT ' : ''}#{time_box_type} in (#{iter_names})"
       else
-        mql = "SELECT '#{story_points_field}' WHERE Type = story AND release = '#{card_name release_parameter}'"
+        mql = "SELECT '#{story_points_field}' WHERE Type = story AND #{release_where}"
       end
       begin
         @project.execute_mql(mql)
