@@ -132,10 +132,11 @@ module CustomMacro
 
     def completed_iterations
       begin
-        @project.execute_mql(
+        completed_iterations = @project.execute_mql(
             "SELECT name, '#{start_date_field}', '#{end_date_field}', #{velocity_field} " +
                 "WHERE Type = #{time_box_type} AND '#{end_date_field}' < today AND #{release_where} " +
                 "ORDER BY '#{end_date_field}' desc")
+        Iterations.new completed_iterations, velocity_parameter, end_date_parameter, start_date_parameter
       rescue Exception => e
         raise "[error retrieving completed iterations for #{release_parameter}: #{e}]"
       end
@@ -223,6 +224,14 @@ module CustomMacro
       @start_date_parameter = start_date_parameter
     end
 
+    def [] key
+      @iterations[key]
+    end
+
+    def first(n=1)
+      @iterations.first(n)
+    end
+    
     def last_3()
       @iterations.first(3)
     end
