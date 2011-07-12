@@ -14,31 +14,46 @@ module CustomMacro
 
     def execute
       begin
-        from_date = Date.parse('2011-07-04')
-        days = 7
+        remaining_story_points = 50
+        last_iter_end_date = Date.parse('2011-07-04')
+        days_in_iter = 7
 
         <<-HTML
     h2. JavaScript Example
 
-    <div id="js-output" style="width: 200px; height: 100px">loading...</div>
-    <input type='text' id='text-for-js'></input>
+    <div class="wiki" id="js-output">Enter a velocity to see expected end date.</div>
+    <span>What if velocity: </span> <input type='text' id='what-if-velocity'></input>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
     <script type="text/javascript">
       jQuery.noConflict();
       // register the initialize function for executing after page loaded.
       MingleJavascript.register(function initialize() {
+        try {
 
-        var fromDate = new Date('#{from_date.to_s}');
-        var daysInIter = #{days};
+          var lastIterEndDate = new Date('#{last_iter_end_date.to_s}'),
+              daysInIter = #{days_in_iter},
+              remainingStoryPoints = #{remaining_story_points};
 
-        var out = jQuery("#js-output");
-        out.html('<span>updated with jQuery</span>');
+          var remainingIterations = function(velocity, remaining_story_points) {
+            return remaining_story_points / velocity;
+          };
 
-        jQuery("#text-for-js").blur(function() {
-          var iterations = parseInt(jQuery("#text-for-js").val());
-          var expectedDate = new Date(fromDate.getTime() + 1000 * 60 * 60 * 24 * (daysInIter * iterations));
-          out.html("<span>you entered " + iterations + ", " + daysInIter + ", " + expectedDate + "</span>");
-        });
+          var expectedCompletionDateFor = function(lastIterEndDate, daysInIter, remainingIterations) {
+            return new Date(lastIterEndDate.getTime() + 1000 * 60 * 60 * 24 * (daysInIter * remainingIterations));
+          };
+
+          var out = jQuery("#js-output");
+
+          jQuery("#what-if-velocity").blur(function() {
+            var velocity = parseInt(jQuery("#what-if-velocity").val());
+            var iterations = remainingIterations(velocity, remainingStoryPoints);
+            var expectedDate = expectedCompletionDateFor(lastIterEndDate, daysInIter, iterations);
+            var dateString = expectedDate.getFullYear() + '-' + expectedDate.getMonth() + '-' + expectedDate.getDate();
+            out.html("<span>Expected end date for a velocity of " + velocity + " is " + dateString + "</span>");
+          });
+        } catch(err) {
+          out.html("<span>Error: " + err + "</span>");
+        }
       });
     </script>
 

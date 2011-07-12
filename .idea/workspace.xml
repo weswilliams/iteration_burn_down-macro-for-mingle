@@ -3,10 +3,13 @@
   <component name="AnalysisUIOptions">
     <option name="SCOPE_TYPE" value="3" />
   </component>
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/js_ex/lib/js_ex.rb" line="33" mnemonic="7" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="4b8638f0-6f72-4452-979a-a016d20c8e6d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" afterPath="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js_ex/lib/js_ex.rb" afterPath="$PROJECT_DIR$/js_ex/lib/js_ex.rb" />
     </list>
     <ignored path="mingle-test-macro.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,7 +38,16 @@
       <file leaf-file-name="js_ex.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js_ex/lib/js_ex.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="11" selection-start="1335" selection-end="1335" vertical-scroll-proportion="0.47314948">
+            <state line="23" column="0" selection-start="423" selection-end="423" vertical-scroll-proportion="0.16835994">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="release_metrics.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="69" column="9" selection-start="3291" selection-end="3294" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -667,23 +679,9 @@
         <state line="46" column="47" selection-start="1696" selection-end="1696" vertical-scroll-proportion="1.3952484" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="118" selection-end="118" vertical-scroll-proportion="0.3068182">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js_ex/test/spec/js_ex_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="0" selection-start="284" selection-end="284" vertical-scroll-proportion="0.6081081">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js_ex/init.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="58" selection-start="424" selection-end="424" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -695,9 +693,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js_ex/init.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="58" selection-start="424" selection-end="424" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="9" selection-start="3291" selection-end="3294" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js_ex/lib/js_ex.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="11" selection-start="1335" selection-end="1335" vertical-scroll-proportion="0.47314948">
+        <state line="23" column="0" selection-start="423" selection-end="423" vertical-scroll-proportion="0.16835994">
           <folding />
         </state>
       </provider>
