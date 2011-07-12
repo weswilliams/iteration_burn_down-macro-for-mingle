@@ -35,7 +35,7 @@ module CustomMacro
       begin
         release = current_release
         release_end = release_end_date release
-        iterations = Iterations.new completed_iterations, velocity_parameter, end_date_parameter, start_date_parameter
+        iterations = completed_iterations
 
         completed_stories = stories iterations, false
         completed_story_points = story_points_for completed_stories
