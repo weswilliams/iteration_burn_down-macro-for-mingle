@@ -42,12 +42,12 @@ describe "remaining stories" do
   end
 
   context "calculate remaining story points" do
-    subject { @macro.story_points_for @stories }
+    subject { CustomMacro::Stories.new(@stories).story_points }
     it { should == 16 }
   end
 
   context "calculate remaining story points when no stories exists" do
-    subject { @macro.story_points_for [] }
+    subject { CustomMacro::Stories.new([]).story_points }
     it { should == 0 }
   end
 

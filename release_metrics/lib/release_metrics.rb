@@ -21,7 +21,7 @@ module CustomMacro
   end
 
   class Stories
-    def initialize(data, story_points_parameter)
+    def initialize(data, story_points_parameter = 'story_points')
       @data = data
       @story_points_parameter = story_points_parameter
     end
@@ -129,13 +129,6 @@ module CustomMacro
     def expected_completion_date_for(last_end_date, iter_length, remaining_iterations)
       return 'Unknown' if remaining_iterations == 'Unknown'
       last_end_date + (iter_length * remaining_iterations)
-    end
-
-    def story_points_for(stories)
-      stories.inject(0) do |total, story|
-        story_points = story["#{story_points_parameter}"]
-        story_points ? total + story_points.to_i : total
-      end
     end
 
     def current_release
