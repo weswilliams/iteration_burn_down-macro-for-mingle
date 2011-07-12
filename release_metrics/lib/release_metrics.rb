@@ -38,10 +38,10 @@ module CustomMacro
         iterations = completed_iterations
         r_iterations = Iterations.new iterations, velocity_parameter
 
-        completed_stories = stories iterations, false
+        completed_stories = stories r_iterations, false
         completed_story_points = story_points_for completed_stories
         
-        remaining_stories = stories iterations
+        remaining_stories = stories r_iterations
         remaining_story_points = story_points_for remaining_stories
 
         last_end_date = iterations.length == 0 ? Date.today : last_iteration_end_date(iterations[0])
@@ -128,10 +128,6 @@ module CustomMacro
       (end_date - start_date) + 1
     end
 
-    def iteration_names(iterations)
-      iterations.collect { |iter| "'#{iter['name']}'" }.join ","
-    end
-
     def release_end_date(release)
       release[end_date_parameter]
     end
@@ -165,7 +161,7 @@ module CustomMacro
 
     def stories(completed_iterations, remaining_stories = true)
       return [] if completed_iterations.length == 0 && !remaining_stories
-      iter_names = iteration_names completed_iterations
+      iter_names = completed_iterations.names
       if completed_iterations.length > 0
         mql = "SELECT '#{story_points_field}' WHERE Type = story AND #{release_where} AND " +
             "#{remaining_stories ? 'NOT ' : ''}#{time_box_type} in (#{iter_names})"
@@ -273,6 +269,14 @@ module CustomMacro
         velocity ? total + velocity.to_i : total
       end
       total_velocity / (iterations.length * 1.0)
+    end
+
+    def names
+      @iterations.collect { |iter| "'#{iter['name']}'" }.join ","
+    end
+
+    def length
+      @iterations.length
     end
 
   end

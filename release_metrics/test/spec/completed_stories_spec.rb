@@ -9,7 +9,7 @@ describe "remaining stories" do
         {'number' => '8', 'name' => 'Iteration 3', 'end_date' => '2011-06-21', 'velocity' => '10'},
         {'number' => '9', 'name' => 'Iteration 2', 'end_date' => '2011-06-14', 'velocity' => '5'},
     ]
-
+    @r_iterations = CustomMacro::Iterations.new @iterations, 'velocity'
     @parameters = {}
     @stories = [
         {'story_points' => '8'},
@@ -31,7 +31,7 @@ describe "remaining stories" do
           "iteration in ('Iteration 5','Iteration 4','Iteration 3','Iteration 2')")
     end
 
-    subject { @macro.stories @iterations, false }
+    subject { @macro.stories @r_iterations, false }
     it { should == @stories }
   end
 

@@ -63,7 +63,7 @@ describe "completed iterations" do
             "SELECT 'Story Points' WHERE Type = story AND release = 'Release 1'")
       end
 
-      subject { @macro.stories [] }
+      subject { @macro.stories CustomMacro::Iterations.new([], nil) }
       it { should == @stories }
     end
     

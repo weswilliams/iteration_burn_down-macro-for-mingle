@@ -9,7 +9,7 @@ describe "remaining stories" do
         {'number' => '3', 'name' => 'Iteration 3', 'end_date' => '2011-06-21', 'velocity' => '10'},
         {'number' => '2', 'name' => 'Iteration 2', 'end_date' => '2011-06-14', 'velocity' => '5'},
     ]
-
+    @r_iterations = CustomMacro::Iterations.new @iterations, 'velocity'
     @parameters = {}
     @stories = [
         {'story_points' => '5'},
@@ -25,7 +25,7 @@ describe "remaining stories" do
   end
 
   context "iteration names" do
-    subject { @macro.iteration_names @iterations }
+    subject { @r_iterations.names }
     it { should == "'Iteration 5','Iteration 4','Iteration 3','Iteration 2'" }
   end
 
@@ -36,7 +36,7 @@ describe "remaining stories" do
           "NOT iteration in ('Iteration 5','Iteration 4','Iteration 3','Iteration 2')")
     end
 
-    subject { @macro.stories @iterations }
+    subject { @macro.stories @r_iterations }
     it { should == @stories }
   end
 
