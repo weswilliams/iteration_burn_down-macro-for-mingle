@@ -38,7 +38,7 @@ module CustomMacro
               remainingStoryPoints = #{remaining_story_points};
 
           var remainingIterations = function(velocity, remaining_story_points) {
-            return remaining_story_points / velocity;
+            return Math.ceil(remaining_story_points / velocity);
           };
 
           var expectedCompletionDateFor = function(lastIterEndDate, daysInIter, remainingIterations) {
@@ -58,7 +58,7 @@ module CustomMacro
           });
 
         } catch(err) {
-          dateCalcText.val(err);
+          debug-info.html(err);
         }
       });
     </script>
