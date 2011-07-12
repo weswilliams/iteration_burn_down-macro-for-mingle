@@ -21,8 +21,9 @@ module CustomMacro
         <<-HTML
     h2. JavaScript Example
 
-    <div class="wiki" id="js-output">Enter a velocity to see expected end date.</div>
-    <span>What if velocity: </span> <input type='text' id='what-if-velocity'></input>
+    |_. Remaining story point |_. Days/Iteration |_. Velocity |_. Calculated End Date |
+    | #{remaining_story_points} | #{days_in_iter} | <input type='text' id='what-if-velocity'></input> | <span class="wiki" id="js-output">Enter a velocity to see expected end date.</span> |
+
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
     <script type="text/javascript">
       jQuery.noConflict();
@@ -49,7 +50,7 @@ module CustomMacro
             var iterations = remainingIterations(velocity, remainingStoryPoints);
             var expectedDate = expectedCompletionDateFor(lastIterEndDate, daysInIter, iterations);
             var dateString = expectedDate.getFullYear() + '-' + expectedDate.getMonth() + '-' + expectedDate.getDate();
-            out.html("<span>Expected end date for a velocity of " + velocity + " is " + dateString + "</span>");
+            out.html(dateString);
           });
         } catch(err) {
           out.html("<span>Error: " + err + "</span>");
