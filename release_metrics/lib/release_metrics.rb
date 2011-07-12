@@ -72,8 +72,9 @@ module CustomMacro
       |_. Completed Iterations | #{iterations.length} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{"%.2f" % all_iter_velocity}) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
       |_. Completed Story Points | #{completed_story_points} |_. #{empty_column_header}  | Best velocity (#{best_velocity}) | #{remaining_iters_for_best} | #{best_end_date} |
       |_. Remaining Story Points <br> (includes all stories not <br> in a past iteration) | #{remaining_story_points} |_. #{empty_column_header}  | Worst velocity (#{worst_velocity}) | #{remaining_iters_for_worst} | #{worst_end_date} |
-      |_. Iteration Length <br> (calculated based on <br> last iteration completed) | #{iter_length} days |_. #{empty_column_header} | #{empty_column} | #{empty_column} | #{empty_column} |
+      |_. Iteration Length <br> (calculated based on <br> last iteration completed) | #{iter_length} days |_. #{empty_column_header} | What if velocity: <input type='text' id='what-if-velocity'></input> | <span id='what-if-iterations'></span> | What if date: <input type='text' id="what-if-date"></input> |
 
+#{ what_if_java_script remaining_story_points, last_end_date, iter_length }
       <br>
           HTML
 
@@ -250,6 +251,67 @@ module CustomMacro
         super
       end
     end
+
+    def what_if_java_script(remaining_story_points, last_iter_end_date, days_in_iter)
+
+      <<-JAVASCRIPT
+  <span id='debug-info'></span>
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    jQuery.noConflict();
+    // register the initialize function for executing after page loaded.
+    MingleJavascript.register(function initialize() {
+      try {
+
+        var dateDiffInDays = function(d1, d2) {
+          var t2 = d2.getTime();
+          var t1 = d1.getTime();
+          return parseInt((t2-t1)/(24*3600*1000));
+        };
+
+        var lastIterEndDate = new Date('#{last_iter_end_date.to_s}'),
+            daysInIter = #{days_in_iter},
+            remainingStoryPoints = #{remaining_story_points};
+
+        var remainingIterations = function(velocity, remaining_story_points) {
+          return Math.ceil(remaining_story_points / velocity);
+        };
+
+        var expectedCompletionDateFor = function(lastIterEndDate, daysInIter, remainingIterations) {
+          return new Date(lastIterEndDate.getTime() + (1000 * 60 * 60 * 24 * (daysInIter * remainingIterations)));
+        };
+
+        var dateCalcText = jQuery("#what-if-date"),
+            velocityText = jQuery("#what-if-velocity"),
+            debugInfo   = jQuery("#debug-info");
+
+        velocityText.blur(function() {
+          var velocity = parseInt(velocityText.val());
+          var iterations = remainingIterations(velocity, remainingStoryPoints);
+          var expectedDate = expectedCompletionDateFor(lastIterEndDate, daysInIter, iterations);
+          var dateString = expectedDate.getFullYear() + '-' + (expectedDate.getMonth()+1) + '-' + expectedDate.getDate();
+          dateCalcText.val(dateString);
+        });
+
+        dateCalcText.blur(function() {
+          var desiredEndDate = new Date(dateCalcText.val());
+          var dayDiff = dateDiffInDays(lastIterEndDate, desiredEndDate);
+          var numberOfIterations = Math.ceil(dayDiff / daysInIter);
+          var requiredVelocity = remainingStoryPoints / numberOfIterations;
+          velocityText.val(requiredVelocity);
+        });
+
+      } catch(err) {
+        debug-info.html(err);
+      }
+    });
+  </script>
+
+      JAVASCRIPT
+
+    end
+
 
   end
 
