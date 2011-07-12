@@ -33,8 +33,10 @@ module CustomMacro
 
         completed_stories = stories iterations, false
         completed_story_points = story_points_for completed_stories
+        
         remaining_stories = stories iterations
         remaining_story_points = story_points_for remaining_stories
+
         last_end_date = iterations.length == 0 ? Date.today : last_iteration_end_date(iterations[0])
         iter_length = iterations.length == 0 ? 7 : iteration_length_in_days(iterations[0])
 
