@@ -12,6 +12,7 @@ describe "completed iterations" do
         {'start_date' => '2011-06-08', 'end_date' => '2011-06-14', 'velocity' => '5'},
         {'start_date' => '2011-06-01', 'end_date' => '2011-06-07', 'velocity' => '0'},
     ]
+    @r_iterations = CustomMacro::Iterations.new @iterations, 'velocity'
     @project = double('project',
                       :value_of_project_variable => '#1 Release 1',
                       :execute_mql => @iterations)
@@ -74,12 +75,12 @@ describe "completed iterations" do
   end
 
   context "best velocity" do
-    subject { @macro.best_velocity_for @iterations }
+    subject { @r_iterations.best_velocity }
     it { should == 12 }
   end
 
   context "worst velocity" do
-    subject { @macro.worst_velocity_for @iterations }
+    subject { @r_iterations.worst_velocity }
     it { should == 5 }
   end
 
