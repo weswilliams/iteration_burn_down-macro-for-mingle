@@ -22,7 +22,9 @@ module CustomMacro
     h2. JavaScript Example
 
     |_. Remaining story point |_. Days/Iteration |_. Velocity |_. Calculated End Date |
-    | #{remaining_story_points} | #{days_in_iter} | <input type='text' id='what-if-velocity'></input> | <span class="wiki" id="js-output">Enter a velocity to see expected end date.</span> |
+    | #{remaining_story_points} | #{days_in_iter} | <input type='text' id='what-if-velocity'></input> | <input type='text' id="date-calc" value='Enter a velocity to see expected end date.'></input> |
+
+    <span id='debug-info'></span>
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
     <script type="text/javascript">
@@ -40,20 +42,24 @@ module CustomMacro
           };
 
           var expectedCompletionDateFor = function(lastIterEndDate, daysInIter, remainingIterations) {
-            return new Date(lastIterEndDate.getTime() + 1000 * 60 * 60 * 24 * (daysInIter * remainingIterations));
+            return new Date(lastIterEndDate.getTime() + (1000 * 60 * 60 * 24 * (daysInIter * remainingIterations)));
           };
 
-          var out = jQuery("#js-output");
+          var dateCalcOut = jQuery("#date-calc");
+          var debugInfo   = jQuery("#debug-info");
 
           jQuery("#what-if-velocity").blur(function() {
             var velocity = parseInt(jQuery("#what-if-velocity").val());
             var iterations = remainingIterations(velocity, remainingStoryPoints);
+//debugInfo.append("iterations: " + iterations + "<br>");
             var expectedDate = expectedCompletionDateFor(lastIterEndDate, daysInIter, iterations);
-            var dateString = expectedDate.getFullYear() + '-' + expectedDate.getMonth() + '-' + expectedDate.getDate();
-            out.html(dateString);
+//debugInfo.append("expected date: " + expectedDate + "<br>");
+            var dateString = expectedDate.getFullYear() + '-' + (expectedDate.getMonth()+1) + '-' + expectedDate.getDate();
+//debugInfo.append("expected date str: " + dateString + "<br>");
+            dateCalcOut.val(dateString);
           });
         } catch(err) {
-          out.html("<span>Error: " + err + "</span>");
+          dateCalcOut.val(err);
         }
       });
     </script>
