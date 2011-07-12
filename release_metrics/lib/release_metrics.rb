@@ -35,32 +35,32 @@ module CustomMacro
       begin
         release = current_release
         release_end = release_end_date release
-        r_iterations = Iterations.new completed_iterations, velocity_parameter, end_date_parameter
+        iterations = Iterations.new completed_iterations, velocity_parameter, end_date_parameter, start_date_parameter
 
-        completed_stories = stories r_iterations, false
+        completed_stories = stories iterations, false
         completed_story_points = story_points_for completed_stories
         
-        remaining_stories = stories r_iterations
+        remaining_stories = stories iterations
         remaining_story_points = story_points_for remaining_stories
 
-        remaining_iters_for_avg = remaining_iterations(r_iterations.last_3_average, remaining_story_points)
-        remaining_iter_for_all_velocity = remaining_iterations(r_iterations.average_velocity, remaining_story_points)
-        remaining_iters_for_best = remaining_iterations(r_iterations.best_velocity, remaining_story_points)
-        remaining_iters_for_worst = remaining_iterations(r_iterations.worst_velocity, remaining_story_points)
+        remaining_iters_for_avg = remaining_iterations(iterations.last_3_average, remaining_story_points)
+        remaining_iter_for_all_velocity = remaining_iterations(iterations.average_velocity, remaining_story_points)
+        remaining_iters_for_best = remaining_iterations(iterations.best_velocity, remaining_story_points)
+        remaining_iters_for_worst = remaining_iterations(iterations.worst_velocity, remaining_story_points)
 
-        avg_end_date = expected_completion_date_for r_iterations.last_end_date, r_iterations.days_in_iteration, remaining_iters_for_avg
-        all_avg_end_date = expected_completion_date_for r_iterations.last_end_date, r_iterations.days_in_iteration, remaining_iter_for_all_velocity
-        best_end_date = expected_completion_date_for r_iterations.last_end_date, r_iterations.days_in_iteration, remaining_iters_for_best
-        worst_end_date = expected_completion_date_for r_iterations.last_end_date, r_iterations.days_in_iteration, remaining_iters_for_worst
+        avg_end_date = expected_completion_date_for iterations.last_end_date, iterations.days_in_iteration, remaining_iters_for_avg
+        all_avg_end_date = expected_completion_date_for iterations.last_end_date, iterations.days_in_iteration, remaining_iter_for_all_velocity
+        best_end_date = expected_completion_date_for iterations.last_end_date, iterations.days_in_iteration, remaining_iters_for_best
+        worst_end_date = expected_completion_date_for iterations.last_end_date, iterations.days_in_iteration, remaining_iters_for_worst
 
-        what_if = WhatIfScenario.new show_what_if_parameter, remaining_story_points, r_iterations.last_end_date, r_iterations.days_in_iteration
+        what_if = WhatIfScenario.new show_what_if_parameter, remaining_story_points, iterations.last_end_date, iterations.days_in_iteration
 
         if mini_parameter.downcase == 'yes'
 
           <<-HTML
-      |_. Scheduled End Date | #{release_end} |_. #{empty_column_header} |_. Estimated Completion <br> of #{card_link release_parameter} |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{r_iterations.days_in_iteration} Day Iterations |
-      |_. Completed Story Points | #{completed_story_points} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % r_iterations.last_3_average}) | #{remaining_iters_for_avg} | #{avg_end_date} |
-      |_. Remaining Story Points | #{remaining_story_points} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{"%.2f" % r_iterations.average_velocity}) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
+      |_. Scheduled End Date | #{release_end} |_. #{empty_column_header} |_. Estimated Completion <br> of #{card_link release_parameter} |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iterations.days_in_iteration} Day Iterations |
+      |_. Completed Story Points | #{completed_story_points} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % iterations.last_3_average}) | #{remaining_iters_for_avg} | #{avg_end_date} |
+      |_. Remaining Story Points | #{remaining_story_points} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{"%.2f" % iterations.average_velocity}) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
           HTML
 
         else
@@ -69,12 +69,12 @@ module CustomMacro
 
       * Scheduled End Date is #{release_end}
 
-      |_. Current Iteration | #{card_link iteration_parameter} |_. #{empty_column_header} |_. Estimated Completion <br> of #{card_link release_parameter} <br> Based on ... |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{r_iterations.days_in_iteration} Day Iterations |
-      |_. Average Velocity <br> (last 3 iterations) | #{"%.2f" % r_iterations.last_3_average} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % r_iterations.last_3_average}) | #{remaining_iters_for_avg} | #{avg_end_date} |
-      |_. Completed Iterations | #{r_iterations.length} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{"%.2f" % r_iterations.average_velocity }) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
-      |_. Completed Story Points | #{completed_story_points} |_. #{empty_column_header}  | Best velocity (#{r_iterations.best_velocity}) | #{remaining_iters_for_best} | #{best_end_date} |
-      |_. Remaining Story Points <br> (includes all stories not <br> in a past iteration) | #{remaining_story_points} |_. #{empty_column_header}  | Worst velocity (#{r_iterations.worst_velocity}) | #{remaining_iters_for_worst} | #{worst_end_date} |
-      |_. Iteration Length <br> (calculated based on <br> last iteration completed) | #{r_iterations.days_in_iteration} days |_. #{empty_column_header} | #{what_if.velocity_field} | #{ what_if.iterations_field } | #{ what_if.date_field } |
+      |_. Current Iteration | #{card_link iteration_parameter} |_. #{empty_column_header} |_. Estimated Completion <br> of #{card_link release_parameter} <br> Based on ... |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iterations.days_in_iteration} Day Iterations |
+      |_. Average Velocity <br> (last 3 iterations) | #{"%.2f" % iterations.last_3_average} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % iterations.last_3_average}) | #{remaining_iters_for_avg} | #{avg_end_date} |
+      |_. Completed Iterations | #{iterations.length} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{"%.2f" % iterations.average_velocity }) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
+      |_. Completed Story Points | #{completed_story_points} |_. #{empty_column_header}  | Best velocity (#{iterations.best_velocity}) | #{remaining_iters_for_best} | #{best_end_date} |
+      |_. Remaining Story Points <br> (includes all stories not <br> in a past iteration) | #{remaining_story_points} |_. #{empty_column_header}  | Worst velocity (#{iterations.worst_velocity}) | #{remaining_iters_for_worst} | #{worst_end_date} |
+      |_. Iteration Length <br> (calculated based on <br> last iteration completed) | #{iterations.days_in_iteration} days |_. #{empty_column_header} | #{what_if.velocity_field} | #{ what_if.iterations_field } | #{ what_if.date_field } |
 
 #{ what_if.javascript }
       <br>
