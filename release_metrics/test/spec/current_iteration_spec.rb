@@ -16,12 +16,7 @@ describe "remaining stories" do
       @project.should_receive(:execute_mql).with("SELECT 'End Date' WHERE Number = 1")
     end
 
-    subject { @macro.current_release }
-    it { should == @current_release[0] }
-  end
-
-  context "#release_end_date" do
-    subject { @macro.release_end_date @current_release[0] }
+    subject { @macro.current_release.end_date }
     it { should == '2011-07-05' }
   end
 end

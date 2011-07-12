@@ -9,6 +9,17 @@ module CustomMacro
       "%{color:white}-%"
   end
 
+  class Release
+    def initialize(data, end_data_parameter)
+      @data = data
+      @end_data_parameter = end_data_parameter
+    end
+
+    def end_date
+      @data[@end_data_parameter]
+    end
+  end
+
   class ReleaseMetrics
     include CustomMacro
     
@@ -34,7 +45,6 @@ module CustomMacro
     def execute
       begin
         release = current_release
-        release_end = release_end_date release
         iterations = completed_iterations
 
         completed_stories = stories iterations, false
@@ -58,7 +68,7 @@ module CustomMacro
         if mini_parameter.downcase == 'yes'
 
           <<-HTML
-      |_. Scheduled End Date | #{release_end} |_. #{empty_column_header} |_. Estimated Completion <br> of #{card_link release_parameter} |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iterations.days_in_iteration} Day Iterations |
+      |_. Scheduled End Date | #{release.end_date} |_. #{empty_column_header} |_. Estimated Completion <br> of #{card_link release_parameter} |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iterations.days_in_iteration} Day Iterations |
       |_. Completed Story Points | #{completed_story_points} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % iterations.last_3_average}) | #{remaining_iters_for_avg} | #{avg_end_date} |
       |_. Remaining Story Points | #{remaining_story_points} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{"%.2f" % iterations.average_velocity}) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
           HTML
@@ -67,7 +77,7 @@ module CustomMacro
           <<-HTML
       h2. Metrics for #{card_link release_parameter}
 
-      * Scheduled End Date is #{release_end}
+      * Scheduled End Date is #{release.end_date}
 
       |_. Current Iteration | #{card_link iteration_parameter} |_. #{empty_column_header} |_. Estimated Completion <br> of #{card_link release_parameter} <br> Based on ... |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iterations.days_in_iteration} Day Iterations |
       |_. Average Velocity <br> (last 3 iterations) | #{"%.2f" % iterations.last_3_average} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % iterations.last_3_average}) | #{remaining_iters_for_avg} | #{avg_end_date} |
@@ -114,17 +124,13 @@ module CustomMacro
       end
     end
 
-    def release_end_date(release)
-      release[end_date_parameter]
-    end
-
     def current_release
       begin
         release_where = "Number = #{card_number release_parameter}"
         release_where = "Number = #{release_parameter}.'Number'" if release_parameter == 'THIS CARD'
         data_rows = @project.execute_mql("SELECT '#{end_date_field}' WHERE #{release_where}")
         raise "##{release_parameter} is not a valid release" if data_rows.empty?
-        data_rows[0]
+        Release.new data_rows[0], end_date_parameter
       rescue Exception => e
         raise "[error retrieving release for #{release_parameter}: #{e}]"
       end
