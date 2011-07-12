@@ -1,7 +1,17 @@
 require "date"
 module CustomMacro
 
+  def empty_column_header
+    "%{color:#EEEEEE}-%"
+  end
+
+  def empty_column
+      "%{color:white}-%"
+  end
+
   class ReleaseMetrics
+    include CustomMacro
+    
     MON = 1
     TUE = 2
     WED = 3
@@ -18,6 +28,7 @@ module CustomMacro
       @parameter_defaults['iteration'] = lambda { @project.value_of_project_variable('Current Iteration') }
       @parameter_defaults['release'] = lambda { @project.value_of_project_variable('Current Release') }
       @parameter_defaults['time_box'] = 'iteration'
+      @parameter_defaults['show_what_if'] = false
     end
 
     def execute
@@ -50,8 +61,7 @@ module CustomMacro
         best_end_date = expected_completion_date_for last_end_date, iter_length, remaining_iters_for_best
         worst_end_date = expected_completion_date_for last_end_date, iter_length, remaining_iters_for_worst
 
-        empty_column_header = "%{color:#EEEEEE}-%"
-        empty_column = "%{color:white}-%"
+        what_if = WhatIfScenario.new show_what_if_parameter, remaining_story_points, last_end_date, iter_length
 
         if mini_parameter.downcase == 'yes'
 
@@ -72,9 +82,9 @@ module CustomMacro
       |_. Completed Iterations | #{iterations.length} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{"%.2f" % all_iter_velocity}) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
       |_. Completed Story Points | #{completed_story_points} |_. #{empty_column_header}  | Best velocity (#{best_velocity}) | #{remaining_iters_for_best} | #{best_end_date} |
       |_. Remaining Story Points <br> (includes all stories not <br> in a past iteration) | #{remaining_story_points} |_. #{empty_column_header}  | Worst velocity (#{worst_velocity}) | #{remaining_iters_for_worst} | #{worst_end_date} |
-      |_. Iteration Length <br> (calculated based on <br> last iteration completed) | #{iter_length} days |_. #{empty_column_header} | What if velocity: <input type='text' id='what-if-velocity'></input> | <span id='what-if-iterations'></span> | What if date: <input type='text' id="what-if-date"></input> |
+      |_. Iteration Length <br> (calculated based on <br> last iteration completed) | #{iter_length} days |_. #{empty_column_header} | #{what_if.velocity_field} | #{ what_if.iterations_field } | #{ what_if.date_field } |
 
-#{ what_if_java_script remaining_story_points, last_end_date, iter_length }
+#{ what_if.javascript }
       <br>
           HTML
 
@@ -252,70 +262,92 @@ module CustomMacro
       end
     end
 
-    def what_if_java_script(remaining_story_points, last_iter_end_date, days_in_iter)
+  end
 
-      <<-JAVASCRIPT
-  <span id='debug-info'></span>
+end
 
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-  <script type="text/javascript">
-    jQuery.noConflict();
-    // register the initialize function for executing after page loaded.
-    MingleJavascript.register(function initialize() {
-      try {
+class WhatIfScenario
+  include CustomMacro
+  
+  def initialize(is_enabled, remaining_story_points, last_iter_end_date, days_in_iter)
+    @is_enabled = is_enabled
+    @remaining_story_points = remaining_story_points
+    @last_iter_end_date = last_iter_end_date
+    @days_in_iter = days_in_iter
+  end
 
-        var dateDiffInDays = function(d1, d2) {
-          var t2 = d2.getTime();
-          var t1 = d1.getTime();
-          return parseInt((t2-t1)/(24*3600*1000));
-        };
+  def javascript
+    return '' if !@is_enabled
+    <<-JAVASCRIPT
+<span id='debug-info'></span>
 
-        var lastIterEndDate = new Date('#{last_iter_end_date.to_s}'),
-            daysInIter = #{days_in_iter},
-            remainingStoryPoints = #{remaining_story_points};
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script type="text/javascript">
+  jQuery.noConflict();
+  // register the initialize function for executing after page loaded.
+  MingleJavascript.register(function initialize() {
+    try {
 
-        var remainingIterations = function(velocity, remaining_story_points) {
-          return Math.ceil(remaining_story_points / velocity);
-        };
+      var dateDiffInDays = function(d1, d2) {
+        var t2 = d2.getTime();
+        var t1 = d1.getTime();
+        return parseInt((t2-t1)/(24*3600*1000));
+      };
 
-        var expectedCompletionDateFor = function(lastIterEndDate, daysInIter, remainingIterations) {
-          return new Date(lastIterEndDate.getTime() + (1000 * 60 * 60 * 24 * (daysInIter * remainingIterations)));
-        };
+      var lastIterEndDate = new Date('#{@last_iter_end_date.to_s}'),
+          daysInIter = #{@days_in_iter},
+          remainingStoryPoints = #{@remaining_story_points};
 
-        var dateCalcText = jQuery("#what-if-date"),
-            velocityText = jQuery("#what-if-velocity"),
-            iterationsSpan = jQuery("#what-if-iterations"),
-            debugInfo   = jQuery("#debug-info");
+      var remainingIterations = function(velocity, remaining_story_points) {
+        return Math.ceil(remaining_story_points / velocity);
+      };
 
-        velocityText.blur(function() {
-          var velocity = parseInt(velocityText.val());
-          var iterations = remainingIterations(velocity, remainingStoryPoints);
-          var expectedDate = expectedCompletionDateFor(lastIterEndDate, daysInIter, iterations);
-          var dateString = expectedDate.getFullYear() + '-' + (expectedDate.getMonth()+1) + '-' + expectedDate.getDate();
-          iterationsSpan.html(iterations);
-          dateCalcText.val(dateString);
-        });
+      var expectedCompletionDateFor = function(lastIterEndDate, daysInIter, remainingIterations) {
+        return new Date(lastIterEndDate.getTime() + (1000 * 60 * 60 * 24 * (daysInIter * remainingIterations)));
+      };
 
-        dateCalcText.blur(function() {
-          var desiredEndDate = new Date(dateCalcText.val());
-          var dayDiff = dateDiffInDays(lastIterEndDate, desiredEndDate);
-          var iterations = Math.ceil(dayDiff / daysInIter);
-          var requiredVelocity = remainingStoryPoints / iterations;
-          iterationsSpan.html(iterations);
-          velocityText.val(requiredVelocity);
-        });
+      var dateCalcText = jQuery("#what-if-date"),
+          velocityText = jQuery("#what-if-velocity"),
+          iterationsSpan = jQuery("#what-if-iterations"),
+          debugInfo   = jQuery("#debug-info");
 
-      } catch(err) {
-        debug-info.html(err);
-      }
-    });
-  </script>
+      velocityText.blur(function() {
+        var velocity = parseInt(velocityText.val());
+        var iterations = remainingIterations(velocity, remainingStoryPoints);
+        var expectedDate = expectedCompletionDateFor(lastIterEndDate, daysInIter, iterations);
+        var dateString = expectedDate.getFullYear() + '-' + (expectedDate.getMonth()+1) + '-' + expectedDate.getDate();
+        iterationsSpan.html(iterations);
+        dateCalcText.val(dateString);
+      });
 
-      JAVASCRIPT
+      dateCalcText.blur(function() {
+        var desiredEndDate = new Date(dateCalcText.val());
+        var dayDiff = dateDiffInDays(lastIterEndDate, desiredEndDate);
+        var iterations = Math.ceil(dayDiff / daysInIter);
+        var requiredVelocity = remainingStoryPoints / iterations;
+        iterationsSpan.html(iterations);
+        velocityText.val(requiredVelocity);
+      });
 
-    end
+    } catch(err) {
+      debug-info.html(err);
+    }
+  });
+</script>
 
+    JAVASCRIPT
+  end
 
+  def velocity_field(disabled_value = empty_column())
+    @is_enabled ? "What if velocity: <input type='text' id='what-if-velocity'></input>" : disabled_value
+  end
+
+  def iterations_field(disabled_value = empty_column())
+    @is_enabled ? "<span id='what-if-iterations'></span>" : disabled_value
+  end
+
+  def date_field(disabled_value = empty_column())
+    @is_enabled ? "What if date: <input type='text' id='what-if-date'></input>" : disabled_value
   end
 
 end
