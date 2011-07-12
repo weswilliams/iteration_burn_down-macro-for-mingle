@@ -32,8 +32,8 @@ describe "remaining stories" do
           "iteration in ('Iteration 5','Iteration 4','Iteration 3','Iteration 2')")
     end
 
-    subject { @macro.stories @r_iterations, false }
-    it { should == @stories }
+    subject { @macro.stories(@r_iterations, false).length }
+    it { should == @stories.length }
   end
 
 #  context "calculate remaining story points" do

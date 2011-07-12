@@ -20,6 +20,24 @@ module CustomMacro
     end
   end
 
+  class Stories
+    def initialize(data, story_points_parameter)
+      @data = data
+      @story_points_parameter = story_points_parameter
+    end
+
+    def story_points
+      @data.inject(0) do |total, story|
+        story_points = story["#{@story_points_parameter}"]
+        story_points ? total + story_points.to_i : total
+      end
+    end
+
+    def length
+      @data.length
+    end
+  end
+
   class ReleaseMetrics
     include CustomMacro
     
@@ -46,31 +64,27 @@ module CustomMacro
       begin
         release = current_release
         iterations = completed_iterations
-
         completed_stories = stories iterations, false
-        completed_story_points = story_points_for completed_stories
-        
         remaining_stories = stories iterations
-        remaining_story_points = story_points_for remaining_stories
 
-        remaining_iters_for_avg = remaining_iterations(iterations.last_3_average, remaining_story_points)
-        remaining_iter_for_all_velocity = remaining_iterations(iterations.average_velocity, remaining_story_points)
-        remaining_iters_for_best = remaining_iterations(iterations.best_velocity, remaining_story_points)
-        remaining_iters_for_worst = remaining_iterations(iterations.worst_velocity, remaining_story_points)
+        remaining_iters_for_avg = remaining_iterations(iterations.last_3_average, remaining_stories.story_points)
+        remaining_iter_for_all_velocity = remaining_iterations(iterations.average_velocity, remaining_stories.story_points)
+        remaining_iters_for_best = remaining_iterations(iterations.best_velocity, remaining_stories.story_points)
+        remaining_iters_for_worst = remaining_iterations(iterations.worst_velocity, remaining_stories.story_points)
 
         avg_end_date = expected_completion_date_for iterations.last_end_date, iterations.days_in_iteration, remaining_iters_for_avg
         all_avg_end_date = expected_completion_date_for iterations.last_end_date, iterations.days_in_iteration, remaining_iter_for_all_velocity
         best_end_date = expected_completion_date_for iterations.last_end_date, iterations.days_in_iteration, remaining_iters_for_best
         worst_end_date = expected_completion_date_for iterations.last_end_date, iterations.days_in_iteration, remaining_iters_for_worst
 
-        what_if = WhatIfScenario.new show_what_if_parameter, remaining_story_points, iterations.last_end_date, iterations.days_in_iteration
+        what_if = WhatIfScenario.new show_what_if_parameter, remaining_stories.story_points, iterations.last_end_date, iterations.days_in_iteration
 
         if mini_parameter.downcase == 'yes'
 
           <<-HTML
       |_. Scheduled End Date | #{release.end_date} |_. #{empty_column_header} |_. Estimated Completion <br> of #{card_link release_parameter} |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iterations.days_in_iteration} Day Iterations |
-      |_. Completed Story Points | #{completed_story_points} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % iterations.last_3_average}) | #{remaining_iters_for_avg} | #{avg_end_date} |
-      |_. Remaining Story Points | #{remaining_story_points} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{"%.2f" % iterations.average_velocity}) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
+      |_. Completed Story Points | #{completed_stories.story_points} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % iterations.last_3_average}) | #{remaining_iters_for_avg} | #{avg_end_date} |
+      |_. Remaining Story Points | #{remaining_stories.story_points} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{"%.2f" % iterations.average_velocity}) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
           HTML
 
         else
@@ -82,8 +96,8 @@ module CustomMacro
       |_. Current Iteration | #{card_link iteration_parameter} |_. #{empty_column_header} |_. Estimated Completion <br> of #{card_link release_parameter} <br> Based on ... |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iterations.days_in_iteration} Day Iterations |
       |_. Average Velocity <br> (last 3 iterations) | #{"%.2f" % iterations.last_3_average} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % iterations.last_3_average}) | #{remaining_iters_for_avg} | #{avg_end_date} |
       |_. Completed Iterations | #{iterations.length} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{"%.2f" % iterations.average_velocity }) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
-      |_. Completed Story Points | #{completed_story_points} |_. #{empty_column_header}  | Best velocity (#{iterations.best_velocity}) | #{remaining_iters_for_best} | #{best_end_date} |
-      |_. Remaining Story Points <br> (includes all stories not <br> in a past iteration) | #{remaining_story_points} |_. #{empty_column_header}  | Worst velocity (#{iterations.worst_velocity}) | #{remaining_iters_for_worst} | #{worst_end_date} |
+      |_. Completed Story Points | #{completed_stories.story_points} |_. #{empty_column_header}  | Best velocity (#{iterations.best_velocity}) | #{remaining_iters_for_best} | #{best_end_date} |
+      |_. Remaining Story Points <br> (includes all stories not <br> in a past iteration) | #{remaining_stories.story_points} |_. #{empty_column_header}  | Worst velocity (#{iterations.worst_velocity}) | #{remaining_iters_for_worst} | #{worst_end_date} |
       |_. Iteration Length <br> (calculated based on <br> last iteration completed) | #{iterations.days_in_iteration} days |_. #{empty_column_header} | #{what_if.velocity_field} | #{ what_if.iterations_field } | #{ what_if.date_field } |
 
 #{ what_if.javascript }
@@ -162,7 +176,7 @@ module CustomMacro
         mql = "SELECT '#{story_points_field}' WHERE Type = story AND #{release_where}"
       end
       begin
-        @project.execute_mql(mql)
+        Stories.new @project.execute_mql(mql), story_points_parameter
       rescue Exception => e
         raise "[error retrieving stories for release '#{release_parameter}': #{e}]"
       end

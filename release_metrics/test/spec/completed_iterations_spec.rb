@@ -59,8 +59,8 @@ describe "completed iterations" do
             "SELECT 'Story Points' WHERE Type = story AND release = 'Release 1'")
       end
 
-      subject { @macro.stories CustomMacro::Iterations.new([]) }
-      it { should == @stories }
+      subject { @macro.stories(CustomMacro::Iterations.new([])).length }
+      it { should == @stories.length }
     end
     
     context "average velocity with no iterations" do
