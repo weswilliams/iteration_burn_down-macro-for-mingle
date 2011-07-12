@@ -1,6 +1,7 @@
 require "rspec"
 require "date"
 require "./lib/release_metrics"
+require "./lib/iterations"
 
 describe "completed iterations" do
   before do
