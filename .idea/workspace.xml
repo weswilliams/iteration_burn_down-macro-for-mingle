@@ -35,7 +35,7 @@
       <file leaf-file-name="js_ex.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js_ex/lib/js_ex.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="16" selection-start="1162" selection-end="1162" vertical-scroll-proportion="0.32840237">
+            <state line="48" column="0" selection-start="1646" selection-end="1646" vertical-scroll-proportion="0.46597633">
               <folding />
             </state>
           </provider>
@@ -578,7 +578,7 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- renaming to be more consistent" />
+    <option name="LAST_COMMIT_MESSAGE" value="- fixed issue with not rounding remaining iterations up" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -591,7 +591,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="- moved the root for running the specs" />
     <MESSAGE value="- added spec task for iteration_burn_down macro" />
     <MESSAGE value="- made iteration_burn_down macro test task depend on spec&#10;- made iteration_burn_down macro package task depend on spec" />
     <MESSAGE value="- updated readme" />
@@ -616,6 +615,7 @@
     <MESSAGE value="- moved to a table" />
     <MESSAGE value="- added a text box for date" />
     <MESSAGE value="- renaming to be more consistent" />
+    <MESSAGE value="- fixed issue with not rounding remaining iterations up" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -706,7 +706,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js_ex/lib/js_ex.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="16" selection-start="1162" selection-end="1162" vertical-scroll-proportion="0.32840237">
+        <state line="48" column="0" selection-start="1646" selection-end="1646" vertical-scroll-proportion="0.46597633">
           <folding />
         </state>
       </provider>

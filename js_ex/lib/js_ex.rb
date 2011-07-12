@@ -20,7 +20,7 @@ module CustomMacro
 
         <<-HTML
     h2. JavaScript Example
-
+       * last end date: #{last_iter_end_date}
     |_. Remaining story point |_. Days/Iteration |_. Velocity |_. Calculated End Date |
     | #{remaining_story_points} | #{days_in_iter} | <input type='text' id='what-if-velocity'></input> | <input type='text' id="what-if-date" value='Enter a velocity to see expected end date.'></input> |
 
@@ -32,6 +32,12 @@ module CustomMacro
       // register the initialize function for executing after page loaded.
       MingleJavascript.register(function initialize() {
         try {
+
+          var dateDiffInDays = function(d1, d2) {
+            var t2 = d2.getTime();
+            var t1 = d1.getTime();
+            return parseInt((t2-t1)/(24*3600*1000));
+          };
 
           var lastIterEndDate = new Date('#{last_iter_end_date.to_s}'),
               daysInIter = #{days_in_iter},
@@ -55,6 +61,14 @@ module CustomMacro
             var expectedDate = expectedCompletionDateFor(lastIterEndDate, daysInIter, iterations);
             var dateString = expectedDate.getFullYear() + '-' + (expectedDate.getMonth()+1) + '-' + expectedDate.getDate();
             dateCalcText.val(dateString);
+          });
+
+          dateCalcText.blur(function() {
+            var desiredEndDate = new Date(dateCalcText.val());
+            var dayDiff = dateDiffInDays(lastIterEndDate, desiredEndDate);
+            var numberOfIterations = Math.ceil(dayDiff / daysInIter);
+            var requiredVelocity = remainingStoryPoints / numberOfIterations;
+            velocityText.val(requiredVelocity);
           });
 
         } catch(err) {
