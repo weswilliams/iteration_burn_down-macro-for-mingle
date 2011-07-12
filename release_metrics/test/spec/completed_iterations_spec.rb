@@ -12,7 +12,7 @@ describe "completed iterations" do
         {'start_date' => '2011-06-08', 'end_date' => '2011-06-14', 'velocity' => '5'},
         {'start_date' => '2011-06-01', 'end_date' => '2011-06-07', 'velocity' => '0'},
     ]
-    @r_iterations = CustomMacro::Iterations.new @iterations, 'velocity'
+    @r_iterations = CustomMacro::Iterations.new @iterations
     @project = double('project',
                       :value_of_project_variable => '#1 Release 1',
                       :execute_mql => @iterations)
@@ -46,11 +46,6 @@ describe "completed iterations" do
       subject { @r_iterations.average_velocity_for @macro.completed_iterations.first(3) }
       it { should == 10 }
     end
-
-    context "iteration length in days" do
-      subject { @macro.iteration_length_in_days @macro.completed_iterations[0] }
-      it { should == 7 }
-    end
   end
 
   context "no completed iterations" do
@@ -63,7 +58,7 @@ describe "completed iterations" do
             "SELECT 'Story Points' WHERE Type = story AND release = 'Release 1'")
       end
 
-      subject { @macro.stories CustomMacro::Iterations.new([], nil) }
+      subject { @macro.stories CustomMacro::Iterations.new([]) }
       it { should == @stories }
     end
     
@@ -82,6 +77,11 @@ describe "completed iterations" do
   context "worst velocity" do
     subject { @r_iterations.worst_velocity }
     it { should == 5 }
+  end
+
+  context "iteration length in days" do
+    subject { @r_iterations.days_in_iteration }
+    it { should == 7 }
   end
 
   context "expected completion date for end data and velocity" do

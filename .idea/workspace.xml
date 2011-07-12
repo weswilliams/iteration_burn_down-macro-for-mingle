@@ -38,7 +38,7 @@
       <file leaf-file-name="release_metrics.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="276" column="0" selection-start="10621" selection-end="10621" vertical-scroll-proportion="0.48394495">
+            <state line="40" column="33" selection-start="1120" selection-end="1120" vertical-scroll-proportion="0.40604752">
               <folding />
             </state>
           </provider>
@@ -47,7 +47,7 @@
       <file leaf-file-name="remaining_stories_spec.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/remaining_stories_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="4" selection-start="521" selection-end="588" vertical-scroll-proportion="0.0">
+            <state line="11" column="20" selection-start="537" selection-end="537" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -56,7 +56,7 @@
       <file leaf-file-name="completed_stories_spec.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/completed_stories_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="71" selection-start="588" selection-end="588" vertical-scroll-proportion="0.0">
+            <state line="11" column="59" selection-start="576" selection-end="576" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -65,7 +65,7 @@
       <file leaf-file-name="completed_iterations_spec.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/completed_iterations_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="5" selection-start="2524" selection-end="2524" vertical-scroll-proportion="0.0">
+            <state line="85" column="0" selection-start="2678" selection-end="2678" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -628,7 +628,7 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- moved all velocity calculations into Iterations" />
+    <option name="LAST_COMMIT_MESSAGE" value="- moved retrieving iteration name to Iterations" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -641,7 +641,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="- making release links work cross project" />
     <MESSAGE value="- removed duplication getting card number and name" />
     <MESSAGE value="- removed duplication getting card link" />
     <MESSAGE value="- made iteration link work across projects" />
@@ -666,6 +665,7 @@
     <MESSAGE value="- pulled what if scenario data into a separate class" />
     <MESSAGE value="- moving iterations related methods to an Iterations object" />
     <MESSAGE value="- moved all velocity calculations into Iterations" />
+    <MESSAGE value="- moved retrieving iteration name to Iterations" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -743,30 +743,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/remaining_stories_spec.rb">
+    <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/completed_stories_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="4" selection-start="521" selection-end="588" vertical-scroll-proportion="0.0">
+        <state line="11" column="59" selection-start="576" selection-end="576" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/completed_stories_spec.rb">
+    <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/remaining_stories_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="71" selection-start="588" selection-end="588" vertical-scroll-proportion="0.0">
+        <state line="11" column="20" selection-start="537" selection-end="537" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/completed_iterations_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="5" selection-start="2524" selection-end="2524" vertical-scroll-proportion="0.0">
+        <state line="85" column="0" selection-start="2678" selection-end="2678" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="276" column="0" selection-start="10621" selection-end="10621" vertical-scroll-proportion="0.48394495">
+        <state line="40" column="33" selection-start="1120" selection-end="1120" vertical-scroll-proportion="0.40604752">
           <folding />
         </state>
       </provider>

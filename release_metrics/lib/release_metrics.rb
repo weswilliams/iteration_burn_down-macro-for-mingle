@@ -35,8 +35,7 @@ module CustomMacro
       begin
         release = current_release
         release_end = release_end_date release
-        iterations = completed_iterations
-        r_iterations = Iterations.new iterations, velocity_parameter
+        r_iterations = Iterations.new completed_iterations, velocity_parameter, end_date_parameter
 
         completed_stories = stories r_iterations, false
         completed_story_points = story_points_for completed_stories
@@ -44,25 +43,22 @@ module CustomMacro
         remaining_stories = stories r_iterations
         remaining_story_points = story_points_for remaining_stories
 
-        last_end_date = iterations.length == 0 ? Date.today : last_iteration_end_date(iterations[0])
-        iter_length = iterations.length == 0 ? 7 : iteration_length_in_days(iterations[0])
-
         remaining_iters_for_avg = remaining_iterations(r_iterations.last_3_average, remaining_story_points)
         remaining_iter_for_all_velocity = remaining_iterations(r_iterations.average_velocity, remaining_story_points)
         remaining_iters_for_best = remaining_iterations(r_iterations.best_velocity, remaining_story_points)
         remaining_iters_for_worst = remaining_iterations(r_iterations.worst_velocity, remaining_story_points)
 
-        avg_end_date = expected_completion_date_for last_end_date, iter_length, remaining_iters_for_avg
-        all_avg_end_date = expected_completion_date_for last_end_date, iter_length, remaining_iter_for_all_velocity
-        best_end_date = expected_completion_date_for last_end_date, iter_length, remaining_iters_for_best
-        worst_end_date = expected_completion_date_for last_end_date, iter_length, remaining_iters_for_worst
+        avg_end_date = expected_completion_date_for r_iterations.last_end_date, r_iterations.days_in_iteration, remaining_iters_for_avg
+        all_avg_end_date = expected_completion_date_for r_iterations.last_end_date, r_iterations.days_in_iteration, remaining_iter_for_all_velocity
+        best_end_date = expected_completion_date_for r_iterations.last_end_date, r_iterations.days_in_iteration, remaining_iters_for_best
+        worst_end_date = expected_completion_date_for r_iterations.last_end_date, r_iterations.days_in_iteration, remaining_iters_for_worst
 
-        what_if = WhatIfScenario.new show_what_if_parameter, remaining_story_points, last_end_date, iter_length
+        what_if = WhatIfScenario.new show_what_if_parameter, remaining_story_points, r_iterations.last_end_date, r_iterations.days_in_iteration
 
         if mini_parameter.downcase == 'yes'
 
           <<-HTML
-      |_. Scheduled End Date | #{release_end} |_. #{empty_column_header} |_. Estimated Completion <br> of #{card_link release_parameter} |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iter_length} Day Iterations |
+      |_. Scheduled End Date | #{release_end} |_. #{empty_column_header} |_. Estimated Completion <br> of #{card_link release_parameter} |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{r_iterations.days_in_iteration} Day Iterations |
       |_. Completed Story Points | #{completed_story_points} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % r_iterations.last_3_average}) | #{remaining_iters_for_avg} | #{avg_end_date} |
       |_. Remaining Story Points | #{remaining_story_points} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{"%.2f" % r_iterations.average_velocity}) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
           HTML
@@ -73,12 +69,12 @@ module CustomMacro
 
       * Scheduled End Date is #{release_end}
 
-      |_. Current Iteration | #{card_link iteration_parameter} |_. #{empty_column_header} |_. Estimated Completion <br> of #{card_link release_parameter} <br> Based on ... |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iter_length} Day Iterations |
+      |_. Current Iteration | #{card_link iteration_parameter} |_. #{empty_column_header} |_. Estimated Completion <br> of #{card_link release_parameter} <br> Based on ... |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{r_iterations.days_in_iteration} Day Iterations |
       |_. Average Velocity <br> (last 3 iterations) | #{"%.2f" % r_iterations.last_3_average} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % r_iterations.last_3_average}) | #{remaining_iters_for_avg} | #{avg_end_date} |
-      |_. Completed Iterations | #{iterations.length} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{"%.2f" % r_iterations.average_velocity }) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
+      |_. Completed Iterations | #{r_iterations.length} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{"%.2f" % r_iterations.average_velocity }) | #{remaining_iter_for_all_velocity} | #{all_avg_end_date} |
       |_. Completed Story Points | #{completed_story_points} |_. #{empty_column_header}  | Best velocity (#{r_iterations.best_velocity}) | #{remaining_iters_for_best} | #{best_end_date} |
       |_. Remaining Story Points <br> (includes all stories not <br> in a past iteration) | #{remaining_story_points} |_. #{empty_column_header}  | Worst velocity (#{r_iterations.worst_velocity}) | #{remaining_iters_for_worst} | #{worst_end_date} |
-      |_. Iteration Length <br> (calculated based on <br> last iteration completed) | #{iter_length} days |_. #{empty_column_header} | #{what_if.velocity_field} | #{ what_if.iterations_field } | #{ what_if.date_field } |
+      |_. Iteration Length <br> (calculated based on <br> last iteration completed) | #{r_iterations.days_in_iteration} days |_. #{empty_column_header} | #{what_if.velocity_field} | #{ what_if.iterations_field } | #{ what_if.date_field } |
 
 #{ what_if.javascript }
       <br>
@@ -116,16 +112,6 @@ module CustomMacro
         story_points = story["#{story_points_parameter}"]
         story_points ? total + story_points.to_i : total
       end
-    end
-
-    def last_iteration_end_date(most_recent_iter)
-      Date.parse(most_recent_iter[end_date_parameter])
-    end
-
-    def iteration_length_in_days(most_recent_iter)
-      start_date = Date.parse(most_recent_iter[start_date_parameter])
-      end_date = last_iteration_end_date(most_recent_iter)
-      (end_date - start_date) + 1
     end
 
     def release_end_date(release)
@@ -229,9 +215,12 @@ module CustomMacro
 
   class Iterations
 
-    def initialize(iterations, velocity_parameter)
+    def initialize(iterations, velocity_parameter = 'velocity',
+                   end_date_parameter = 'end_date', start_date_parameter = 'start_date')
       @iterations = iterations
       @velocity_parameter = velocity_parameter
+      @end_date_parameter = end_date_parameter
+      @start_date_parameter = start_date_parameter
     end
 
     def last_3()
@@ -273,6 +262,19 @@ module CustomMacro
 
     def names
       @iterations.collect { |iter| "'#{iter['name']}'" }.join ","
+    end
+
+    def last_end_date
+      @iterations.length == 0 ? Date.today : Date.parse(@iterations[0][@end_date_parameter])
+    end
+
+    def last_start_date
+      @iterations.length == 0 ? Date.today : Date.parse(@iterations[0][@start_date_parameter])
+    end
+
+    def days_in_iteration
+      return 7 if @iterations.length == 0
+      (last_end_date - last_start_date) + 1
     end
 
     def length
