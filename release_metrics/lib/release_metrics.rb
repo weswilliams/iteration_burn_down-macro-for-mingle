@@ -284,6 +284,7 @@ module CustomMacro
 
         var dateCalcText = jQuery("#what-if-date"),
             velocityText = jQuery("#what-if-velocity"),
+            iterationsSpan = jQuery("#what-if-iterations"),
             debugInfo   = jQuery("#debug-info");
 
         velocityText.blur(function() {
@@ -291,14 +292,16 @@ module CustomMacro
           var iterations = remainingIterations(velocity, remainingStoryPoints);
           var expectedDate = expectedCompletionDateFor(lastIterEndDate, daysInIter, iterations);
           var dateString = expectedDate.getFullYear() + '-' + (expectedDate.getMonth()+1) + '-' + expectedDate.getDate();
+          iterationsSpan.html(iterations);
           dateCalcText.val(dateString);
         });
 
         dateCalcText.blur(function() {
           var desiredEndDate = new Date(dateCalcText.val());
           var dayDiff = dateDiffInDays(lastIterEndDate, desiredEndDate);
-          var numberOfIterations = Math.ceil(dayDiff / daysInIter);
-          var requiredVelocity = remainingStoryPoints / numberOfIterations;
+          var iterations = Math.ceil(dayDiff / daysInIter);
+          var requiredVelocity = remainingStoryPoints / iterations;
+          iterationsSpan.html(iterations);
           velocityText.val(requiredVelocity);
         });
 
