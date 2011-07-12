@@ -43,7 +43,7 @@ describe "completed iterations" do
     end
 
     context "average velocity" do
-      subject { @macro.average_velocity @macro.completed_iterations.first(3) }
+      subject { @r_iterations.average_velocity_for @macro.completed_iterations.first(3) }
       it { should == 10 }
     end
 
@@ -68,7 +68,7 @@ describe "completed iterations" do
     end
     
     context "average velocity with no iterations" do
-      subject { @macro.average_velocity [] }
+      subject { @r_iterations.average_velocity_for [] }
       it { should == 0 }
     end
 
