@@ -22,7 +22,7 @@ module CustomMacro
     h2. JavaScript Example
 
     |_. Remaining story point |_. Days/Iteration |_. Velocity |_. Calculated End Date |
-    | #{remaining_story_points} | #{days_in_iter} | <input type='text' id='what-if-velocity'></input> | <input type='text' id="date-calc" value='Enter a velocity to see expected end date.'></input> |
+    | #{remaining_story_points} | #{days_in_iter} | <input type='text' id='what-if-velocity'></input> | <input type='text' id="what-if-date" value='Enter a velocity to see expected end date.'></input> |
 
     <span id='debug-info'></span>
 
@@ -45,21 +45,20 @@ module CustomMacro
             return new Date(lastIterEndDate.getTime() + (1000 * 60 * 60 * 24 * (daysInIter * remainingIterations)));
           };
 
-          var dateCalcOut = jQuery("#date-calc");
-          var debugInfo   = jQuery("#debug-info");
+          var dateCalcText = jQuery("#what-if-date"),
+              velocityText = jQuery("#what-if-velocity"),
+              debugInfo   = jQuery("#debug-info");
 
-          jQuery("#what-if-velocity").blur(function() {
-            var velocity = parseInt(jQuery("#what-if-velocity").val());
+          velocityText.blur(function() {
+            var velocity = parseInt(velocityText.val());
             var iterations = remainingIterations(velocity, remainingStoryPoints);
-//debugInfo.append("iterations: " + iterations + "<br>");
             var expectedDate = expectedCompletionDateFor(lastIterEndDate, daysInIter, iterations);
-//debugInfo.append("expected date: " + expectedDate + "<br>");
             var dateString = expectedDate.getFullYear() + '-' + (expectedDate.getMonth()+1) + '-' + expectedDate.getDate();
-//debugInfo.append("expected date str: " + dateString + "<br>");
-            dateCalcOut.val(dateString);
+            dateCalcText.val(dateString);
           });
+
         } catch(err) {
-          dateCalcOut.val(err);
+          dateCalcText.val(err);
         }
       });
     </script>
