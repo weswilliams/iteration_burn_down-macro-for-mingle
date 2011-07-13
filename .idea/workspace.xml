@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4b8638f0-6f72-4452-979a-a016d20c8e6d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb" afterPath="$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js_ex/lib/js_ex.rb" afterPath="$PROJECT_DIR$/js_ex/lib/js_ex.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" afterPath="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
     </list>
     <ignored path="mingle-test-macro.iws" />
@@ -32,19 +34,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="release_metrics.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="release_metrics.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="68" column="0" selection-start="1935" selection-end="1935" vertical-scroll-proportion="0.22337279">
+            <state line="260" column="0" selection-start="10398" selection-end="10398" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wiki_table_builder.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="iteration_burn_down_macro.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="179" column="0" selection-start="6548" selection-end="6548" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wiki_table_builder.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/release_metrics/lib/wiki_table_builder.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="70" column="13" selection-start="1220" selection-end="1220" vertical-scroll-proportion="0.0">
+            <state line="68" column="7" selection-start="1205" selection-end="1205" vertical-scroll-proportion="0.36936936">
               <folding />
             </state>
           </provider>
@@ -68,14 +79,11 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/iteration_burn_down/test/spec/burn_down_line_data_spec.rb" />
         <option value="$PROJECT_DIR$/release_metrics/init.rb" />
         <option value="$PROJECT_DIR$/release_metrics/test/spec/parameter_spec.rb" />
-        <option value="$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb" />
         <option value="$PROJECT_DIR$/js_ex/test/spec/js_ex_spec.rb" />
         <option value="$PROJECT_DIR$/js_ex/lib/iteration_burn_down_macro.rb" />
         <option value="$PROJECT_DIR$/js_ex/init.rb" />
-        <option value="$PROJECT_DIR$/js_ex/lib/js_ex.rb" />
         <option value="$PROJECT_DIR$/release_metrics/lib/what_if_scenario.rb" />
         <option value="$PROJECT_DIR$/release_metrics/test/spec/completed_stories_spec.rb" />
         <option value="$PROJECT_DIR$/release_metrics/test/spec/remaining_stories_spec.rb" />
@@ -84,6 +92,9 @@
         <option value="$PROJECT_DIR$/release_metrics/test/spec/completed_iterations_spec.rb" />
         <option value="$PROJECT_DIR$/release_metrics/lib/wiki_table_builder.rb" />
         <option value="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
+        <option value="$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb" />
+        <option value="$PROJECT_DIR$/iteration_burn_down/tasks/deploy.rake" />
+        <option value="$PROJECT_DIR$/js_ex/lib/js_ex.rb" />
       </list>
     </option>
   </component>
@@ -570,7 +581,7 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914925" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914925" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34170154" sideWeight="0.4918033" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34170154" sideWeight="0.4918033" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.67741936" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33401638" sideWeight="0.70292884" order="0" side_tool="false" content_ui="tabs" />
@@ -611,7 +622,7 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- first two rows of full table using the wiki table builder" />
+    <option name="LAST_COMMIT_MESSAGE" value="- full metrics completely using wiki table builder&#10;- all views pulled into their own methods" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -624,7 +635,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="- added remaining iterations to what if" />
     <MESSAGE value="- disabled what if by default" />
     <MESSAGE value="- pulled what if scenario data into a separate class" />
     <MESSAGE value="- moving iterations related methods to an Iterations object" />
@@ -649,23 +659,12 @@
     <MESSAGE value="- added another mini row&#10;- fixed issue with passing non-string to col" />
     <MESSAGE value="- mini table fulling using new wik table builder and moved to a separate method" />
     <MESSAGE value="- first two rows of full table using the wiki table builder" />
+    <MESSAGE value="- full metrics completely using wiki table builder&#10;- all views pulled into their own methods" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="47" selection-start="1696" selection-end="1696" vertical-scroll-proportion="1.3952484" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js_ex/test/spec/js_ex_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="0" selection-start="284" selection-end="284" vertical-scroll-proportion="0.6081081">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -676,13 +675,6 @@
     <entry file="file://$PROJECT_DIR$/js_ex/init.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="58" selection-start="424" selection-end="424" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js_ex/lib/js_ex.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="0" selection-start="263" selection-end="2998" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -743,13 +735,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/release_metrics/lib/wiki_table_builder.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="13" selection-start="1220" selection-end="1220" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/lib/iterations.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="64" column="7" selection-start="1730" selection-end="1730" vertical-scroll-proportion="2.0168068">
@@ -759,7 +744,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="0" selection-start="1935" selection-end="1935" vertical-scroll-proportion="0.22337279">
+        <state line="260" column="0" selection-start="10398" selection-end="10398" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iteration_burn_down/tasks/deploy.rake">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="4" selection-start="767" selection-end="767" vertical-scroll-proportion="0.45945945">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="179" column="0" selection-start="6548" selection-end="6548" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js_ex/lib/js_ex.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="114" column="0" selection-start="3888" selection-end="3888" vertical-scroll-proportion="0.44315544">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/release_metrics/lib/wiki_table_builder.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="68" column="7" selection-start="1205" selection-end="1205" vertical-scroll-proportion="0.36936936">
           <folding />
         </state>
       </provider>

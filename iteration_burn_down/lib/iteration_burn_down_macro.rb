@@ -177,7 +177,6 @@ module CustomMacro
     end
 
     def respond_to?(method_sym, include_private = false)
-      puts 'in respond to'
       if method_sym.to_s =~ /^(.*)_[field|parameter|type]$/
         true
       else
