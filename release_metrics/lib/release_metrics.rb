@@ -74,42 +74,30 @@ module CustomMacro
         remaining_stories = stories iterations
         release = current_release iterations, remaining_stories
         what_if = WhatIfScenario.new show_what_if_parameter, remaining_stories.story_points, iterations.last_end_date, iterations.days_in_iteration
-
         if mini_parameter
           mini_table completed_stories, remaining_stories, iterations, release
         else
-          <<-HTML
+          full_metrics(completed_stories, iterations, release, remaining_stories, what_if)
+        end
+      rescue Exception => e
+        error_view(e)
+      end
+    end
+
+    def full_metrics(completed_stories, iterations, release, remaining_stories, what_if)
+      # make sure the #{full_table...} does not have spaces at the beginning of the line to avoid layout issues
+      <<-HTML
       h2. Metrics for #{card_link release_parameter}
 
       * Scheduled End Date is #{release.end_date}
 
-#{full_table completed_stories, remaining_stories, iterations, release}
+#{full_table completed_stories, remaining_stories, iterations, release, what_if}
 
-      |_. Current Iteration | #{card_link iteration_parameter} |_. #{empty_column_header} |_. Estimated Completion <br> of #{card_link release_parameter} <br> Based on ... |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iterations.days_in_iteration} Day Iterations |
-      |_. Average Velocity <br> (last 3 iterations) | #{"%.2f" % iterations.last_3_average} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % iterations.last_3_average}) | #{release.remaining_iters(:last_3_average)} | #{release.completion_date :last_3_average} |
-      |_. Completed Iterations | #{iterations.length} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{"%.2f" % iterations.average_velocity }) | #{release.remaining_iters(:average_velocity)} | #{release.completion_date :average_velocity} |
-      |_. Completed Story Points | #{completed_stories.story_points} |_. #{empty_column_header}  | Best velocity (#{iterations.best_velocity}) | #{release.remaining_iters(:best_velocity)} | #{release.completion_date :best_velocity} |
-      |_. Remaining Story Points <br> (includes all stories not <br> in a past iteration) | #{remaining_stories.story_points} |_. #{empty_column_header}  | Worst velocity (#{iterations.worst_velocity}) | #{release.remaining_iters(:worst_velocity)} | #{release.completion_date :worst_velocity} |
-      |_. Iteration Length <br> (calculated based on <br> last iteration completed) | #{iterations.days_in_iteration} days |_. #{empty_column_header} | #{what_if.velocity_field} | #{ what_if.iterations_field } | #{ what_if.date_field } |
-
-      #{ what_if.javascript }
-      <br>
-          HTML
-
-        end
-
-      rescue Exception => e
-        <<-ERROR
-    h2. Release Metrics:
-
-    "An Error occurred: #{e}"
-
-        ERROR
-      end
+#{ what_if.javascript }
+      HTML
     end
 
-    def full_table(completed_stories, remaining_stories, iterations, release)
-
+    def full_table(completed_stories, remaining_stories, iterations, release, what_if)
       WikiTableBuilder.
           table.
             row.
@@ -128,6 +116,22 @@ module CustomMacro
               col("Completed Iterations").header.build.col(iterations.length).build.col.header.build.
               col("Average velocity of <br> all iterations (#{"%.2f" % iterations.average_velocity})").build.
               col(release.remaining_iters(:average_velocity)).build.col(release.completion_date :average_velocity).build.
+            build.
+            row.
+              col("Completed Story Points").header.build.col(completed_stories.story_points).build.col.header.build.
+              col("Best velocity (#{iterations.best_velocity})").build.
+              col(release.remaining_iters(:best_velocity)).build.col(release.completion_date :best_velocity).build.
+            build.
+            row.
+              col("Remaining Story Points <br> (includes all stories not <br> in a past iteration)").header.build.
+              col(remaining_stories.story_points).build.col.header.build.
+              col("Worst velocity (#{iterations.worst_velocity})").build.
+              col(release.remaining_iters(:worst_velocity)).build.col(release.completion_date :worst_velocity).build.
+            build.
+            row.
+              col("Iteration Length <br> (calculated based on <br> last iteration completed)").header.build.
+              col("#{iterations.days_in_iteration} days").build.col.header.build.
+              col(what_if.velocity_field).build.col(what_if.iterations_field).build.col(what_if.date_field).build.
             build.
           build
     end
@@ -152,6 +156,15 @@ module CustomMacro
               col(release.remaining_iters(:average_velocity)).build.col(release.completion_date :average_velocity).build.
             build.
           build
+    end
+
+    def error_view(e)
+      <<-ERROR
+    h2. Release Metrics:
+
+    "An Error occurred: #{e}"
+
+      ERROR
     end
 
     def current_release(iterations, remaining_stories)
