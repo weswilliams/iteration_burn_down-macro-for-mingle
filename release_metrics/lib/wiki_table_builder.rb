@@ -18,7 +18,7 @@ module CustomMacro
       @rows.last
     end
 
-    def done
+    def build
       to_s
     end
 
@@ -44,7 +44,7 @@ module CustomMacro
       self
     end
 
-    def done
+    def build
       @table_builder
     end
 
@@ -59,7 +59,7 @@ module CustomMacro
     
     def initialize(row_builder, text = "", separator = $col_separator)
       @row_builder = row_builder
-      @text = text
+      @text = text.to_s
       @separator = separator
     end
 
@@ -68,7 +68,7 @@ module CustomMacro
       self
     end
 
-    def done
+    def build
       @row_builder
     end
 

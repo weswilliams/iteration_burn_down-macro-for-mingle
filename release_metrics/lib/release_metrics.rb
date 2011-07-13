@@ -76,8 +76,25 @@ module CustomMacro
         what_if = WhatIfScenario.new show_what_if_parameter, remaining_stories.story_points, iterations.last_end_date, iterations.days_in_iteration
 
         if mini_parameter
+          table = WikiTableBuilder.
+            table.
+              row.
+                col("Scheduled End Date").header.build.col(release.end_date).build.col.header.build.
+                col("Estimated Completion <br> of #{card_link release_parameter}").header.build.
+                col("Required <br> Iterations").header.build.
+                col("Calculated Development End Date <br> Based on #{iterations.days_in_iteration} Day Iterations").header.build.
+              build.
+              row.
+                col("Completed Story Points").header.build.col(completed_stories.story_points).build.col.header.build.
+                col("Average velocity of <br> last 3 iterations (#{"%.2f" % iterations.last_3_average})").build.
+                col(release.remaining_iters(:last_3_average)).build.col(release.completion_date :last_3_average).build.
+              build.
+            build
 
           <<-HTML
+
+      #{table}
+
       |_. Scheduled End Date | #{release.end_date} |_. #{empty_column_header} |_. Estimated Completion <br> of #{card_link release_parameter} |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iterations.days_in_iteration} Day Iterations |
       |_. Completed Story Points | #{completed_stories.story_points} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % iterations.last_3_average}) | #{release.remaining_iters(:last_3_average)} | #{release.completion_date :last_3_average} |
       |_. Remaining Story Points | #{remaining_stories.story_points} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{"%.2f" % iterations.average_velocity}) | #{release.remaining_iters(:average_velocity)} | #{release.completion_date :average_velocity} |
