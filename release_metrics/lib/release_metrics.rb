@@ -112,21 +112,6 @@ module CustomMacro
       end
     end
 
-    def card_link(card_identifier_name)
-      return "#{card_name card_identifier_name} #{@project.identifier}/##{card_number card_identifier_name}" if @parameters['project']
-      card_identifier_name
-    end
-
-    def remaining_iterations(velocity, remaining_story_points)
-      return 'Unknown' if velocity <= 0
-      (remaining_story_points/velocity).ceil
-    end
-
-    def expected_completion_date_for(last_end_date, iter_length, remaining_iterations)
-      return 'Unknown' if remaining_iterations == 'Unknown'
-      last_end_date + (iter_length * remaining_iterations)
-    end
-
     def current_release(iterations, remaining_stories)
       begin
         release_where = "Number = #{card_number release_parameter}"
@@ -169,6 +154,11 @@ module CustomMacro
       rescue Exception => e
         raise "[error retrieving stories for release '#{release_parameter}': #{e}]"
       end
+    end
+
+    def card_link(card_identifier_name)
+      return "#{card_name card_identifier_name} #{@project.identifier}/##{card_number card_identifier_name}" if @parameters['project']
+      card_identifier_name
     end
 
     def card_name(card_identifier_name)
