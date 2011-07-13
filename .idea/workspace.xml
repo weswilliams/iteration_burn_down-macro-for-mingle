@@ -7,7 +7,6 @@
     <list default="true" id="4b8638f0-6f72-4452-979a-a016d20c8e6d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" afterPath="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/lib/wiki_table_builder.rb" afterPath="$PROJECT_DIR$/release_metrics/lib/wiki_table_builder.rb" />
     </list>
     <ignored path="mingle-test-macro.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,19 +32,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="release_metrics.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="release_metrics.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="90" column="20" selection-start="3222" selection-end="3222" vertical-scroll-proportion="0.0">
+            <state line="107" column="0" selection-start="4394" selection-end="4394" vertical-scroll-proportion="1.1943845">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wiki_table_builder.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="wiki_table_builder.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/release_metrics/lib/wiki_table_builder.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="70" column="13" selection-start="1220" selection-end="1220" vertical-scroll-proportion="0.40756303">
+            <state line="70" column="13" selection-start="1220" selection-end="1220" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -83,8 +82,8 @@
         <option value="$PROJECT_DIR$/release_metrics/test/spec/current_iteration_spec.rb" />
         <option value="$PROJECT_DIR$/release_metrics/lib/iterations.rb" />
         <option value="$PROJECT_DIR$/release_metrics/test/spec/completed_iterations_spec.rb" />
-        <option value="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
         <option value="$PROJECT_DIR$/release_metrics/lib/wiki_table_builder.rb" />
+        <option value="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
       </list>
     </option>
   </component>
@@ -612,7 +611,7 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- fixed empty col issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="- added another mini row&#10;- fixed issue with passing non-string to col" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -625,7 +624,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="- fixed issue with not rounding remaining iterations up" />
     <MESSAGE value="- what if date" />
     <MESSAGE value="- added what if calculations to release_metrics" />
     <MESSAGE value="- added remaining iterations to what if" />
@@ -650,6 +648,7 @@
     <MESSAGE value="- basic table builder" />
     <MESSAGE value="- added header&#10;- added empty values" />
     <MESSAGE value="- fixed empty col issue" />
+    <MESSAGE value="- added another mini row&#10;- fixed issue with passing non-string to col" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -730,13 +729,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/release_metrics/lib/iterations.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="7" selection-start="1730" selection-end="1730" vertical-scroll-proportion="0.27521008">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/current_iteration_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="42" selection-start="609" selection-end="609" vertical-scroll-proportion="0.0">
@@ -751,16 +743,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
+    <entry file="file://$PROJECT_DIR$/release_metrics/lib/wiki_table_builder.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="20" selection-start="3222" selection-end="3222" vertical-scroll-proportion="0.0">
+        <state line="70" column="13" selection-start="1220" selection-end="1220" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/release_metrics/lib/wiki_table_builder.rb">
+    <entry file="file://$PROJECT_DIR$/release_metrics/lib/iterations.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="13" selection-start="1220" selection-end="1220" vertical-scroll-proportion="0.40756303">
+        <state line="64" column="7" selection-start="1730" selection-end="1730" vertical-scroll-proportion="2.0168068">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="107" column="0" selection-start="4394" selection-end="4394" vertical-scroll-proportion="1.1943845">
           <folding />
         </state>
       </provider>
