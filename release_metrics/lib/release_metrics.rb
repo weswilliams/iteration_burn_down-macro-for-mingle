@@ -10,9 +10,23 @@ module CustomMacro
   end
 
   class Release
-    def initialize(data, end_data_parameter)
+    def initialize(data, end_data_parameter, iterations, remaining_stories)
       @data = data
       @end_data_parameter = end_data_parameter
+      @iterations = iterations
+      @remaining_stories = remaining_stories
+    end
+
+    def remaining_iters(velocity_method)
+      velocity = @iterations.send velocity_method.to_s
+      return 'Unknown' if velocity <= 0
+      (@remaining_stories.story_points / velocity).ceil
+    end
+
+    def completion_date(velocity_method)
+      remaining_iterations = remaining_iters velocity_method
+      return 'Unknown' if remaining_iterations == 'Unknown'
+      @iterations.last_end_date + (@iterations.days_in_iteration * remaining_iterations)
     end
 
     def end_date
@@ -54,15 +68,15 @@ module CustomMacro
 
     def execute
       begin
-        release = current_release
         iterations = completed_iterations
         completed_stories = stories iterations, false
         remaining_stories = stories iterations
+        release = current_release iterations, remaining_stories
 
-        remaining_iters_for_avg = iterations.remaining_for(:last_3_average, remaining_stories.story_points)
-        remaining_iter_for_all_velocity = iterations.remaining_for(:average_velocity, remaining_stories.story_points)
-        remaining_iters_for_best = iterations.remaining_for(:best_velocity, remaining_stories.story_points)
-        remaining_iters_for_worst = iterations.remaining_for(:worst_velocity, remaining_stories.story_points)
+        remaining_iters_for_avg = release.remaining_iters(:last_3_average)
+        remaining_iter_for_all_velocity =release.remaining_iters(:average_velocity)
+        remaining_iters_for_best = release.remaining_iters(:best_velocity)
+        remaining_iters_for_worst = release.remaining_iters(:worst_velocity)
 
         avg_end_date = expected_completion_date_for iterations.last_end_date, iterations.days_in_iteration, remaining_iters_for_avg
         all_avg_end_date = expected_completion_date_for iterations.last_end_date, iterations.days_in_iteration, remaining_iter_for_all_velocity
@@ -123,13 +137,13 @@ module CustomMacro
       last_end_date + (iter_length * remaining_iterations)
     end
 
-    def current_release
+    def current_release(iterations, remaining_stories)
       begin
         release_where = "Number = #{card_number release_parameter}"
         release_where = "Number = #{release_parameter}.'Number'" if release_parameter == 'THIS CARD'
         data_rows = @project.execute_mql("SELECT '#{end_date_field}' WHERE #{release_where}")
         raise "##{release_parameter} is not a valid release" if data_rows.empty?
-        Release.new data_rows[0], end_date_parameter
+        Release.new data_rows[0], end_date_parameter, iterations, remaining_stories
       rescue Exception => e
         raise "[error retrieving release for #{release_parameter}: #{e}]"
       end

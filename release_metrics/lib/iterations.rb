@@ -73,17 +73,6 @@ module CustomMacro
       (last_end_date - last_start_date) + 1
     end
 
-    def remaining_for(velocity_method, remaining_story_points)
-      velocity = send velocity_method.to_s
-      return 'Unknown' if velocity <= 0
-      (remaining_story_points/velocity).ceil
-    end
-
-    def expected_completion_date_for(last_end_date, iter_length, remaining_iterations)
-      return 'Unknown' if remaining_iterations == 'Unknown'
-      last_end_date + (iter_length * remaining_iterations)
-    end
-
     def length
       @iterations.length
     end
