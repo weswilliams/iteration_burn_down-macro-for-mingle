@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4b8638f0-6f72-4452-979a-a016d20c8e6d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/lib/iterations.rb" afterPath="$PROJECT_DIR$/release_metrics/lib/iterations.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" afterPath="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/test/spec/current_iteration_spec.rb" afterPath="$PROJECT_DIR$/release_metrics/test/spec/current_iteration_spec.rb" />
     </list>
     <ignored path="mingle-test-macro.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,16 +35,7 @@
       <file leaf-file-name="release_metrics.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="34" selection-start="1515" selection-end="1515" vertical-scroll-proportion="0.24190065">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="current_iteration_spec.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/current_iteration_spec.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="42" selection-start="609" selection-end="609" vertical-scroll-proportion="0.0">
+            <state line="80" column="29" selection-start="2640" selection-end="2640" vertical-scroll-proportion="0.5334773">
               <folding />
             </state>
           </provider>
@@ -79,9 +68,9 @@
         <option value="$PROJECT_DIR$/release_metrics/test/spec/completed_stories_spec.rb" />
         <option value="$PROJECT_DIR$/release_metrics/test/spec/completed_iterations_spec.rb" />
         <option value="$PROJECT_DIR$/release_metrics/test/spec/remaining_stories_spec.rb" />
-        <option value="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
         <option value="$PROJECT_DIR$/release_metrics/test/spec/current_iteration_spec.rb" />
         <option value="$PROJECT_DIR$/release_metrics/lib/iterations.rb" />
+        <option value="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
       </list>
     </option>
   </component>
@@ -609,7 +598,7 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- created remaining_for in Iterations" />
+    <option name="LAST_COMMIT_MESSAGE" value="- moved methods from iterations to release" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -622,7 +611,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="- added support for THIS CARD" />
     <MESSAGE value="- added ability to define line colors" />
     <MESSAGE value="- removed duplication for creating where for release to handle THIS CARD" />
     <MESSAGE value="- ability to calculate a end date with a what if velocity" />
@@ -647,6 +635,7 @@
     <MESSAGE value="- introduced Stories object" />
     <MESSAGE value="- removed unused method" />
     <MESSAGE value="- created remaining_for in Iterations" />
+    <MESSAGE value="- moved methods from iterations to release" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -755,7 +744,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="34" selection-start="1515" selection-end="1515" vertical-scroll-proportion="0.24190065">
+        <state line="80" column="29" selection-start="2640" selection-end="2640" vertical-scroll-proportion="0.5334773">
           <folding />
         </state>
       </provider>
