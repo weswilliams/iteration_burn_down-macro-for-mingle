@@ -34,7 +34,7 @@ module CustomMacro
       @table_builder = table_builder
     end
 
-    def col(text)
+    def col(text = "")
       @cols << WikiColBuilder.new(self, text, @col_separator)
       @cols.last
     end
@@ -57,7 +57,7 @@ module CustomMacro
 
     attr_accessor :separator
     
-    def initialize(row_builder, text, separator = $col_separator)
+    def initialize(row_builder, text = "", separator = $col_separator)
       @row_builder = row_builder
       @text = text
       @separator = separator
