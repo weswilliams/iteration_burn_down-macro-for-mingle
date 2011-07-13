@@ -83,6 +83,8 @@ module CustomMacro
 
       * Scheduled End Date is #{release.end_date}
 
+#{full_table completed_stories, remaining_stories, iterations, release}
+
       |_. Current Iteration | #{card_link iteration_parameter} |_. #{empty_column_header} |_. Estimated Completion <br> of #{card_link release_parameter} <br> Based on ... |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iterations.days_in_iteration} Day Iterations |
       |_. Average Velocity <br> (last 3 iterations) | #{"%.2f" % iterations.last_3_average} |_. #{empty_column_header}  | Average velocity of <br> last 3 iterations (#{"%.2f" % iterations.last_3_average}) | #{release.remaining_iters(:last_3_average)} | #{release.completion_date :last_3_average} |
       |_. Completed Iterations | #{iterations.length} |_. #{empty_column_header}  |Average velocity of <br> all iterations (#{"%.2f" % iterations.average_velocity }) | #{release.remaining_iters(:average_velocity)} | #{release.completion_date :average_velocity} |
@@ -104,6 +106,30 @@ module CustomMacro
 
         ERROR
       end
+    end
+
+    def full_table(completed_stories, remaining_stories, iterations, release)
+
+      WikiTableBuilder.
+          table.
+            row.
+              col("Current Iteration").header.build.col(card_link iteration_parameter).build.col.header.build.
+              col("Estimated Completion <br> of #{card_link release_parameter}").header.build.
+              col("Required <br> Iterations").header.build.
+              col("Calculated Development End Date <br> Based on #{iterations.days_in_iteration} Day Iterations").header.build.
+            build.
+            row.
+              col("Average Velocity <br> (last 3 iterations)").header.build.
+              col("%.2f" % iterations.last_3_average).build.col.header.build.
+              col("Average velocity of <br> last 3 iterations (#{"%.2f" % iterations.last_3_average})").build.
+              col(release.remaining_iters(:last_3_average)).build.col(release.completion_date :last_3_average).build.
+            build.
+            row.
+              col("Completed Iterations").header.build.col(iterations.length).build.col.header.build.
+              col("Average velocity of <br> all iterations (#{"%.2f" % iterations.average_velocity})").build.
+              col(release.remaining_iters(:average_velocity)).build.col(release.completion_date :average_velocity).build.
+            build.
+          build
     end
 
     def mini_table(completed_stories, remaining_stories, iterations, release)
