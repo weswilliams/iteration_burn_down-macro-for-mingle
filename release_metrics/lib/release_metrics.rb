@@ -40,14 +40,6 @@ module CustomMacro
 
   class ReleaseMetrics
     include CustomMacro
-    
-    MON = 1
-    TUE = 2
-    WED = 3
-    THU = 4
-    FRI = 5
-
-    WEEKDAYS = [MON, TUE, WED, THU, FRI]
 
     def initialize(parameters, project, current_user)
       @parameters = parameters
@@ -67,10 +59,10 @@ module CustomMacro
         completed_stories = stories iterations, false
         remaining_stories = stories iterations
 
-        remaining_iters_for_avg = remaining_iterations(iterations.last_3_average, remaining_stories.story_points)
-        remaining_iter_for_all_velocity = remaining_iterations(iterations.average_velocity, remaining_stories.story_points)
-        remaining_iters_for_best = remaining_iterations(iterations.best_velocity, remaining_stories.story_points)
-        remaining_iters_for_worst = remaining_iterations(iterations.worst_velocity, remaining_stories.story_points)
+        remaining_iters_for_avg = iterations.remaining_for(:last_3_average, remaining_stories.story_points)
+        remaining_iter_for_all_velocity = iterations.remaining_for(:average_velocity, remaining_stories.story_points)
+        remaining_iters_for_best = iterations.remaining_for(:best_velocity, remaining_stories.story_points)
+        remaining_iters_for_worst = iterations.remaining_for(:worst_velocity, remaining_stories.story_points)
 
         avg_end_date = expected_completion_date_for iterations.last_end_date, iterations.days_in_iteration, remaining_iters_for_avg
         all_avg_end_date = expected_completion_date_for iterations.last_end_date, iterations.days_in_iteration, remaining_iter_for_all_velocity
