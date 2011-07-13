@@ -64,6 +64,7 @@ module CustomMacro
       @parameter_defaults['release'] = lambda { @project.value_of_project_variable('Current Release') }
       @parameter_defaults['time_box'] = 'iteration'
       @parameter_defaults['show_what_if'] = false
+      @parameter_defaults['mini'] = false
     end
 
     def execute
@@ -74,7 +75,7 @@ module CustomMacro
         release = current_release iterations, remaining_stories
         what_if = WhatIfScenario.new show_what_if_parameter, remaining_stories.story_points, iterations.last_end_date, iterations.days_in_iteration
 
-        if mini_parameter.downcase == 'yes'
+        if mini_parameter
 
           <<-HTML
       |_. Scheduled End Date | #{release.end_date} |_. #{empty_column_header} |_. Estimated Completion <br> of #{card_link release_parameter} |_. Required <br> Iterations |_. Calculated Development End Date <br> Based on #{iterations.days_in_iteration} Day Iterations |
