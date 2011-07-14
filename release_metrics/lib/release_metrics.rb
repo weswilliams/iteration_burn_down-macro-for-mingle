@@ -2,11 +2,11 @@ require "date"
 module CustomMacro
 
   class Release
-    def initialize(data, end_data_parameter, iterations, remaining_stories)
+    def initialize(data, end_data_parameter, release_data)
       @data = data
       @end_data_parameter = end_data_parameter
-      @iterations = iterations
-      @remaining_stories = remaining_stories
+      @iterations = release_data[:iterations]
+      @remaining_stories = release_data[:remaining_stories]
     end
 
     def remaining_iters(velocity_method)
@@ -67,9 +67,12 @@ module CustomMacro
     def execute
       begin
         iterations = completed_iterations
+        release_data = {
+          :iterations => iterations,
+          :remaining_stories => stories(iterations)
+        }
         completed_stories = stories iterations, false
-        remaining_stories = stories iterations
-        release = current_release iterations, remaining_stories
+        release = current_release release_data
         what_if = WhatIfScenario.new show_what_if_parameter, release, iterations
         if mini_parameter
           mini_table completed_stories, iterations, release
@@ -166,13 +169,13 @@ module CustomMacro
       ERROR
     end
 
-    def current_release(iterations, remaining_stories)
+    def current_release(release_data)
       begin
         release_where = "Number = #{card_number release_parameter}"
         release_where = "Number = #{release_parameter}.'Number'" if release_parameter == 'THIS CARD'
         data_rows = @project.execute_mql("SELECT '#{end_date_field}' WHERE #{release_where}")
         raise "##{release_parameter} is not a valid release" if data_rows.empty?
-        Release.new data_rows[0], end_date_parameter, iterations, remaining_stories
+        Release.new data_rows[0], end_date_parameter, release_data
       rescue Exception => e
         raise "[error retrieving release for #{release_parameter}: #{e}]"
       end
