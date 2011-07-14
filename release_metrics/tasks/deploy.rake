@@ -7,7 +7,7 @@ namespace :macro do |ns|
   task :full_start_mingle => ["macro:start_postgresql","macro:start_mingle"]
 
   task :start_postgresql do
-    system "sudo /etc/init.d/postgresql start;sleep 15"
+    system "sudo service postgresql start;sleep 15"
   end
 
   task :stop_mingle do
