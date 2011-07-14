@@ -7,10 +7,10 @@ whatIf.init = function(daysInIter, remainingStoryPoints, lastIterEndDate) {
             iterationsSpan = jQuery("#what-if-iterations"),
             debugInfo = jQuery("#debug-info");
 
-        var dateDiffInDays = function(d1, d2) {
-            var t2 = d2.getTime();
-            var t1 = d1.getTime();
-            return parseInt((t2 - t1) / (24 * 3600 * 1000));
+        var dateDiffInDays = function(startDate, endDate) {
+            var endTime = endDate.getTime(),
+                startTime = startDate.getTime();
+            return parseInt((endTime - startTime) / (24 * 3600 * 1000));
         };
 
         var remainingIterations = function(velocity, remaining_story_points) {
