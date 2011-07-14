@@ -22,15 +22,19 @@ module CustomMacro
   MingleJavascript.register(function initialize() {
     try {
 
+      var lastIterEndDate = new Date('#{@last_iter_end_date.to_s}'),
+          daysInIter = #{@days_in_iter},
+          remainingStoryPoints = #{@remaining_story_points},
+          dateCalcText = jQuery("#what-if-date"),
+          velocityText = jQuery("#what-if-velocity"),
+          iterationsSpan = jQuery("#what-if-iterations"),
+          debugInfo   = jQuery("#debug-info");
+
       var dateDiffInDays = function(d1, d2) {
         var t2 = d2.getTime();
         var t1 = d1.getTime();
         return parseInt((t2-t1)/(24*3600*1000));
       };
-
-      var lastIterEndDate = new Date('#{@last_iter_end_date.to_s}'),
-          daysInIter = #{@days_in_iter},
-          remainingStoryPoints = #{@remaining_story_points};
 
       var remainingIterations = function(velocity, remaining_story_points) {
         return Math.ceil(remaining_story_points / velocity);
@@ -39,11 +43,6 @@ module CustomMacro
       var expectedCompletionDateFor = function(lastIterEndDate, daysInIter, remainingIterations) {
         return new Date(lastIterEndDate.getTime() + (1000 * 60 * 60 * 24 * (daysInIter * remainingIterations)));
       };
-
-      var dateCalcText = jQuery("#what-if-date"),
-          velocityText = jQuery("#what-if-velocity"),
-          iterationsSpan = jQuery("#what-if-iterations"),
-          debugInfo   = jQuery("#debug-info");
 
       velocityText.blur(function() {
         var velocity = parseInt(velocityText.val());
