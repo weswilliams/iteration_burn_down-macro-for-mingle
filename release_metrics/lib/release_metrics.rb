@@ -40,6 +40,7 @@ module CustomMacro
 
     #noinspection RubyUnusedLocalVariable
     def method_missing(method_sym, *arguments, &block)
+      # this may be lazy of me
       if @iterations.respond_to? method_sym
         @iterations.send method_sym, *arguments, &block
       else
