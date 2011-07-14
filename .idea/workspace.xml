@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4b8638f0-6f72-4452-979a-a016d20c8e6d" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/release_metrics/assets/javascripts/debug.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/assets/javascripts/what.if.js" afterPath="$PROJECT_DIR$/release_metrics/assets/javascripts/what.if.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" afterPath="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/lib/what_if_scenario.rb" afterPath="$PROJECT_DIR$/release_metrics/lib/what_if_scenario.rb" />
     </list>
     <ignored path="mingle-test-macro.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,19 +35,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="release_metrics.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
+      <file leaf-file-name="what.if.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/release_metrics/assets/javascripts/what.if.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="189" column="16" selection-start="8230" selection-end="8230" vertical-scroll-proportion="0.0">
+            <state line="31" column="21" selection-start="1478" selection-end="1478" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="what.if.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/release_metrics/assets/javascripts/what.if.js">
+      <file leaf-file-name="what_if_scenario.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/release_metrics/lib/what_if_scenario.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="10" selection-start="598" selection-end="598" vertical-scroll-proportion="0.30478954">
+            <state line="23" column="50" selection-start="956" selection-end="956" vertical-scroll-proportion="0.37721893">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="release_metrics.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="65" column="42" selection-start="1993" selection-end="1993" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="debug.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/release_metrics/assets/javascripts/debug.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="0" selection-start="103" selection-end="163" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -64,7 +85,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/js_ex/lib/iteration_burn_down_macro.rb" />
         <option value="$PROJECT_DIR$/js_ex/init.rb" />
         <option value="$PROJECT_DIR$/release_metrics/test/spec/completed_stories_spec.rb" />
         <option value="$PROJECT_DIR$/release_metrics/test/spec/remaining_stories_spec.rb" />
@@ -75,11 +95,12 @@
         <option value="$PROJECT_DIR$/iteration_burn_down/lib/iteration_burn_down_macro.rb" />
         <option value="$PROJECT_DIR$/iteration_burn_down/tasks/deploy.rake" />
         <option value="$PROJECT_DIR$/js_ex/lib/js_ex.rb" />
-        <option value="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
         <option value="$PROJECT_DIR$/release_metrics/tasks/deploy.rake" />
         <option value="$PROJECT_DIR$/release_metrics/assets/what-if.js" />
-        <option value="$PROJECT_DIR$/release_metrics/lib/what_if_scenario.rb" />
+        <option value="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
+        <option value="$PROJECT_DIR$/release_metrics/assets/javascripts/debug.js" />
         <option value="$PROJECT_DIR$/release_metrics/assets/javascripts/what.if.js" />
+        <option value="$PROJECT_DIR$/release_metrics/lib/what_if_scenario.rb" />
       </list>
     </option>
   </component>
@@ -182,11 +203,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
+              <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -200,21 +217,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="burndown_chart_flot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mingle-test-macro" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mingle-macros" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="burndown_chart_flot" />
+              <option name="myItemId" value="release_metrics" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -647,7 +650,7 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- small code style tweaks" />
+    <option name="LAST_COMMIT_MESSAGE" value="- removed duplication for date match" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -660,7 +663,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="- creating Iteration object when mql is executed" />
     <MESSAGE value="- moved Iterations into it's own rb file" />
     <MESSAGE value="- extracted release object (very basic for now)" />
     <MESSAGE value="- introduced Stories object" />
@@ -685,16 +687,12 @@
     <MESSAGE value="- removed alert used for testing" />
     <MESSAGE value="- changed some naming violations" />
     <MESSAGE value="- small code style tweaks" />
+    <MESSAGE value="- removed duplication for date match" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/current_iteration_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="42" selection-start="609" selection-end="609" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/completed_iterations_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="86" column="0" selection-start="2720" selection-end="2720" vertical-scroll-proportion="1.1008403" />
@@ -769,16 +767,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/release_metrics/assets/javascripts/debug.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="0" selection-start="103" selection-end="163" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="189" column="16" selection-start="8230" selection-end="8230" vertical-scroll-proportion="0.0">
+        <state line="65" column="42" selection-start="1993" selection-end="1993" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/assets/javascripts/what.if.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="10" selection-start="598" selection-end="598" vertical-scroll-proportion="0.30478954">
+        <state line="31" column="21" selection-start="1478" selection-end="1478" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/release_metrics/lib/what_if_scenario.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="50" selection-start="956" selection-end="956" vertical-scroll-proportion="0.37721893">
           <folding />
         </state>
       </provider>

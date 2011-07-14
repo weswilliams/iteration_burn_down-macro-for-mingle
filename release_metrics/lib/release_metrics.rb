@@ -85,6 +85,8 @@ module CustomMacro
 
 #{full_table completed_stories, remaining_stories, iterations, release, what_if}
 
+<span id='debug-info'></span>
+
 #{ what_if.javascript }
       HTML
     end

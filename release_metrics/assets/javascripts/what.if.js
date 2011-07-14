@@ -1,16 +1,17 @@
 var whatIf = {};
 
 whatIf.init = function(daysInIter, remainingStoryPoints, lastIterEndDate) {
+
     try {
         var dateCalcText = jQuery("#what-if-date"),
             velocityText = jQuery("#what-if-velocity"),
             iterationsSpan = jQuery("#what-if-iterations"),
-            secondsPerDay = 24 * 3600 * 1000,
-            debugInfo = jQuery("#debug-info");
+            secondsPerDay = 24 * 3600 * 1000;
 
         var dateDiffInDays = function(startDate, endDate) {
             var endTime = endDate.getTime(),
                 startTime = startDate.getTime();
+            macroDebug.log('date diff for: ' + startDate + '-' + endDate);
             return parseInt((endTime - startTime) / secondsPerDay);
         };
 
@@ -41,6 +42,6 @@ whatIf.init = function(daysInIter, remainingStoryPoints, lastIterEndDate) {
         });
 
     } catch(err) {
-        debugInfo.html(err);
+        macroDebug.log(err);
     }
 };
