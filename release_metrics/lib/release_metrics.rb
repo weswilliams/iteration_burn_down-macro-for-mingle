@@ -70,18 +70,18 @@ module CustomMacro
         completed_stories = stories iterations, false
         remaining_stories = stories iterations
         release = current_release iterations, remaining_stories
-        what_if = WhatIfScenario.new show_what_if_parameter, remaining_stories, iterations
+        what_if = WhatIfScenario.new show_what_if_parameter, release, iterations
         if mini_parameter
-          mini_table completed_stories, remaining_stories, iterations, release
+          mini_table completed_stories, iterations, release
         else
-          full_metrics(completed_stories, iterations, release, remaining_stories, what_if)
+          full_metrics(completed_stories, iterations, release, what_if)
         end
       rescue Exception => e
         error_view(e)
       end
     end
 
-    def full_metrics(completed_stories, iterations, release, remaining_stories, what_if)
+    def full_metrics(completed_stories, iterations, release, what_if)
       # make sure the #{full_table...} does not have spaces at the beginning of the line to avoid layout issues
       <<-HTML
       h2. Metrics for #{card_link release_parameter}
@@ -135,7 +135,7 @@ module CustomMacro
           build
     end
 
-    def mini_table(completed_stories, remaining_stories, iterations, release)
+    def mini_table(completed_stories, iterations, release)
       WikiTableBuilder.
           table.
             row.
@@ -150,7 +150,7 @@ module CustomMacro
               col(release.remaining_iters(:last_3_average)).build.col(release.completion_date :last_3_average).build.
             build.
             row.
-              col("Remaining Story Points").header.build.col(remaining_stories.story_points).build.col.header.build.
+              col("Remaining Story Points").header.build.col(release.remaining_story_points).build.col.header.build.
               col("Average velocity of <br> all iterations (#{"%.2f" % iterations.average_velocity})").build.
               col(release.remaining_iters(:average_velocity)).build.col(release.completion_date :average_velocity).build.
             build.

@@ -7,6 +7,7 @@
     <list default="true" id="4b8638f0-6f72-4452-979a-a016d20c8e6d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" afterPath="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/lib/what_if_scenario.rb" afterPath="$PROJECT_DIR$/release_metrics/lib/what_if_scenario.rb" />
     </list>
     <ignored path="mingle-test-macro.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,7 +36,7 @@
       <file leaf-file-name="what_if_scenario.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/release_metrics/lib/what_if_scenario.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="24" selection-start="361" selection-end="361" vertical-scroll-proportion="0.0">
+            <state line="7" column="50" selection-start="201" selection-end="201" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -44,7 +45,7 @@
       <file leaf-file-name="release_metrics.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="90" column="30" selection-start="2914" selection-end="2914" vertical-scroll-proportion="0.13867489">
+            <state line="83" column="23" selection-start="2539" selection-end="2539" vertical-scroll-proportion="0.33284023">
               <folding />
             </state>
           </provider>
@@ -86,8 +87,8 @@
         <option value="$PROJECT_DIR$/release_metrics/tasks/deploy.rake" />
         <option value="$PROJECT_DIR$/release_metrics/assets/what-if.js" />
         <option value="$PROJECT_DIR$/release_metrics/assets/javascripts/what.if.js" />
-        <option value="$PROJECT_DIR$/release_metrics/lib/what_if_scenario.rb" />
         <option value="$PROJECT_DIR$/release_metrics/assets/javascripts/debug.js" />
+        <option value="$PROJECT_DIR$/release_metrics/lib/what_if_scenario.rb" />
         <option value="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
       </list>
     </option>
@@ -638,7 +639,7 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- ability to enable and disable logging via macro parameter" />
+    <option name="LAST_COMMIT_MESSAGE" value="- getting remaining story points from release" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -651,7 +652,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="- introduced Stories object" />
     <MESSAGE value="- removed unused method" />
     <MESSAGE value="- created remaining_for in Iterations" />
     <MESSAGE value="- moved methods from iterations to release" />
@@ -676,6 +676,7 @@
     <MESSAGE value="- removed duplication for date match" />
     <MESSAGE value="- added debug logger" />
     <MESSAGE value="- ability to enable and disable logging via macro parameter" />
+    <MESSAGE value="- getting remaining story points from release" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -762,13 +763,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/release_metrics/lib/what_if_scenario.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="24" selection-start="361" selection-end="361" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/lib/iterations.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="64" column="7" selection-start="1730" selection-end="1730" vertical-scroll-proportion="0.0">
@@ -776,9 +770,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/release_metrics/lib/what_if_scenario.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="50" selection-start="201" selection-end="201" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/lib/release_metrics.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="30" selection-start="2914" selection-end="2914" vertical-scroll-proportion="0.13867489">
+        <state line="83" column="23" selection-start="2539" selection-end="2539" vertical-scroll-proportion="0.33284023">
           <folding />
         </state>
       </provider>

@@ -3,9 +3,9 @@ module CustomMacro
   class WhatIfScenario
     include CustomMacro
 
-    def initialize(is_enabled, remaining_stories, iterations)
+    def initialize(is_enabled, release, iterations)
       @is_enabled = is_enabled
-      @remaining_story_points = remaining_stories.story_points
+      @remaining_story_points = release.remaining_story_points
       @last_iter_end_date = iterations.last_end_date
       @days_in_iter = iterations.days_in_iteration
     end
