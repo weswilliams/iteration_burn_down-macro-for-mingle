@@ -33,6 +33,28 @@ module CustomMacro
     def end_date
       @data[@end_data_parameter]
     end
+
+    def completed_iterations
+      @iterations.length
+    end
+
+    #noinspection RubyUnusedLocalVariable
+    def method_missing(method_sym, *arguments, &block)
+      if @iterations.respond_to? method_sym
+        @iterations.send method_sym, *arguments, &block
+      else
+        super
+      end
+    end
+
+    def respond_to?(method_sym, include_private = false)
+      if @iterations.respond_to? method_sym
+        true
+      else
+        super
+      end
+    end
+
   end
 
   class Stories
@@ -80,23 +102,23 @@ module CustomMacro
         release = current_release release_data
         what_if = WhatIfScenario.new show_what_if_parameter, release, iterations
         if mini_parameter
-          mini_table iterations, release
+          mini_table release
         else
-          full_metrics(iterations, release, what_if)
+          full_metrics(release, what_if)
         end
       rescue Exception => e
         error_view(e)
       end
     end
 
-    def full_metrics(iterations, release, what_if)
+    def full_metrics(release, what_if)
       # make sure the #{full_table...} does not have spaces at the beginning of the line to avoid layout issues
       <<-HTML
       h2. Metrics for #{card_link release_parameter}
 
       * Scheduled End Date is #{release.end_date}
 
-#{full_table iterations, release, what_if}
+#{full_table release, what_if}
 
 <span id='debug-info'></span>
 
@@ -104,62 +126,62 @@ module CustomMacro
       HTML
     end
 
-    def full_table(iterations, release, what_if)
+    def full_table(release, what_if)
       WikiTableBuilder.
           table.
             row.
               col("Current Iteration").header.build.col(card_link iteration_parameter).build.col.header.build.
               col("Estimated Completion <br> of #{card_link release_parameter}").header.build.
               col("Required <br> Iterations").header.build.
-              col("Calculated Development End Date <br> Based on #{iterations.days_in_iteration} Day Iterations").header.build.
+              col("Calculated Development End Date <br> Based on #{release.days_in_iteration} Day Iterations").header.build.
             build.
             row.
               col("Average Velocity <br> (last 3 iterations)").header.build.
-              col("%.2f" % iterations.last_3_average).build.col.header.build.
-              col("Average velocity of <br> last 3 iterations (#{"%.2f" % iterations.last_3_average})").build.
+              col("%.2f" % release.last_3_average).build.col.header.build.
+              col("Average velocity of <br> last 3 iterations (#{"%.2f" % release.last_3_average})").build.
               col(release.remaining_iters(:last_3_average)).build.col(release.completion_date :last_3_average).build.
             build.
             row.
-              col("Completed Iterations").header.build.col(iterations.length).build.col.header.build.
-              col("Average velocity of <br> all iterations (#{"%.2f" % iterations.average_velocity})").build.
+              col("Completed Iterations").header.build.col(release.completed_iterations).build.col.header.build.
+              col("Average velocity of <br> all iterations (#{"%.2f" % release.average_velocity})").build.
               col(release.remaining_iters(:average_velocity)).build.col(release.completion_date :average_velocity).build.
             build.
             row.
               col("Completed Story Points").header.build.col(release.completed_story_points).build.col.header.build.
-              col("Best velocity (#{iterations.best_velocity})").build.
+              col("Best velocity (#{release.best_velocity})").build.
               col(release.remaining_iters(:best_velocity)).build.col(release.completion_date :best_velocity).build.
             build.
             row.
               col("Remaining Story Points <br> (includes all stories not <br> in a past iteration)").header.build.
               col(release.remaining_story_points).build.col.header.build.
-              col("Worst velocity (#{iterations.worst_velocity})").build.
+              col("Worst velocity (#{release.worst_velocity})").build.
               col(release.remaining_iters(:worst_velocity)).build.col(release.completion_date :worst_velocity).build.
             build.
             row.
               col("Iteration Length <br> (calculated based on <br> last iteration completed)").header.build.
-              col("#{iterations.days_in_iteration} days").build.col.header.build.
+              col("#{release.days_in_iteration} days").build.col.header.build.
               col(what_if.velocity_field).build.col(what_if.iterations_field).build.col(what_if.date_field).build.
             build.
           build
     end
 
-    def mini_table(iterations, release)
+    def mini_table(release)
       WikiTableBuilder.
           table.
             row.
               col("Scheduled End Date").header.build.col(release.end_date).build.col.header.build.
               col("Estimated Completion <br> of #{card_link release_parameter}").header.build.
               col("Required <br> Iterations").header.build.
-              col("Calculated Development End Date <br> Based on #{iterations.days_in_iteration} Day Iterations").header.build.
+              col("Calculated Development End Date <br> Based on #{release.days_in_iteration} Day Iterations").header.build.
             build.
             row.
               col("Completed Story Points").header.build.col(release.completed_story_points).build.col.header.build.
-              col("Average velocity of <br> last 3 iterations (#{"%.2f" % iterations.last_3_average})").build.
+              col("Average velocity of <br> last 3 iterations (#{"%.2f" % release.last_3_average})").build.
               col(release.remaining_iters(:last_3_average)).build.col(release.completion_date :last_3_average).build.
             build.
             row.
               col("Remaining Story Points").header.build.col(release.remaining_story_points).build.col.header.build.
-              col("Average velocity of <br> all iterations (#{"%.2f" % iterations.average_velocity})").build.
+              col("Average velocity of <br> all iterations (#{"%.2f" % release.average_velocity})").build.
               col(release.remaining_iters(:average_velocity)).build.col(release.completion_date :average_velocity).build.
             build.
           build
