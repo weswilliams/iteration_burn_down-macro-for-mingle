@@ -1,7 +1,6 @@
 var whatIf = {};
 
 whatIf.init = function(daysInIter, remainingStoryPoints, lastIterEndDate) {
-    alert("whatIf init");
     try {
         var dateCalcText = jQuery("#what-if-date"),
             velocityText = jQuery("#what-if-velocity"),
