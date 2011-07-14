@@ -1,14 +1,6 @@
 require "date"
 module CustomMacro
 
-  def empty_column_header
-    "%{color:#EEEEEE}-%"
-  end
-
-  def empty_column
-      "%{color:white}-%"
-  end
-
   class Release
     def initialize(data, end_data_parameter, iterations, remaining_stories)
       @data = data

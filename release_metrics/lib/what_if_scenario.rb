@@ -72,15 +72,15 @@ module CustomMacro
       JAVASCRIPT
     end
 
-    def velocity_field(disabled_value = empty_column())
+    def velocity_field(disabled_value = $empty_column)
       @is_enabled ? "What if velocity: <input type='text' id='what-if-velocity'></input>" : disabled_value
     end
 
-    def iterations_field(disabled_value = empty_column())
+    def iterations_field(disabled_value = $empty_column)
       @is_enabled ? "<span id='what-if-iterations'></span>" : disabled_value
     end
 
-    def date_field(disabled_value = empty_column())
+    def date_field(disabled_value = $empty_column)
       @is_enabled ? "What if date: <input type='text' id='what-if-date'></input>" : disabled_value
     end
 
