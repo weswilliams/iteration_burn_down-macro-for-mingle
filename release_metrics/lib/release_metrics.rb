@@ -57,6 +57,7 @@ module CustomMacro
       @parameter_defaults['time_box'] = 'iteration'
       @parameter_defaults['show_what_if'] = false
       @parameter_defaults['mini'] = false
+      @parameter_defaults['debug'] = false
     end
 
     def execute
@@ -65,7 +66,7 @@ module CustomMacro
         completed_stories = stories iterations, false
         remaining_stories = stories iterations
         release = current_release iterations, remaining_stories
-        what_if = WhatIfScenario.new show_what_if_parameter, remaining_stories.story_points, iterations.last_end_date, iterations.days_in_iteration
+        what_if = WhatIfScenario.new show_what_if_parameter, remaining_stories, iterations
         if mini_parameter
           mini_table completed_stories, remaining_stories, iterations, release
         else
@@ -87,7 +88,7 @@ module CustomMacro
 
 <span id='debug-info'></span>
 
-#{ what_if.javascript }
+#{ what_if.javascript debug_parameter }
       HTML
     end
 

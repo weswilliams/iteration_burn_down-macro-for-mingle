@@ -3,14 +3,14 @@ module CustomMacro
   class WhatIfScenario
     include CustomMacro
 
-    def initialize(is_enabled, remaining_story_points, last_iter_end_date, days_in_iter)
+    def initialize(is_enabled, remaining_stories, iterations)
       @is_enabled = is_enabled
-      @remaining_story_points = remaining_story_points
-      @last_iter_end_date = last_iter_end_date
-      @days_in_iter = days_in_iter
+      @remaining_story_points = remaining_stories.story_points
+      @last_iter_end_date = iterations.last_end_date
+      @days_in_iter = iterations.days_in_iteration
     end
 
-    def javascript
+    def javascript(debug)
       return '' if !@is_enabled
       <<-JAVASCRIPT
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
@@ -21,7 +21,7 @@ module CustomMacro
 <script language="javascript" type="text/javascript" src="../../../../plugin_assets/release_metrics/javascripts/debug.js"></script>
 <script type="text/javascript">
   jQuery.noConflict();
-  var macroDebug = releaseMetrics.macroDebug(false, jQuery("#debug-info"));
+  var macroDebug = releaseMetrics.macroDebug(#{debug}, jQuery("#debug-info"));
   // register the initialize function for executing after page loaded.
   MingleJavascript.register(function initialize() {
     try {
