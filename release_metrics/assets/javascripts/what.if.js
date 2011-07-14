@@ -5,12 +5,13 @@ whatIf.init = function(daysInIter, remainingStoryPoints, lastIterEndDate) {
         var dateCalcText = jQuery("#what-if-date"),
             velocityText = jQuery("#what-if-velocity"),
             iterationsSpan = jQuery("#what-if-iterations"),
+            secondsPerDay = 24 * 3600 * 1000,
             debugInfo = jQuery("#debug-info");
 
         var dateDiffInDays = function(startDate, endDate) {
             var endTime = endDate.getTime(),
                 startTime = startDate.getTime();
-            return parseInt((endTime - startTime) / (24 * 3600 * 1000));
+            return parseInt((endTime - startTime) / secondsPerDay);
         };
 
         var remainingIterations = function(velocity, remaining_story_points) {
@@ -18,7 +19,7 @@ whatIf.init = function(daysInIter, remainingStoryPoints, lastIterEndDate) {
         };
 
         var expectedCompletionDateFor = function(lastIterEndDate, daysInIter, remainingIterations) {
-            return new Date(lastIterEndDate.getTime() + (1000 * 60 * 60 * 24 * (daysInIter * remainingIterations)));
+            return new Date(lastIterEndDate.getTime() + (secondsPerDay * (daysInIter * remainingIterations)));
         };
 
         velocityText.blur(function() {
