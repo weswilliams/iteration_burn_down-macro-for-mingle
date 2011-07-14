@@ -22,19 +22,19 @@ whatIf.init = function(daysInIter, remainingStoryPoints, lastIterEndDate) {
         };
 
         velocityText.blur(function() {
-            var velocity = parseInt(velocityText.val());
-            var iterations = remainingIterations(velocity, remainingStoryPoints);
-            var expectedDate = expectedCompletionDateFor(lastIterEndDate, daysInIter, iterations);
-            var dateString = expectedDate.getFullYear() + '-' + (expectedDate.getMonth() + 1) + '-' + expectedDate.getDate();
+            var velocity = parseInt(velocityText.val()),
+                iterations = remainingIterations(velocity, remainingStoryPoints),
+                expectedDate = expectedCompletionDateFor(lastIterEndDate, daysInIter, iterations),
+                dateString = expectedDate.getFullYear() + '-' + (expectedDate.getMonth() + 1) + '-' + expectedDate.getDate();
             iterationsSpan.html(iterations);
             dateCalcText.val(dateString);
         });
 
         dateCalcText.blur(function() {
-            var desiredEndDate = new Date(dateCalcText.val());
-            var dayDiff = dateDiffInDays(lastIterEndDate, desiredEndDate);
-            var iterations = Math.ceil(dayDiff / daysInIter);
-            var requiredVelocity = remainingStoryPoints / iterations;
+            var desiredEndDate = new Date(dateCalcText.val()),
+                dayDiff = dateDiffInDays(lastIterEndDate, desiredEndDate),
+                iterations = Math.ceil(dayDiff / daysInIter),
+                requiredVelocity = remainingStoryPoints / iterations;
             iterationsSpan.html(iterations);
             velocityText.val(requiredVelocity);
         });
