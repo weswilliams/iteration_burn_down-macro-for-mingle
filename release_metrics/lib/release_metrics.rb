@@ -7,6 +7,7 @@ module CustomMacro
       @end_data_parameter = end_data_parameter
       @iterations = release_data[:iterations]
       @remaining_stories = release_data[:remaining_stories]
+      @completed_stories = release_data[:completed_stories]
     end
 
     def remaining_iters(velocity_method)
@@ -23,6 +24,10 @@ module CustomMacro
 
     def remaining_story_points
       @remaining_stories.story_points
+    end
+
+    def completed_story_points
+      @completed_stories.story_points
     end
 
     def end_date
@@ -69,29 +74,29 @@ module CustomMacro
         iterations = completed_iterations
         release_data = {
           :iterations => iterations,
-          :remaining_stories => stories(iterations)
+          :remaining_stories => stories(iterations),
+          :completed_stories => stories(iterations, false)
         }
-        completed_stories = stories iterations, false
         release = current_release release_data
         what_if = WhatIfScenario.new show_what_if_parameter, release, iterations
         if mini_parameter
-          mini_table completed_stories, iterations, release
+          mini_table iterations, release
         else
-          full_metrics(completed_stories, iterations, release, what_if)
+          full_metrics(iterations, release, what_if)
         end
       rescue Exception => e
         error_view(e)
       end
     end
 
-    def full_metrics(completed_stories, iterations, release, what_if)
+    def full_metrics(iterations, release, what_if)
       # make sure the #{full_table...} does not have spaces at the beginning of the line to avoid layout issues
       <<-HTML
       h2. Metrics for #{card_link release_parameter}
 
       * Scheduled End Date is #{release.end_date}
 
-#{full_table completed_stories, iterations, release, what_if}
+#{full_table iterations, release, what_if}
 
 <span id='debug-info'></span>
 
@@ -99,7 +104,7 @@ module CustomMacro
       HTML
     end
 
-    def full_table(completed_stories, iterations, release, what_if)
+    def full_table(iterations, release, what_if)
       WikiTableBuilder.
           table.
             row.
@@ -120,7 +125,7 @@ module CustomMacro
               col(release.remaining_iters(:average_velocity)).build.col(release.completion_date :average_velocity).build.
             build.
             row.
-              col("Completed Story Points").header.build.col(completed_stories.story_points).build.col.header.build.
+              col("Completed Story Points").header.build.col(release.completed_story_points).build.col.header.build.
               col("Best velocity (#{iterations.best_velocity})").build.
               col(release.remaining_iters(:best_velocity)).build.col(release.completion_date :best_velocity).build.
             build.
@@ -138,7 +143,7 @@ module CustomMacro
           build
     end
 
-    def mini_table(completed_stories, iterations, release)
+    def mini_table(iterations, release)
       WikiTableBuilder.
           table.
             row.
@@ -148,7 +153,7 @@ module CustomMacro
               col("Calculated Development End Date <br> Based on #{iterations.days_in_iteration} Day Iterations").header.build.
             build.
             row.
-              col("Completed Story Points").header.build.col(completed_stories.story_points).build.col.header.build.
+              col("Completed Story Points").header.build.col(release.completed_story_points).build.col.header.build.
               col("Average velocity of <br> last 3 iterations (#{"%.2f" % iterations.last_3_average})").build.
               col(release.remaining_iters(:last_3_average)).build.col(release.completion_date :last_3_average).build.
             build.
