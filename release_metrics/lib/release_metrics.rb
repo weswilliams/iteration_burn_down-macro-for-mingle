@@ -21,6 +21,10 @@ module CustomMacro
       @iterations.last_end_date + (@iterations.days_in_iteration * remaining_iterations)
     end
 
+    def remaining_story_points
+      @remaining_stories.story_points
+    end
+
     def end_date
       @data[@end_data_parameter]
     end
@@ -84,7 +88,7 @@ module CustomMacro
 
       * Scheduled End Date is #{release.end_date}
 
-#{full_table completed_stories, remaining_stories, iterations, release, what_if}
+#{full_table completed_stories, iterations, release, what_if}
 
 <span id='debug-info'></span>
 
@@ -92,7 +96,7 @@ module CustomMacro
       HTML
     end
 
-    def full_table(completed_stories, remaining_stories, iterations, release, what_if)
+    def full_table(completed_stories, iterations, release, what_if)
       WikiTableBuilder.
           table.
             row.
@@ -119,7 +123,7 @@ module CustomMacro
             build.
             row.
               col("Remaining Story Points <br> (includes all stories not <br> in a past iteration)").header.build.
-              col(remaining_stories.story_points).build.col.header.build.
+              col(release.remaining_story_points).build.col.header.build.
               col("Worst velocity (#{iterations.worst_velocity})").build.
               col(release.remaining_iters(:worst_velocity)).build.col(release.completion_date :worst_velocity).build.
             build.
