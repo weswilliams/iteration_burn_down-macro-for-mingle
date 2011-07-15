@@ -1,5 +1,7 @@
 require "date"
 require "parameters"
+require "release"
+require "views/mini_table"
 
 module CustomMacro
 
@@ -29,7 +31,7 @@ module CustomMacro
         release = current_release release_data
         what_if = WhatIfScenario.new @parameters, release
         if mini_parameter
-          mini_table release
+          MiniTable.new(@project, release, @parameters).render
         else
           full_metrics(release, what_if)
         end
@@ -92,28 +94,6 @@ module CustomMacro
           build
     end
 
-    def mini_table(release)
-      WikiTableBuilder.
-          table.
-            row.
-              col("Scheduled End Date").header.build.col(release.end_date).build.col.header.build.
-              col("Estimated Completion <br> of #{card_link release_parameter}").header.build.
-              col("Required <br> Iterations").header.build.
-              col("Calculated Development End Date <br> Based on #{release.days_in_iteration} Day Iterations").header.build.
-            build.
-            row.
-              col("Completed Story Points").header.build.col(release.completed_story_points).build.col.header.build.
-              col("Average velocity of <br> last 3 iterations (#{"%.2f" % release.last_3_average})").build.
-              col(release.remaining_iters(:last_3_average)).build.col(release.completion_date :last_3_average).build.
-            build.
-            row.
-              col("Remaining Story Points").header.build.col(release.remaining_story_points).build.col.header.build.
-              col("Average velocity of <br> all iterations (#{"%.2f" % release.average_velocity})").build.
-              col(release.remaining_iters(:average_velocity)).build.col(release.completion_date :average_velocity).build.
-            build.
-          build
-    end
-
     def error_view(e)
       <<-ERROR
     h2. Release Metrics:
@@ -167,32 +147,32 @@ module CustomMacro
       end
     end
 
-    def card_link(card_identifier_name)
-      return "#{card_name card_identifier_name} #{@project.identifier}/##{card_number card_identifier_name}" if @parameters['project']
-      card_identifier_name
-    end
-
-    def card_name(card_identifier_name)
-      find_first_match(card_identifier_name, /#\d+ (.*)/)
-    end
-
-    def card_number(card_identifier_name)
-      find_first_match(card_identifier_name, /#(\d+).*/).to_i
-    end
-
-    def find_first_match(data, regex)
-      match_data = regex.match(data)
-      if  match_data
-        match_data[1]
-      else
-        'Unknown'
-      end
-    end
-
     def can_be_cached?
       false # if appropriate, switch to true once you move your macro to production
     end
 
+  end
+
+  def find_first_match(data, regex)
+    match_data = regex.match(data)
+    if  match_data
+      match_data[1]
+    else
+      'Unknown'
+    end
+  end
+
+  def card_link(card_identifier_name)
+    return "#{card_name card_identifier_name} #{@project.identifier}/##{card_number card_identifier_name}" if @parameters['project']
+    card_identifier_name
+  end
+
+  def card_name(card_identifier_name)
+    find_first_match(card_identifier_name, /#\d+ (.*)/)
+  end
+
+  def card_number(card_identifier_name)
+    find_first_match(card_identifier_name, /#(\d+).*/).to_i
   end
 
 end

@@ -30,7 +30,6 @@ module CustomMacro
       if method_sym.to_s =~ /^(.*)_field$/
         parameter_to_field(send "#{$1}_parameter".to_s)
       elsif  method_sym.to_s =~ /^(.*)_(parameter|type)$/
-        puts "missing: #{parameters.object_id} - #{defaults.object_id}"
         param = parameters[$1] || defaults[$1]
         if param.respond_to? :call
           param.call
