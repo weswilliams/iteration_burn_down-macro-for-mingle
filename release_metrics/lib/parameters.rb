@@ -3,9 +3,10 @@ module CustomMacro
   module Parameters
 
     class Parameters < SimpleDelegator
-      def initialize(parameters = {}, defaults = (Hash.new { |h, k| h[k]=k }))
+      def initialize(parameters = {}, defaults = {})
         __setobj__ parameters
-        @defaults = defaults
+        @defaults = Hash.new { |h, k| h[k]=k }
+        @defaults.merge! defaults
       end
 
       def defaults

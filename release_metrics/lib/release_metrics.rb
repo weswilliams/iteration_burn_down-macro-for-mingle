@@ -9,15 +9,13 @@ module CustomMacro
     def initialize(parameters, project, current_user)
       @project = project
       @current_user = current_user
-      
-      defaults = Hash.new { |h, k| h[k]=k }
-      defaults['iteration'] = lambda { @project.value_of_project_variable('Current Iteration') }
-      defaults['release'] = lambda { @project.value_of_project_variable('Current Release') }
-      defaults['time_box'] = 'iteration'
-      defaults['show_what_if'] = false
-      defaults['mini'] = false
-      defaults['debug'] = false
-      @parameters = Parameters::Parameters.new parameters, defaults
+      @parameters = Parameters::Parameters.new( parameters,
+         'iteration' => lambda { @project.value_of_project_variable('Current Iteration') },
+         'release' => lambda { @project.value_of_project_variable('Current Release') },
+         'time_box' => 'iteration',
+         'show_what_if' => false,
+         'mini' => false,
+         'debug' => false)
     end
 
     def execute
