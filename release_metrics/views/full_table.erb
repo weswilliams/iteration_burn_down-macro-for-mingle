@@ -23,23 +23,23 @@
       </a>
     </th>
     <th>Required <br/> Iterations</th>
-    <th>Calculated Development End Date <br/> Based on 7 Day Iterations</th>
+    <th>Calculated Development End Date <br/> Based on <%= release.days_in_iteration %> Day Iterations</th>
   </tr>
   <tr>
     <th>Average Velocity <br/> (last 3 iterations)</th>
-    <td> 7.00</td>
+    <td><%= "%.2f" % release.last_3_average %></td>
     <th><span style="color:#EEEEEE;">-</span></th>
-    <td> Average velocity of <br/> last 3 iterations (7.00)</td>
-    <td> 13</td>
-    <td> 2011-10-10</td>
+    <td> Average velocity of <br/> last 3 iterations (<%= "%.2f" % release.last_3_average %>)</td>
+    <td><%= release.remaining_iters :last_3_average %></td>
+    <td><%= release.completion_date :last_3_average %></td>
   </tr>
   <tr>
     <th>Completed Iterations</th>
-    <td> 7</td>
+    <td><%= release.completed_iterations %></td>
     <th><span style="color:#EEEEEE;">-</span></th>
-    <td> Average velocity of <br/> all iterations (6.00)</td>
-    <td> 15</td>
-    <td> 2011-10-24</td>
+    <td> Average velocity of <br/> all iterations (<%= "%.2f" % release.average_velocity %>)</td>
+    <td><%= release.remaining_iters :average_velocity %></td>
+    <td><%= release.completion_date :average_velocity %></td>
   </tr>
   <tr>
     <th>Completed Story Points</th>
