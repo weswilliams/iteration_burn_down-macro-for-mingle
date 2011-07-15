@@ -1,8 +1,8 @@
 require "date"
 require "parameters"
 require "release"
-require "views/mini_table"
 require "views/full_table"
+require 'erb'
 
 module CustomMacro
 
@@ -32,7 +32,7 @@ module CustomMacro
         release = current_release release_data
         what_if = WhatIfScenario.new @parameters, release
         if mini_parameter
-          MiniTable.new(@project, release, @parameters).render
+          render_view("mini_table.erb", binding)
         else
           FullTable.new(@project, release, what_if, @parameters).render
         end
@@ -42,12 +42,18 @@ module CustomMacro
     end
 
     def error_view(e)
-      <<-ERROR
+      template = ERB.new <<-ERROR
     h2. Release Metrics:
 
-    "An Error occurred: #{e}"
-
+    An Error occurred: <%= e %><br>
+    Stack trace: <%= e.backtrace.join("<br>") %>
       ERROR
+      template.result binding
+    end
+
+    def render_view(view_file_name, binding)
+      file = File.open("./vendor/plugins/release_metrics/views/#{view_file_name}")
+      ERB.new(file.read).result binding
     end
 
     def current_release(release_data)
@@ -96,6 +102,10 @@ module CustomMacro
 
     def can_be_cached?
       false # if appropriate, switch to true once you move your macro to production
+    end
+
+    def get_binding
+      binding
     end
 
   end
