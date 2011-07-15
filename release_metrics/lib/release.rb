@@ -1,10 +1,15 @@
 require "date"
+require "parameters"
+
 module CustomMacro
 
   class Release
-    def initialize(data, end_data_parameter, release_data)
+    include CustomMacro::Parameters
+
+    def initialize(data, release_data, parameters, parameter_defaults)
       @data = data
-      @end_data_parameter = end_data_parameter
+      @parameters = parameters
+      @parameter_defaults = parameter_defaults
       @iterations = release_data[:iterations]
       @remaining_stories = release_data[:remaining_stories]
       @completed_stories = release_data[:completed_stories]
@@ -31,7 +36,7 @@ module CustomMacro
     end
 
     def end_date
-      @data[@end_data_parameter]
+      @data[end_date_parameter]
     end
 
     def completed_iterations

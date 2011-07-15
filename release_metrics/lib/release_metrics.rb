@@ -131,7 +131,7 @@ module CustomMacro
         release_where = "Number = #{release_parameter}.'Number'" if release_parameter == 'THIS CARD'
         data_rows = @project.execute_mql("SELECT '#{end_date_field}' WHERE #{release_where}")
         raise "##{release_parameter} is not a valid release" if data_rows.empty?
-        Release.new data_rows[0], end_date_parameter, release_data
+        Release.new data_rows[0], release_data, @parameters, @parameter_defaults
       rescue Exception => e
         raise "[error retrieving release for #{release_parameter}: #{e}]"
       end
