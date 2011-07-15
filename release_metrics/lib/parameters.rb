@@ -2,12 +2,23 @@ module CustomMacro
 
   module Parameters
 
-    def parameters
-      @parameters || {}
+    class Parameters < SimpleDelegator
+      def initialize(parameters = {}, defaults = (Hash.new { |h, k| h[k]=k }))
+        __setobj__ parameters
+        @defaults = defaults
+      end
+
+      def defaults
+        @defaults
+      end
     end
 
-    def parameter_defaults
-      @parameter_defaults || Hash.new { |h, k| h[k]=k }
+    def parameters
+      @parameters || Parameters.new
+    end
+
+    def defaults
+      parameters.defaults
     end
 
     def parameter_to_field(param)
@@ -18,8 +29,8 @@ module CustomMacro
       if method_sym.to_s =~ /^(.*)_field$/
         parameter_to_field(send "#{$1}_parameter".to_s)
       elsif  method_sym.to_s =~ /^(.*)_(parameter|type)$/
-        puts "missing: #{parameters.object_id} - #{parameter_defaults.object_id}"
-        param = parameters[$1] || parameter_defaults[$1]
+        puts "missing: #{parameters.object_id} - #{defaults.object_id}"
+        param = parameters[$1] || defaults[$1]
         if param.respond_to? :call
           param.call
         else

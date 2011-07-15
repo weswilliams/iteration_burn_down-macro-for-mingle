@@ -10,14 +10,14 @@ module CustomMacro
       @project = project
       @current_user = current_user
       
-      @parameters = parameters
-      @parameter_defaults = Hash.new { |h, k| h[k]=k }
-      @parameter_defaults['iteration'] = lambda { @project.value_of_project_variable('Current Iteration') }
-      @parameter_defaults['release'] = lambda { @project.value_of_project_variable('Current Release') }
-      @parameter_defaults['time_box'] = 'iteration'
-      @parameter_defaults['show_what_if'] = false
-      @parameter_defaults['mini'] = false
-      @parameter_defaults['debug'] = false
+      defaults = Hash.new { |h, k| h[k]=k }
+      defaults['iteration'] = lambda { @project.value_of_project_variable('Current Iteration') }
+      defaults['release'] = lambda { @project.value_of_project_variable('Current Release') }
+      defaults['time_box'] = 'iteration'
+      defaults['show_what_if'] = false
+      defaults['mini'] = false
+      defaults['debug'] = false
+      @parameters = Parameters::Parameters.new parameters, defaults
     end
 
     def execute
@@ -131,7 +131,7 @@ module CustomMacro
         release_where = "Number = #{release_parameter}.'Number'" if release_parameter == 'THIS CARD'
         data_rows = @project.execute_mql("SELECT '#{end_date_field}' WHERE #{release_where}")
         raise "##{release_parameter} is not a valid release" if data_rows.empty?
-        Release.new data_rows[0], release_data, @parameters, @parameter_defaults
+        Release.new data_rows[0], release_data, @parameters
       rescue Exception => e
         raise "[error retrieving release for #{release_parameter}: #{e}]"
       end

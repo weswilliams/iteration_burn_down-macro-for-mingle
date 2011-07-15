@@ -6,10 +6,9 @@ module CustomMacro
   class Release
     include CustomMacro::Parameters
 
-    def initialize(data, release_data, parameters, parameter_defaults)
+    def initialize(data, release_data, parameters)
       @data = data
       @parameters = parameters
-      @parameter_defaults = parameter_defaults
       @iterations = release_data[:iterations]
       @remaining_stories = release_data[:remaining_stories]
       @completed_stories = release_data[:completed_stories]
