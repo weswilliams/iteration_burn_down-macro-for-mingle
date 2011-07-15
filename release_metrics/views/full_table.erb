@@ -12,8 +12,9 @@
   <tr>
     <th>Current Iteration</th>
     <td>
-      <a href="/projects/baml_push_pay/cards/149" card_name_url="/projects/baml_push_pay/cards/card_name/149" class="card-link-149" onmouseover="new Tooltip(this, event)">#149</a>
-      Iteration 08
+      <a href="/projects/<%= @project.identifier %>/cards/<%= card_number iteration_parameter %>" class="card-link-1" onmouseover="new Tooltip(this, event)">
+        #<%= card_number iteration_parameter %> <%= card_name iteration_parameter %>
+      </a>
     </td>
     <th><span style="color:#EEEEEE;">-</span></th>
     <th>Estimated Completion <br/> of
