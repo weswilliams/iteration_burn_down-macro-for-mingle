@@ -26,7 +26,7 @@ module CustomMacro
           :completed_stories => stories(iterations, false)
         }
         release = current_release release_data
-        what_if = WhatIfScenario.new show_what_if_parameter, release, iterations
+        what_if = WhatIfScenario.new show_what_if_parameter, release
         if mini_parameter
           mini_table release
         else
