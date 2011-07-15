@@ -11,7 +11,7 @@ describe "parameters" do
 
   describe "release parameter" do
 
-    subject { @burn_down_macro }
+    subject { @macro }
 
     describe "Current Release project property" do
       subject { @macro.release_parameter }

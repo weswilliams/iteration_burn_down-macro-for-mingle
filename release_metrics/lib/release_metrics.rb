@@ -1,13 +1,16 @@
 require "date"
+require "parameters"
+
 module CustomMacro
 
   class ReleaseMetrics
-    include CustomMacro
+    include CustomMacro, CustomMacro::Parameters
 
     def initialize(parameters, project, current_user)
-      @parameters = parameters
       @project = project
       @current_user = current_user
+      
+      @parameters = parameters
       @parameter_defaults = Hash.new { |h, k| h[k]=k }
       @parameter_defaults['iteration'] = lambda { @project.value_of_project_variable('Current Iteration') }
       @parameter_defaults['release'] = lambda { @project.value_of_project_variable('Current Release') }
@@ -151,7 +154,7 @@ module CustomMacro
     end
 
     def stories(completed_iterations, remaining_stories = true)
-      return [] if completed_iterations.length == 0 && !remaining_stories
+      return Stories.new [], story_points_parameter if completed_iterations.length == 0 && !remaining_stories
       iter_names = completed_iterations.names
       if completed_iterations.length > 0
         mql = "SELECT '#{story_points_field}' WHERE Type = story AND #{release_where} AND " +
@@ -188,36 +191,8 @@ module CustomMacro
       end
     end
 
-    def parameter_to_field(param)
-      param.gsub('_', ' ').scan(/\w+/).collect { |word| word.capitalize }.join(' ')
-    end
-
     def can_be_cached?
       false # if appropriate, switch to true once you move your macro to production
-    end
-
-    #noinspection RubyUnusedLocalVariable
-    def method_missing(method_sym, *arguments, &block)
-      if method_sym.to_s =~ /^(.*)_field$/
-        parameter_to_field(send "#{$1}_parameter".to_s)
-      elsif  method_sym.to_s =~ /^(.*)_(parameter|type)$/
-        param = @parameters[$1] || @parameter_defaults[$1]
-        if param.respond_to? :call
-          param.call
-        else
-          param
-        end
-      else
-        super
-      end
-    end
-
-    def respond_to?(method_sym, include_private = false)
-      if method_sym.to_s =~ /^(.*)_[field|parameter|type]$/
-        true
-      else
-        super
-      end
     end
 
   end
