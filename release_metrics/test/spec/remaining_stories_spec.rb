@@ -1,6 +1,7 @@
 require "rspec"
 require "./lib/release_metrics"
 require "./lib/iterations"
+require "./lib/release"
 
 describe "remaining stories" do
   before do
