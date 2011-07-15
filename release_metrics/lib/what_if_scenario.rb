@@ -1,10 +1,13 @@
+require 'parameters'
+
 module CustomMacro
 
   class WhatIfScenario
-    include CustomMacro
+    include CustomMacro, CustomMacro::Parameters
 
-    def initialize(is_enabled, release)
-      @is_enabled = is_enabled
+    def initialize(parameters, release)
+      @parameters = parameters
+      @is_enabled = show_what_if_parameter
       @remaining_story_points = release.remaining_story_points
       @last_iter_end_date = release.last_end_date
       @days_in_iter = release.days_in_iteration
