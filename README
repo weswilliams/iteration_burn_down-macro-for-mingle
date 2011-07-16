@@ -31,6 +31,11 @@ ex. overriding defaults (iteration can be THIS CARD if the macro is included in 
 
 shows information about the current release
 
+** currently has two different views
+*** full table view with all the metrics below
+*** mini view with (last 3 and total average date estimates)
+*** use parameter 'view: mini_table' to see the mini view
+*** you can create new views by creating an erb file in the views folder, use the current views as examples
 ** average velocity for last 3 iterations
 ** competed iterations
 ** completed story points
@@ -58,4 +63,5 @@ override the defaults: (note: end_date is used on both the Release and time_box 
     start_date: 'Begin Date'
     end_date: 'Finish Date'
     velocity: 'Completed Story Estimate Sum'
+    view: mini_table
 }}
