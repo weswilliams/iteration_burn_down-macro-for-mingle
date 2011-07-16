@@ -1,7 +1,6 @@
 require "date"
 require "parameters"
 require "release"
-require "views/full_table"
 require 'erb'
 
 module CustomMacro
@@ -30,7 +29,7 @@ module CustomMacro
           :completed_stories => stories(iterations, false)
         }
         release = current_release release_data
-        what_if = WhatIfScenario.new @parameters, release
+        #what_if = WhatIfScenario.new @parameters, release
         if mini_parameter
           render_view("mini_table.erb", binding)
         else
