@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4b8638f0-6f72-4452-979a-a016d20c8e6d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README" afterPath="$PROJECT_DIR$/README" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/Rakefile" afterPath="$PROJECT_DIR$/release_metrics/Rakefile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release_metrics/lib/parameters.rb" afterPath="$PROJECT_DIR$/release_metrics/lib/parameters.rb" />
     </list>
     <ignored path="mingle-test-macro.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,10 +42,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="README" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="65" column="20" selection-start="2140" selection-end="2140" vertical-scroll-proportion="0.74759614">
+            <state line="52" column="2" selection-start="1835" selection-end="1835" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Rakefile" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/release_metrics/Rakefile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="12" selection-start="541" selection-end="541" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="init.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/release_metrics/init.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="7" selection-start="330" selection-end="330" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="parameters.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/release_metrics/lib/parameters.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="0" selection-start="274" selection-end="274" vertical-scroll-proportion="0.43269232">
               <folding />
             </state>
           </provider>
@@ -64,13 +92,11 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/release_metrics/assets/javascripts/debug.js" />
         <option value="$PROJECT_DIR$/release_metrics/test/spec/current_iteration_spec.rb" />
         <option value="$PROJECT_DIR$/release_metrics/test/spec/remaining_stories_spec.rb" />
         <option value="$PROJECT_DIR$/release_metrics/test/spec/parameter_spec.rb" />
         <option value="$PROJECT_DIR$/release_metrics/lib/release.rb" />
         <option value="$PROJECT_DIR$/release_metrics/lib/what_if_scenario.rb" />
-        <option value="$PROJECT_DIR$/release_metrics/lib/parameters.rb" />
         <option value="$PROJECT_DIR$/release_metrics/lib/views/mini_table.rb" />
         <option value="$PROJECT_DIR$/release_metrics/lib/views/full_table.rb" />
         <option value="$PROJECT_DIR$/release_metrics/lib/views/mini_table.erb" />
@@ -80,6 +106,8 @@
         <option value="$PROJECT_DIR$/release_metrics/views/full_table.erb" />
         <option value="$PROJECT_DIR$/release_metrics/lib/release_metrics.rb" />
         <option value="$PROJECT_DIR$/README" />
+        <option value="$PROJECT_DIR$/release_metrics/Rakefile" />
+        <option value="$PROJECT_DIR$/release_metrics/lib/parameters.rb" />
       </list>
     </option>
   </component>
@@ -165,6 +193,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="release_metrics" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mingle-test-macro" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mingle-macros" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="release_metrics" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -589,7 +639,7 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- view can be set with parameter 'view: file_name' with no extension&#10;-- must be an erb file in the views directory" />
+    <option name="LAST_COMMIT_MESSAGE" value="- updated readme" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -602,7 +652,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="- removed duplication for date match" />
     <MESSAGE value="- added debug logger" />
     <MESSAGE value="- ability to enable and disable logging via macro parameter" />
     <MESSAGE value="- getting remaining story points from release" />
@@ -627,21 +676,12 @@
     <MESSAGE value="- removed full_table.rb" />
     <MESSAGE value="- removed WhatIf scenario due to full covered in erb files and .js files" />
     <MESSAGE value="- view can be set with parameter 'view: file_name' with no extension&#10;-- must be an erb file in the views directory" />
+    <MESSAGE value="- updated readme" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/burndown_chart_flot/lib/burndown_chart_flot.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="40" selection-start="318" selection-end="318" vertical-scroll-proportion="0.24408284" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/current_iteration_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="78" selection-start="645" selection-end="645" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/test/spec/remaining_stories_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="22" selection-start="97" selection-end="97" vertical-scroll-proportion="0.0" />
@@ -660,11 +700,6 @@
     <entry file="file://$USER_HOME$/.rvm/rubies/ruby-1.9.2-p180/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="35" column="0" selection-start="1065" selection-end="1065" vertical-scroll-proportion="0.46848738" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/release_metrics/lib/parameters.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="0" selection-start="921" selection-end="921" vertical-scroll-proportion="0.56458634" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/release_metrics/log/mingle.log">
@@ -710,9 +745,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/release_metrics/tasks/deploy.rake">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.5144231">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="20" selection-start="2140" selection-end="2140" vertical-scroll-proportion="0.74759614">
+        <state line="52" column="2" selection-start="1835" selection-end="1835" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/release_metrics/Rakefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="12" selection-start="541" selection-end="541" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/release_metrics/init.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="7" selection-start="330" selection-end="330" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/release_metrics/lib/parameters.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="0" selection-start="274" selection-end="274" vertical-scroll-proportion="0.43269232">
           <folding />
         </state>
       </provider>

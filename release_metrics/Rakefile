@@ -16,6 +16,8 @@ Rake::PackageTask.new("release_metrics", :noversion) do |p|
       "Rakefile",
       "lib/**/*.*",
       "tasks/**/*.*",
+      "assets/**/*.*",
+      "views/**/*.*",
       "test/**/*.*"
   )
 end
