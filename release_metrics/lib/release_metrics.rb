@@ -35,7 +35,6 @@ module CustomMacro
           render_view("mini_table.erb", binding)
         else
           render_view("full_table.erb", binding)
-          #FullTable.new(@project, release, what_if, @parameters).render
         end
       rescue Exception => e
         error_view(e)
