@@ -29,7 +29,7 @@ module CustomMacro
           :remaining_stories => stories(iterations),
           :completed_stories => stories(iterations, false)
         }
-        # used in erb files
+        # release used in erb files
         release = current_release release_data
         render_view view_parameter, binding
       rescue Exception => e
