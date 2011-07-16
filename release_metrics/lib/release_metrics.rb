@@ -17,7 +17,8 @@ module CustomMacro
          'time_box' => 'iteration',
          'show_what_if' => false,
          'mini' => false,
-         'debug' => false)
+         'debug' => false,
+         'view' => 'full_table')
     end
 
     def execute
@@ -28,13 +29,9 @@ module CustomMacro
           :remaining_stories => stories(iterations),
           :completed_stories => stories(iterations, false)
         }
+        # used in erb files
         release = current_release release_data
-        #what_if = WhatIfScenario.new @parameters, release
-        if mini_parameter
-          render_view("mini_table.erb", binding)
-        else
-          render_view("full_table.erb", binding)
-        end
+        render_view view_parameter, binding
       rescue Exception => e
         error_view(e)
       end
@@ -51,7 +48,7 @@ module CustomMacro
     end
 
     def render_view(view_file_name, binding)
-      file = File.open("./vendor/plugins/release_metrics/views/#{view_file_name}")
+      file = File.open("./vendor/plugins/release_metrics/views/#{view_file_name}.erb")
       ERB.new(file.read).result binding
     end
 
