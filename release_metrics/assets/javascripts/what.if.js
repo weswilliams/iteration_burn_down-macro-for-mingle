@@ -12,7 +12,7 @@ whatIf.init = function(daysInIter, remainingStoryPoints, lastIterEndDate) {
             var endTime = endDate.getTime(),
                 startTime = startDate.getTime();
             macroDebug.log('date diff for: ' + startDate + '-' + endDate);
-            return parseInt((endTime - startTime) / secondsPerDay);
+            return parseInt((endTime - startTime) / secondsPerDay, 10);
         };
 
         var remainingIterations = function(velocity, remaining_story_points) {
@@ -24,7 +24,7 @@ whatIf.init = function(daysInIter, remainingStoryPoints, lastIterEndDate) {
         };
 
         velocityText.blur(function() {
-            var velocity = parseInt(velocityText.val()),
+            var velocity = parseInt(velocityText.val(), 10),
                 iterations = remainingIterations(velocity, remainingStoryPoints),
                 expectedDate = expectedCompletionDateFor(lastIterEndDate, daysInIter, iterations),
                 dateString = expectedDate.getFullYear() + '-' + (expectedDate.getMonth() + 1) + '-' + expectedDate.getDate();
