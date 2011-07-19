@@ -1,13 +1,14 @@
 namespace :macro do |ns|
 
   mingle_folder = File.expand_path(File.join(ENV['MINGLE_LOCATION']))
+  user_folder = File.expand_path(File.join(ENV['HOME']))
 
   task :full_deploy => ["macro:stop_mingle","macro:clean_deploy","macro:deploy","macro:start_mingle"]
 
   task :full_start_mingle => ["macro:start_postgresql","macro:start_mingle"]
 
   task :start_postgresql do
-    system "sudo /etc/init.d/postgresql start;sleep 15"
+    system "sudo service postgresql start;sleep 15"
   end
 
   task :stop_mingle do
@@ -15,10 +16,11 @@ namespace :macro do |ns|
   end
 
   task :start_mingle => ["macro:stop_mingle"] do
-    system "export JAVA_HOME=/usr/lib/jvm/java-6-sun;" +
+    system "cd $MINGLE_LOCATION;" +
+           "export JAVA_HOME=/usr/lib/jvm/java-6-sun;" +
            "export PATH=$JAVA_HOME/bin:$PATH;" +
            "unset GEM_HOME GEM_PATH;" +
-           "#{mingle_folder}/MingleServer --mingle.dataDir=~/mingle/data start"
+           "./MingleServer --mingle.dataDir=#{user_folder}/mingle/data start"
   end
 
   task :clean_deploy do
