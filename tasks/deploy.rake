@@ -23,13 +23,12 @@ namespace :macro do |ns|
 
   task :clean_deploy do
     puts "Remove deployed macro if it exists"
-    macro_name = File.basename(File.expand_path(File.join(File.dirname(__FILE__), '..')))
-    FileUtils.rm_rf(File.join(ENV['MINGLE_LOCATION'], 'vendor', 'plugins', macro_name))
+    FileUtils.rm_rf(File.join(ENV['MINGLE_LOCATION'], 'vendor', 'plugins', "iteration_burn_down"))
   end
 
   task :deploy do
-    macro_folder = File.expand_path(File.join(File.dirname(__FILE__), '..'))
-    mingle_plugins_folder = File.join(ENV['MINGLE_LOCATION'], 'vendor', 'plugins')
+    macro_folder = File.expand_path(".")
+    mingle_plugins_folder = File.join(ENV['MINGLE_LOCATION'], 'vendor', 'plugins', "iteration_burn_down")
     FileUtils.cp_r(macro_folder, mingle_plugins_folder)
     puts "#{macro_folder} successfully deployed to #{mingle_plugins_folder}. Mingle server must be restarted."
   end

@@ -1,8 +1,11 @@
 require "date"
+require "parameters"
 
 module CustomMacro
 
   class IterationBurnDownMacro
+    include CustomMacro, CustomMacro::Parameters
+
     MON = 1
     TUE = 2
     WED = 3
@@ -12,20 +15,17 @@ module CustomMacro
     WEEKDAYS = [MON, TUE, WED, THU, FRI]
 
     def initialize(parameters, project, current_user)
-      @parameters = parameters
       @project = project
       @current_user = current_user
-
-      @parameter_defaults = Hash.new { |h, k| h[k]=k }
-      @parameter_defaults['iteration'] = lambda { @project.value_of_project_variable('Current Iteration') }
-      @parameter_defaults['release'] = lambda { @project.value_of_project_variable('Current Release') }
-      @parameter_defaults['time_box'] = 'iteration'
-      @parameter_defaults['today'] = Date.today
-      @parameter_defaults['chart_width'] = 600
-      @parameter_defaults['chart_height'] = 400
-      @parameter_defaults['ideal_line_color'] = "00FF00"
-      @parameter_defaults['burndown_line_color'] = "FF0000"
-
+      @parameters = Parameters::Parameters.new( parameters,
+         'iteration' => lambda { @project.value_of_project_variable('Current Iteration') },
+         'release' => lambda { @project.value_of_project_variable('Current Release') },
+         'time_box' => 'iteration',
+         'today' => Date.today,
+         'chart_width' => 600,
+         'chart_height' => 400,
+         'ideal_line_color' => "00FF00",
+         'burndown_line_color' => "FF0000")
    end
 
     def execute
@@ -48,14 +48,10 @@ module CustomMacro
         HTML
       rescue Exception => e
         <<-ERROR
-    h2. Iteration ##{iteration_number} Burndown:
+    h2. Iteration Burndown Error:
 
-    "An Error occurred: #{e}"
-
-    iteration: [#{iteration}]<br>
-    date accepted property: [#{date_accepted_parameter}]<br>
-    estimate property: #{story_points_parameter}<br>
-
+    "An Error occurred: #{e}"<br>
+    #{e.backtrace.join("<br>")}
         ERROR
       end
     end
@@ -152,36 +148,8 @@ module CustomMacro
       iteration
     end
 
-    def parameter_to_field(field)
-      field.gsub('_', ' ').scan(/\w+/).collect { |word| word.capitalize }.join(' ')
-    end
-
     def can_be_cached?
       false # if appropriate, switch to true once you move your macro to production
-    end
-
-    #noinspection RubyUnusedLocalVariable
-    def method_missing(method_sym, *arguments, &block)
-      if method_sym.to_s =~ /^(.*)_field$/
-        parameter_to_field(send "#{$1}_parameter".to_s)
-      elsif  method_sym.to_s =~ /^(.*)_(parameter|type)$/
-        param = @parameters[$1] || @parameter_defaults[$1]
-        if param.respond_to? :call
-          param.call
-        else
-          param
-        end
-      else
-        super
-      end
-    end
-
-    def respond_to?(method_sym, include_private = false)
-      if method_sym.to_s =~ /^(.*)_[field|parameter|type]$/
-        true
-      else
-        super
-      end
     end
 
   end
